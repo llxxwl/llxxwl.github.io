@@ -10,7 +10,7 @@
     
     
     
-    <title>Hello World | lpower</title>
+    <title>js的一点小基础 | lpower</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -161,13 +161,13 @@
     <div class="cube-content">
         <div class="cube-left">
             <div class="cube-article">
-    <h1 class="title">Hello World</h1>
+    <h1 class="title">js的一点小基础</h1>
     
     <div class="cube-article-header">
         <div class="cube-article-date">
             <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
             <!-- moment.js对象 -->
-            2018-09-28
+            2018-07-25
         </div>
         <div class="cube-article-tags">
     <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
@@ -177,26 +177,32 @@
     
     <div class="cube-article-content cube-markdown">
         
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+        <h2 id="1-使用"><a href="#1-使用" class="headerlink" title="1.使用"></a>1.使用</h2><p>HTML 中的脚本必须位于 <script> 与 </script> 标签之间。<br>脚本可被放置在 HTML 页面的 <body> 和 <head> 部分中</head></body></p>
+<h2 id="2-输出"><a href="#2-输出" class="headerlink" title="2.输出"></a>2.输出</h2><a id="more"></a>
+<p>document.write()  大部分的输出方式，写到文档输出<br>document.getElementById(id)  用id属性标识HTML元素，达到访问目的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p id=&quot;demo&quot;&gt;biaoqian&lt;/p&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">document.getElementById().innerText;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-JavaScript严格区分大小写"><a href="#3-JavaScript严格区分大小写" class="headerlink" title="3.JavaScript严格区分大小写"></a>3.JavaScript严格区分大小写</h2><h2 id="4-函数"><a href="#4-函数" class="headerlink" title="4.函数"></a>4.函数</h2><h3 id="（1）toUpperCase-小写转大写"><a href="#（1）toUpperCase-小写转大写" class="headerlink" title="（1）toUpperCase()   小写转大写"></a>（1）toUpperCase()   小写转大写</h3><h3 id="（2）getDay-得到现在的日期"><a href="#（2）getDay-得到现在的日期" class="headerlink" title="（2）getDay()  得到现在的日期"></a>（2）getDay()  得到现在的日期</h3><h2 id="5-错误"><a href="#5-错误" class="headerlink" title="5.错误"></a>5.错误</h2><p>用try，catch检测，try与catch不可分割，成对出现。try语句里是有错的代码块，catch语句输出错误信息。throw 抛出异常 。可用可不用</p>
+<h2 id="6-HTML事件"><a href="#6-HTML事件" class="headerlink" title="6.HTML事件"></a>6.HTML事件</h2><p>onchange   HTML元素改变<br>onclick       用户点击HTML元素<br>onmouseover   用户在一个HTML元素上移动鼠标<br>onmouseout    用户在一个HTML元素上移开鼠标i<br>onkeydown     用户按下键盘按键<br>onload            浏览器已完成页面的加载</p>
+<p>可用于处理表单验证，用户输入，用户行为及浏览器动作。</p>
+<h2 id="7-判断对象的具体类型"><a href="#7-判断对象的具体类型" class="headerlink" title="7.判断对象的具体类型"></a>7.判断对象的具体类型</h2><p>通过instanceof操作符来判断<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">arr = [1,2,3];</span><br><span class="line">if(arr instanceof Array)&#123;</span><br><span class="line">    document.write(&quot;arr 是一个数组&quot;);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    document.write(&quot;arr 不是一个数组&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果是返回true，如果不是则返回false。</p>
+<h2 id="7-严格模式（可用可不用）"><a href="#7-严格模式（可用可不用）" class="headerlink" title="7.严格模式（可用可不用）"></a>7.严格模式（可用可不用）</h2><h3 id="（1）不允许使用未声明的变量"><a href="#（1）不允许使用未声明的变量" class="headerlink" title="（1）不允许使用未声明的变量"></a>（1）不允许使用未声明的变量</h3><h3 id="（2）不允许删除变量或对象"><a href="#（2）不允许删除变量或对象" class="headerlink" title="（2）不允许删除变量或对象"></a>（2）不允许删除变量或对象</h3><h3 id="（3）不允许删除函数"><a href="#（3）不允许删除函数" class="headerlink" title="（3）不允许删除函数"></a>（3）不允许删除函数</h3><h3 id="（4）不允许变量重名"><a href="#（4）不允许变量重名" class="headerlink" title="（4）不允许变量重名"></a>（4）不允许变量重名</h3><h3 id="（5）不允许使用八进制"><a href="#（5）不允许使用八进制" class="headerlink" title="（5）不允许使用八进制"></a>（5）不允许使用八进制</h3><h3 id="（6）不允许使用转义字符"><a href="#（6）不允许使用转义字符" class="headerlink" title="（6）不允许使用转义字符"></a>（6）不允许使用转义字符</h3><h3 id="（7）不允许对只读属性赋值"><a href="#（7）不允许对只读属性赋值" class="headerlink" title="（7）不允许对只读属性赋值"></a>（7）不允许对只读属性赋值</h3><h3 id="（8）不允许对一个使用getter方法读取的属性进行复制"><a href="#（8）不允许对一个使用getter方法读取的属性进行复制" class="headerlink" title="（8）不允许对一个使用getter方法读取的属性进行复制"></a>（8）不允许对一个使用getter方法读取的属性进行复制</h3><h3 id="（9）变量名不能使用eval，arguments字符串"><a href="#（9）变量名不能使用eval，arguments字符串" class="headerlink" title="（9）变量名不能使用eval，arguments字符串"></a>（9）变量名不能使用eval，arguments字符串</h3><h3 id="（10）保留关键字"><a href="#（10）保留关键字" class="headerlink" title="（10）保留关键字"></a>（10）保留关键字</h3>
     </div>
 </div>
 
 <div class="cube-article-nav">
     <ul>
         
+        <li class="prev">
+            <a href="/2018/09/28/hello-world/">
+                <i class="cube-icon cube-prev" aria-hidden="true"></i>
+                Hello World
+            </a>
+        </li>
+        
         
         <li class="next">
-            <a href="/2018/07/25/js的一点小基础/">
-                js的一点小基础
+            <a href="/2018/07/06/first/">
+                first
                 <i class="cube-icon cube-next" aria-hidden="true"></i>
             </a>
         </li>
