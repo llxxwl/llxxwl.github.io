@@ -192,7 +192,14 @@
 <h2 id="9-刷新，使修改生效"><a href="#9-刷新，使修改生效" class="headerlink" title="9.刷新，使修改生效"></a>9.刷新，使修改生效</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
 <h2 id="10-退出，重新登陆MySQL"><a href="#10-退出，重新登陆MySQL" class="headerlink" title="10.退出，重新登陆MySQL"></a>10.退出，重新登陆MySQL</h2><p>退出mysql<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure></p>
 <p>重新登陆MySQL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure></p>
-<p>然后输入你修改后的密码，发现能够登陆，MySQL安装完成<br><!--more--></p>
+<p>然后输入你修改后的密码，发现能够登陆，MySQL安装完成</p>
+<h1 id="附：mysql的导入导出"><a href="#附：mysql的导入导出" class="headerlink" title="附：mysql的导入导出"></a>附：mysql的导入导出</h1><h2 id="1-导入："><a href="#1-导入：" class="headerlink" title="1.导入："></a>1.导入：</h2><ul>
+<li>运行cmd</li>
+<li>mysql -u 用户名 -p 密码</li>
+<li>source 数据库名 &lt; 要导入的文件名.sql<h2 id="2-导出："><a href="#2-导出：" class="headerlink" title="2.导出："></a>2.导出：</h2></li>
+<li>到MySQL的bin目录下，运行cmd</li>
+<li>输入 mysqldump 数据库名 &gt; 文件名.sql。如果要指定路径，例如如果想放到C盘下，可以直接 mysqldump 数据库名 &gt;  c:\文件名.sql<h2 id="当然还有一种更简单的方法，就是直接用图形化界面，直接导出。"><a href="#当然还有一种更简单的方法，就是直接用图形化界面，直接导出。" class="headerlink" title="当然还有一种更简单的方法，就是直接用图形化界面，直接导出。"></a>当然还有一种更简单的方法，就是直接用图形化界面，直接导出。</h2><!--more--></li>
+</ul>
 
     </div>
 </div>
