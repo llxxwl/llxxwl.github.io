@@ -205,38 +205,7 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <a id="more"></a>
-<h2 id="学习的是慕课网的玩转数据结构（从入门到进阶）"><a href="#学习的是慕课网的玩转数据结构（从入门到进阶）" class="headerlink" title="学习的是慕课网的玩转数据结构（从入门到进阶）"></a>学习的是慕课网的玩转数据结构（从入门到进阶）</h2><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><ol>
-<li><p>泛型：使数据结构可以放置除boolean,byte,char,short,int,long,float,double这八种基础数据类型以外所有数据类型，如果想放置这八种基本类型，可以用对应的包装类。 在声明类的时候，在类名后加&lt;类型&gt;。下面要实例化数组的时候，要强制转换。例如：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Array&lt;E&gt;&#123;</span><br><span class="line">    private E[] data;</span><br><span class="line">    public Array(int cap)&#123;</span><br><span class="line">        data = (E[]) new Object[cap];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>简单的时间复杂度分析</p>
-<ul>
-<li>大O 描述的是算法的运行时间和输入数据之间的关系，分析时忽略常数。</li>
-<li>O(n)翻译过来应该是渐进时间复杂度，它描述的是当n趋于无穷的情况。</li>
-<li>严格计算需要一些概率论知识。</li>
-<li>均摊复杂度：将复杂度较高的算法和其他操作放在一起分析复杂度。这个复杂度较高的的算法复杂度将会均摊到其他的操作中。</li>
-<li>复杂度震荡：存在某种情况，刚刚进行了一次数组的删除操作，缩容了一次数组，此时数组元素个数正好等于数组的容量，后面又对数组进行了一次添加操作，就会又要给数组进行一次扩容，这样整个算法的复杂度就会上升，这就是所谓的复杂度震荡。</li>
-<li>解决复杂度震荡：推迟数组的缩容操作。当某个元素等于数组容量的1/4时，在进行缩容，缩容为当前数组容量的1/2.这样就可以很好地解决复杂度震荡问题。</li>
-</ul>
-</li>
-</ol>
-<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><ol>
-<li>栈是一种线性结构，是数组的子集，只能从一端添加元素，也只能从一端取出元素，这一端称为栈顶。</li>
-<li>栈是一种后进先出的数据结构（LIFO），撤销操作就是典型的栈的操作。</li>
-<li>基本操作 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Stack&lt;E&gt; //泛型</span><br><span class="line">void push(E)//入栈</span><br><span class="line">E pop() //出栈</span><br><span class="line">E peek() //栈顶元素（E top()）</span><br><span class="line">int getSize() //共有几个元素</span><br><span class="line">boolean isEmpty() //判断是否为空</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><ol>
-<li>队列也是一种线性结构，是数组的子集，只能从一端（队尾）添加元素，只能从另一端（队首）取出元素</li>
-<li>队列是一种先进先出的数据结构（先到先得），First in First Out(FIFO)</li>
-<li><p>基本操作</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;E&gt; //泛型</span><br><span class="line">void enqueue(E)//入队</span><br><span class="line">E dequeue() //出队</span><br><span class="line">E getFront() //队首元素</span><br><span class="line">int getSize() //共有几个元素</span><br><span class="line">boolean isEmpty() //判断是否为空</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>循环队列：front==tail 队列为空，当填入一个元素时，tail++，直至(tail+1) % c==front时，队列满，就可以扩容队列了。这样，队列是有意识的浪费一个空间<br><img src="/2018/11/25/数据结构/1.png" alt="福利"><br>循环队列比数组快很多，容量越大，区别越大。</p>
-</li>
-</ol>
-
+           <h2 id="学习的是慕课网的玩转数据结构（从入门到进阶）"><a href="#学习的是慕课网的玩转数据结构（从入门到进阶）" class="headerlink" title="学习的是慕课网的玩转数据结构（从入门到进阶）"></a>学习的是慕课网的玩转数据结构（从入门到进阶）</h2>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -290,11 +259,7 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <a id="more"></a>
-<h4 id="今天想写博客，突然发现要用到图片，然而自己却不会上传，于是就拜托了谷歌大神。一开始下载了插件之后，发现不好用，于是用了七牛云。七牛云很麻烦，还要实名认证。所以我还是决定用插件来操作。话不多说，看操作。"><a href="#今天想写博客，突然发现要用到图片，然而自己却不会上传，于是就拜托了谷歌大神。一开始下载了插件之后，发现不好用，于是用了七牛云。七牛云很麻烦，还要实名认证。所以我还是决定用插件来操作。话不多说，看操作。" class="headerlink" title="今天想写博客，突然发现要用到图片，然而自己却不会上传，于是就拜托了谷歌大神。一开始下载了插件之后，发现不好用，于是用了七牛云。七牛云很麻烦，还要实名认证。所以我还是决定用插件来操作。话不多说，看操作。"></a>今天想写博客，突然发现要用到图片，然而自己却不会上传，于是就拜托了谷歌大神。一开始下载了插件之后，发现不好用，于是用了七牛云。七牛云很麻烦，还要实名认证。所以我还是决定用插件来操作。话不多说，看操作。</h4><h4 id="1-首先把hexo下的-config-yml下的post-asset-folder改为true"><a href="#1-首先把hexo下的-config-yml下的post-asset-folder改为true" class="headerlink" title="1.首先把hexo下的_config.yml下的post_asset_folder改为true"></a>1.首先把hexo下的_config.yml下的post_asset_folder改为true</h4><h4 id="2-在hexo目录下git-bash-here"><a href="#2-在hexo目录下git-bash-here" class="headerlink" title="2.在hexo目录下git bash here"></a>2.在hexo目录下git bash here</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure>
-<h4 id="3-之后你再hexo-n-“博客名”生成md博客时，在-post目录下会生成一个与博客名相同的文件夹。"><a href="#3-之后你再hexo-n-“博客名”生成md博客时，在-post目录下会生成一个与博客名相同的文件夹。" class="headerlink" title="3.之后你再hexo n “博客名”生成md博客时，在_post目录下会生成一个与博客名相同的文件夹。"></a>3.之后你再hexo n “博客名”生成md博客时，在_post目录下会生成一个与博客名相同的文件夹。</h4><h4 id="4-将想要上传的图片放到文件夹下，用markdown插入图片："><a href="#4-将想要上传的图片放到文件夹下，用markdown插入图片：" class="headerlink" title="4.将想要上传的图片放到文件夹下，用markdown插入图片："></a>4.将想要上传的图片放到文件夹下，用markdown插入图片：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![想输入的文字](文件夹名/图片名.jpg)</span><br></pre></td></tr></table></figure>
-<h4 id="5-用hexo上传博客。"><a href="#5-用hexo上传博客。" class="headerlink" title="5.用hexo上传博客。"></a>5.用hexo上传博客。</h4><h5 id="一波小小的福利"><a href="#一波小小的福利" class="headerlink" title="一波小小的福利"></a>一波小小的福利</h5><p> <img src="/2018/11/22/hexo博客上传图片/test.jpg" alt="福利"><br><!--more--></p>
-
+           <h4 id="今天想写博客，突然发现要用到图片，然而自己却不会上传，于是就拜托了谷歌大神。一开始下载了插件之后，发现不好用，于是用了七牛云。七牛云很麻烦，还要实名认证。所以我还是决定用插件来操作。话不多说，看操作。"><a href="#今天想写博客，突然发现要用到图片，然而自己却不会上传，于是就拜托了谷歌大神。一开始下载了插件之后，发现不好用，于是用了七牛云。七牛云很麻烦，还要实名认证。所以我还是决定用插件来操作。话不多说，看操作。" class="headerlink" title="今天想写博客，突然发现要用到图片，然而自己却不会上传，于是就拜托了谷歌大神。一开始下载了插件之后，发现不好用，于是用了七牛云。七牛云很麻烦，还要实名认证。所以我还是决定用插件来操作。话不多说，看操作。"></a>今天想写博客，突然发现要用到图片，然而自己却不会上传，于是就拜托了谷歌大神。一开始下载了插件之后，发现不好用，于是用了七牛云。七牛云很麻烦，还要实名认证。所以我还是决定用插件来操作。话不多说，看操作。</h4><h4 id="1-首先把hexo下的-config-yml下的post-asset-folder改为true"><a href="#1-首先把hexo下的-config-yml下的post-asset-folder改为true" class="headerlink" title="1.首先把hexo下的_config.yml下的post_asset_folder改为true"></a>1.首先把hexo下的_config.yml下的post_asset_folder改为true</h4><h4 id="2-在hexo目录下git-bash-here"><a href="#2-在hexo目录下git-bash-here" class="headerlink" title="2.在hexo目录下git bash here"></a>2.在hexo目录下git bash here</h4>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -321,30 +286,7 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <a id="more"></a>
-<h3 id="Windows下MySQL安装"><a href="#Windows下MySQL安装" class="headerlink" title="Windows下MySQL安装"></a>Windows下MySQL安装</h3><h2 id="今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。"><a href="#今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。" class="headerlink" title="今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。"></a>今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。</h2><h2 id="1-官网下载社区版MySQL（zip包），然后解压。"><a href="#1-官网下载社区版MySQL（zip包），然后解压。" class="headerlink" title="1.官网下载社区版MySQL（zip包），然后解压。"></a>1.官网下载社区版MySQL（zip包），然后解压。</h2><h2 id="2-配置环境变量。"><a href="#2-配置环境变量。" class="headerlink" title="2.配置环境变量。"></a>2.配置环境变量。</h2><p>我的电脑-&gt;右键-&gt;高级系统设置-&gt;环境变量，在系统变量的path后添加解压后的MySQL文件夹里的bin目录的路径</p>
-<h2 id="3-添加配置文件"><a href="#3-添加配置文件" class="headerlink" title="3.添加配置文件"></a>3.添加配置文件</h2><p>在MySQL文件夹下创建my.ini文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[mysql]</span><br><span class="line"># 设置mysql客户端默认字符集</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysqld]</span><br><span class="line"># 设置3306端口</span><br><span class="line">port = 3306</span><br><span class="line"># 设置mysql的安装目录</span><br><span class="line">basedir=C:\web\mysql-8.0.11</span><br><span class="line"># 设置mysql数据库的数据的存放目录</span><br><span class="line">datadir=C:\web\sqldata</span><br><span class="line"># 允许最大连接数</span><br><span class="line">max_connections=20</span><br><span class="line"># 服务端使用的字符集默认为8比特编码的latin1字符集</span><br><span class="line">character-set-server=utf8</span><br></pre></td></tr></table></figure></p>
-<h2 id="4-以管理员身份运行cmd（在搜索框敲cmd，右键，以管理员身份运行）"><a href="#4-以管理员身份运行cmd（在搜索框敲cmd，右键，以管理员身份运行）" class="headerlink" title="4.以管理员身份运行cmd（在搜索框敲cmd，右键，以管理员身份运行）"></a>4.以管理员身份运行cmd（在搜索框敲cmd，右键，以管理员身份运行）</h2><p>这里一定一定要用管理员身份运行cmd，不然在后续步骤时会报错<br>进入cmd后切到bin目录下，初始化数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --initialize --console</span><br></pre></td></tr></table></figure></p>
-<p>待执行完成后，会出现root的初始密码<br>root@localhost后面的字符串就是密码<br>记住密码，保存下来，之后第一次登陆时会用到。</p>
-<h2 id="5-安装mysqld"><a href="#5-安装mysqld" class="headerlink" title="5.安装mysqld"></a>5.安装mysqld</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld -install</span><br></pre></td></tr></table></figure>
-<h2 id="6-启动MySQL"><a href="#6-启动MySQL" class="headerlink" title="6.启动MySQL"></a>6.启动MySQL</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start mysql</span><br></pre></td></tr></table></figure>
-<p>这里就是上文提到的如果不是管理员身份运行，会提示安装失败。</p>
-<h2 id="7-上述步骤完成后，就不需要管理员权限了，直接cmd"><a href="#7-上述步骤完成后，就不需要管理员权限了，直接cmd" class="headerlink" title="7.上述步骤完成后，就不需要管理员权限了，直接cmd"></a>7.上述步骤完成后，就不需要管理员权限了，直接cmd</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-<p>回车后会提示输入密码，把刚才保存的输入密码输入之后就可以登录了</p>
-<h2 id="8-修改密码"><a href="#8-修改密码" class="headerlink" title="8.修改密码"></a>8.修改密码</h2><p>因为初始密码过于难记，所以大部分人都需要重置密码，重置密码有很多种方法，我试了很多，只有下面这条能用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter user &apos;root&apos;@&apos;localhost&apos; identified by &apos;你的密码&apos;;</span><br></pre></td></tr></table></figure></p>
-<p>其他的都会报错，这里一定要有耐心，因为我不知道试了多少语句。</p>
-<h2 id="9-刷新，使修改生效"><a href="#9-刷新，使修改生效" class="headerlink" title="9.刷新，使修改生效"></a>9.刷新，使修改生效</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
-<h2 id="10-退出，重新登陆MySQL"><a href="#10-退出，重新登陆MySQL" class="headerlink" title="10.退出，重新登陆MySQL"></a>10.退出，重新登陆MySQL</h2><p>退出mysql<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure></p>
-<p>重新登陆MySQL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure></p>
-<p>然后输入你修改后的密码，发现能够登陆，MySQL安装完成</p>
-<h1 id="附：mysql的导入导出"><a href="#附：mysql的导入导出" class="headerlink" title="附：mysql的导入导出"></a>附：mysql的导入导出</h1><h2 id="1-导入："><a href="#1-导入：" class="headerlink" title="1.导入："></a>1.导入：</h2><ul>
-<li>运行cmd</li>
-<li>mysql -u 用户名 -p 密码</li>
-<li>source 数据库名 &lt; 要导入的文件名.sql<h2 id="2-导出："><a href="#2-导出：" class="headerlink" title="2.导出："></a>2.导出：</h2></li>
-<li>到MySQL的bin目录下，运行cmd</li>
-<li>输入 mysqldump 数据库名 &gt; 文件名.sql。如果要指定路径，例如如果想放到C盘下，可以直接 mysqldump 数据库名 &gt;  c:\文件名.sql<h2 id="当然还有一种更简单的方法，就是直接用图形化界面，直接导出。"><a href="#当然还有一种更简单的方法，就是直接用图形化界面，直接导出。" class="headerlink" title="当然还有一种更简单的方法，就是直接用图形化界面，直接导出。"></a>当然还有一种更简单的方法，就是直接用图形化界面，直接导出。</h2><!--more--></li>
-</ul>
-
+           <h3 id="Windows下MySQL安装"><a href="#Windows下MySQL安装" class="headerlink" title="Windows下MySQL安装"></a>Windows下MySQL安装</h3><h2 id="今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。"><a href="#今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。" class="headerlink" title="今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。"></a>今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。</h2><h2 id="1-官网下载社区版MySQL（zip包），然后解压。"><a href="#1-官网下载社区版MySQL（zip包），然后解压。" class="headerlink" title="1.官网下载社区版MySQL（zip包），然后解压。"></a>1.官网下载社区版MySQL（zip包），然后解压。</h2><h2 id="2-配置环境变量。"><a href="#2-配置环境变量。" class="headerlink" title="2.配置环境变量。"></a>2.配置环境变量。</h2>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -371,15 +313,8 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <a id="more"></a>
-<h2 id="1-使用"><a href="#1-使用" class="headerlink" title="1.使用"></a>1.使用</h2><p>HTML 中的脚本必须位于 <script> 与 </script> 标签之间。<br>脚本可被放置在 HTML 页面的 <body> 和 <head> 部分中</head></body></p>
-<h2 id="2-输出"><a href="#2-输出" class="headerlink" title="2.输出"></a>2.输出</h2><p>document.write()  大部分的输出方式，写到文档输出<br>document.getElementById(id)  用id属性标识HTML元素，达到访问目的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p id=&quot;demo&quot;&gt;biaoqian&lt;/p&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">document.getElementById().innerText;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="3-JavaScript严格区分大小写"><a href="#3-JavaScript严格区分大小写" class="headerlink" title="3.JavaScript严格区分大小写"></a>3.JavaScript严格区分大小写</h2><h2 id="4-函数"><a href="#4-函数" class="headerlink" title="4.函数"></a>4.函数</h2><h3 id="（1）toUpperCase-小写转大写"><a href="#（1）toUpperCase-小写转大写" class="headerlink" title="（1）toUpperCase()   小写转大写"></a>（1）toUpperCase()   小写转大写</h3><h3 id="（2）getDay-得到现在的日期"><a href="#（2）getDay-得到现在的日期" class="headerlink" title="（2）getDay()  得到现在的日期"></a>（2）getDay()  得到现在的日期</h3><h2 id="5-错误"><a href="#5-错误" class="headerlink" title="5.错误"></a>5.错误</h2><p>用try，catch检测，try与catch不可分割，成对出现。try语句里是有错的代码块，catch语句输出错误信息。throw 抛出异常 。可用可不用</p>
-<h2 id="6-HTML事件"><a href="#6-HTML事件" class="headerlink" title="6.HTML事件"></a>6.HTML事件</h2><p>onchange   HTML元素改变<br>onclick       用户点击HTML元素<br>onmouseover   用户在一个HTML元素上移动鼠标<br>onmouseout    用户在一个HTML元素上移开鼠标i<br>onkeydown     用户按下键盘按键<br>onload            浏览器已完成页面的加载</p>
-<p>可用于处理表单验证，用户输入，用户行为及浏览器动作。</p>
-<h2 id="7-判断对象的具体类型"><a href="#7-判断对象的具体类型" class="headerlink" title="7.判断对象的具体类型"></a>7.判断对象的具体类型</h2><p>通过instanceof操作符来判断<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">arr = [1,2,3];</span><br><span class="line">if(arr instanceof Array)&#123;</span><br><span class="line">    document.write(&quot;arr 是一个数组&quot;);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    document.write(&quot;arr 不是一个数组&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如果是返回true，如果不是则返回false。</p>
-<h2 id="7-严格模式（可用可不用）"><a href="#7-严格模式（可用可不用）" class="headerlink" title="7.严格模式（可用可不用）"></a>7.严格模式（可用可不用）</h2><h3 id="（1）不允许使用未声明的变量"><a href="#（1）不允许使用未声明的变量" class="headerlink" title="（1）不允许使用未声明的变量"></a>（1）不允许使用未声明的变量</h3><h3 id="（2）不允许删除变量或对象"><a href="#（2）不允许删除变量或对象" class="headerlink" title="（2）不允许删除变量或对象"></a>（2）不允许删除变量或对象</h3><h3 id="（3）不允许删除函数"><a href="#（3）不允许删除函数" class="headerlink" title="（3）不允许删除函数"></a>（3）不允许删除函数</h3><h3 id="（4）不允许变量重名"><a href="#（4）不允许变量重名" class="headerlink" title="（4）不允许变量重名"></a>（4）不允许变量重名</h3><h3 id="（5）不允许使用八进制"><a href="#（5）不允许使用八进制" class="headerlink" title="（5）不允许使用八进制"></a>（5）不允许使用八进制</h3><h3 id="（6）不允许使用转义字符"><a href="#（6）不允许使用转义字符" class="headerlink" title="（6）不允许使用转义字符"></a>（6）不允许使用转义字符</h3><h3 id="（7）不允许对只读属性赋值"><a href="#（7）不允许对只读属性赋值" class="headerlink" title="（7）不允许对只读属性赋值"></a>（7）不允许对只读属性赋值</h3><h3 id="（8）不允许对一个使用getter方法读取的属性进行复制"><a href="#（8）不允许对一个使用getter方法读取的属性进行复制" class="headerlink" title="（8）不允许对一个使用getter方法读取的属性进行复制"></a>（8）不允许对一个使用getter方法读取的属性进行复制</h3><h3 id="（9）变量名不能使用eval，arguments字符串"><a href="#（9）变量名不能使用eval，arguments字符串" class="headerlink" title="（9）变量名不能使用eval，arguments字符串"></a>（9）变量名不能使用eval，arguments字符串</h3><h3 id="（10）保留关键字"><a href="#（10）保留关键字" class="headerlink" title="（10）保留关键字"></a>（10）保留关键字</h3>
+           <h2 id="1-使用"><a href="#1-使用" class="headerlink" title="1.使用"></a>1.使用</h2><p>HTML 中的脚本必须位于 <script> 与 </script> 标签之间。<br>脚本可被放置在 HTML 页面的 <body> 和 <head> 部分中</head></body></p>
+<h2 id="2-输出"><a href="#2-输出" class="headerlink" title="2.输出"></a>2.输出</h2>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -569,12 +504,12 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/categories/博客/">#博客</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/categories/web前端/">#web前端</a>
         </div>
         
@@ -600,12 +535,12 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/hexo/">#hexo</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/js/">#js</a>
         </div>
         
