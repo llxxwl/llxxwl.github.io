@@ -185,9 +185,10 @@
 <li>在c盘下Windows文件夹下的system32文件夹下drivers文件夹下的etc文件夹下的hosts文件添加一个配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1  www.tp5.com</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>如果不能修改的话，将文件复制到桌面修改，然后在粘贴回去就完事了。<br><!--more--></p>
+<p>如果不能修改的话，将文件复制到桌面修改，然后在粘贴回去就完事了。</p>
 <ol start="2">
-<li>因为我用的是wamp集成环境，所以配置要在httpd-vhosts.conf下配置：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">	ServerName www.tp5.com</span><br><span class="line">	DocumentRoot &quot;f:/wamp/www/tp5/public&quot;</span><br><span class="line">	&lt;Directory  &quot;f:/wamp/www/tp5/public/&quot;&gt;</span><br><span class="line">		Options +Indexes +Includes +FollowSymLinks +MultiViews</span><br><span class="line">		AllowOverride All</span><br><span class="line">		Require local</span><br><span class="line">	&lt;/Directory&gt;</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+<li>因为我用的是wamp集成环境，所以配置要在httpd-vhosts.conf下配置：<!--more-->
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">	ServerName www.tp5.com</span><br><span class="line">	DocumentRoot &quot;f:/wamp/www/tp5/public&quot;</span><br><span class="line">	&lt;Directory  &quot;f:/wamp/www/tp5/public/&quot;&gt;</span><br><span class="line">		Options +Indexes +Includes +FollowSymLinks +MultiViews</span><br><span class="line">		AllowOverride All</span><br><span class="line">		Require local</span><br><span class="line">	&lt;/Directory&gt;</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>如果用户用的的Apache，要修改Httpd.conf<br><img src="/2018/11/30/tp5基础/配置域名.png" alt="配置"></p>
@@ -622,8 +623,13 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/categories/博客/">#博客</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/web前端/">#web前端</a>
         </div>
         
         
@@ -633,11 +639,6 @@
         
         
         <div class="cube-box ">
-            <a href="/categories/web前端/">#web前端</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/categories/PHP/">#PHP</a>
         </div>
         
@@ -658,18 +659,18 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/hexo/">#hexo</a>
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/MySQL/">#MySQL</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/js/">#js</a>
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/js/">#js</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/MySQL/">#MySQL</a>
         </div>
         
         
@@ -678,7 +679,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/sql语句/">#sql语句</a>
         </div>
         
