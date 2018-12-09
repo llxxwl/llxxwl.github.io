@@ -213,6 +213,19 @@
 <li>数据存储在节点（Node）中，是真正的动态，不需要处理固定容量的问题，但是丧失了随机访问的能力</li>
 <li>在执行链表代码时，顺序很重要，不能前后顺序颠倒。</li>
 <li>在链表头增加数据时，为链表设立虚拟头结点（dummyHead）。</li>
+<li>在删除链表时，要先找到待删除的节点的上一个节点，让这个节点指向待删除的节点的下一个节点。<img src="/2018/11/25/数据结构/2.png" alt="链表"></li>
+<li>可以用链表实现栈和队列。<h3 id="链表与递归"><a href="#链表与递归" class="headerlink" title="链表与递归"></a>链表与递归</h3><ol>
+<li>递归本质上就是将原来的问题转化为更小的同一问题。</li>
+<li>数组求和问题：实际上就是从第一个加到最后一个，然后一个一个将数取出来，最后只剩最后一个数加上一个空数组，实现如下：<img src="/2018/11/25/数据结构/递归.png" alt=""></li>
+<li>递归算法。<ul>
+<li>求解最基本问题</li>
+<li>把原问题转化为更小的问题</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>链表具有天然递归结构性质  </li>
+<li>递归调用是有代价的：函数调用+系统栈空间</li>
 </ol>
 
     </div>
@@ -385,17 +398,17 @@
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/categories/MySQL/">#MySQL</a>
-        </div>
-        
-        
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/categories/PHP/">#PHP</a>
         </div>
         
         
         <div class="cube-box-bg ">
+            <a href="/categories/MySQL/">#MySQL</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/categories/数据结构/">#数据结构</a>
         </div>
         
@@ -422,12 +435,12 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/MySQL/">#MySQL</a>
+            <a href="/tags/tp5/">#tp5</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/tp5/">#tp5</a>
+            <a href="/tags/MySQL/">#MySQL</a>
         </div>
         
         
