@@ -180,134 +180,7 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <a id="more"></a>
-<h4 id="一、交换机和MAC地址"><a href="#一、交换机和MAC地址" class="headerlink" title="一、交换机和MAC地址"></a>一、交换机和MAC地址</h4><ol>
-<li>单工，半双工，全双工</li>
-</ol>
-<ul>
-<li>单工：数据只能沿一个方向发送，另一个方向是无法发送数据的。</li>
-<li>半双工：数据可以沿两个方向发送，但同一时间只可能有一台设备发送数据。</li>
-<li>全双工：数据可以沿两个方向同时发送。</li>
-<li>TYPE的取值：0800代表IP协议  0806代表arp协议<h4 id="二、iOS软件操作"><a href="#二、iOS软件操作" class="headerlink" title="二、iOS软件操作"></a>二、iOS软件操作</h4></li>
-</ul>
-<ol>
-<li>路由器：</li>
-</ol>
-<ul>
-<li>1）首先输入no     初始化配置对话</li>
-<li>2） en                 进入特权模式</li>
-<li>3）configuration terminal   进入全局配置模式</li>
-<li>4）hostname xxx   修改主机名</li>
-</ul>
-<ol start="2">
-<li>IP地址</li>
-</ol>
-<ul>
-<li>1）配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">step1：进入要配置IP地址的接口。</span><br><span class="line">命令：全局配置模式下：interface +接口号</span><br><span class="line">step2：配置IP地址</span><br><span class="line">命令：接口子配置模式下：ip address IP地址 子网掩码</span><br><span class="line">示例：R1(config-if)#ip address 12.1.1.1 255.255.255.0</span><br><span class="line">step3：开启接口，因为接口模式情况下是关闭的，即使配置IP地址也无法正常工作，所以需要开启接口。</span><br><span class="line">命令：接口子配置模式下：no shutdown</span><br><span class="line">示例：R1(config-if)#no shutdown</span><br><span class="line">step4：exit退出接口子配置模式进入另一个接口。</span><br><span class="line">step5：检查IP地址配置</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>命令：特权模式下：show ip interface brief显示接口的三层摘要信息。在除了执行模式外其它模式输入执行命令时，需要在命令前添加do 关键字。<br>检查IP地址配置是否无误，使用ping命令，来检查一对直连接口的IP 。</p>
-<ul>
-<li><p>2）分类</p>
-<ul>
-<li><p>IP地址根据其使用的方式分为ABCDE5类。分类的依据是一个IP地址当中前4bit的取值情况，按照如下规则进行分类。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A：0xxx      </span><br><span class="line">B：10xx</span><br><span class="line">C：110x</span><br><span class="line">D：1110    组播IP地址</span><br><span class="line">E：1111     保留科研用IP地址</span><br></pre></td></tr></table></figure>
-<p>A类地址的范围为1~126。0为保留地址。127为本地环回地址。<br>B类地址的范围为128~191。169.254为本地链路地址，DHCP获取地址失败时会使用该地址。<br>C类地址的范围为192~223。<br>本地广播地址：255.255.255.255（也就是32个1）</p>
-</li>
-<li>网络位：标识主机所属的网络</li>
-<li>主机位：标识网络中的一台主机</li>
-</ul>
-</li>
-<li>3）封装与解封<ul>
-<li>IP首部<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">版本（4bit）：描述IP协议版本。一般为4。</span><br><span class="line">IHL（4bit）：描述IP协议首部长度。</span><br><span class="line">ToS（8bit）：用于标记流量，用作QoS。</span><br><span class="line">总长度（16bit）：代表一个IP数据包的总长度。</span><br><span class="line">标识（16bit）：相同的标识代表分片数据包属于同一个源数据包。</span><br><span class="line">标志（3bit）：0（保留，恒为0）0（DF位，禁止分片位）0（MF更多分片位）</span><br><span class="line">片偏移（13bit）：当前分片的第一个bit与原始分片的第一个bit的相对位移。</span><br><span class="line">MTU：最大传输单元，默认情况下多为1500</span><br><span class="line">TTL（8bit）：当TTL为0时，该数据包将被丢弃。用于减缓产生路由环路后对网络的影响。</span><br><span class="line">协议（8bit）：用于指示IP报文的上层协议。（例：TCP 6，UDP 17，ICMP 1）</span><br><span class="line">首部校验和（16bit）：检查IP首部在传输过程当中的完整性。</span><br><span class="line">源IP地址（32bit）：源主机IP地址</span><br><span class="line">目的IP地址（32bit）：目的主机IP地址</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="三、传输层（tcp，udp，arp，路由表）"><a href="#三、传输层（tcp，udp，arp，路由表）" class="headerlink" title="三、传输层（tcp，udp，arp，路由表）"></a>三、传输层（tcp，udp，arp，路由表）</h4><ol>
-<li><p>telnet协议（远程管理协议）</p>
-<ul>
-<li>实验配置：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">PC配置</span><br><span class="line">Router(config)#hostname PC            //将路由器的主机名设置为PC</span><br><span class="line">PC(config)#int e0/0               //进入设备的e0/0接口子配置模式</span><br><span class="line">PC(config-if)#ip address 12.1.1.1 255.255.255.0     //设置e0/0接口的IP地址为12.1.1.1/24</span><br><span class="line">PC(config-if)#no sh                        //开启e0/0接口</span><br><span class="line">PC(config)#no ip routing              //关闭路由器的路由功能</span><br><span class="line">PC(config)#ip default-gateway 12.1.1.2       //设置路由器的默认网关</span><br><span class="line">（备注：用路由器模拟PC的时候，必须关闭路由器的路由功能并为它设置默认网关。因为一台路由器收到一个目的地址未知的数据包，就会将它丢弃。而主机收到一个目的地址未知的数据包，会把它交给自己的网关）</span><br><span class="line">路由器的配置</span><br><span class="line">Router(config)#hostname ROUTER       //将路由器的主机名设定为ROUTER</span><br><span class="line">ROUTER(config)#int e0/0                 //进入e0/0接口的子配置模式</span><br><span class="line">ROUTER(config-if)#ip address 12.1.1.2 255.255.255.0 //设置e0/0接口的IP地址为12.1.1.2/24</span><br><span class="line">ROUTER(config-if)#no sh            //开启e0/0接口</span><br><span class="line">ROUTER(config)#line vty 0 4           //开启虚拟终端线路0到4共5条</span><br><span class="line">ROUTER(config-line)#transport input telnet      //限制入方向只能通过TELNET进行连接</span><br><span class="line">ROUTER(config-line)#password cisco123           //配置线路密码</span><br><span class="line">ROUTER(config-line)#login           //开启线路下密码认证功能</span><br><span class="line">验证实验效果</span><br><span class="line">PC&gt;telnet 12.1.1.2        //使用telnet协议连接12.1.1.2主机，默认端口号23。</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>路由表</p>
-<ul>
-<li><p>查看路由器的路由表：<code>show ip route</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C        10.1.10.0/24 is directly connected, Ethernet0/0</span><br><span class="line">L        10.1.10.254/32 is directly connected, Ethernet0/0</span><br><span class="line">C        10.1.20.0/24 is directly connected, Ethernet0/1</span><br><span class="line">L        10.1.20.254/32 is directly connected, Ethernet0/1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>路由表中的每个路由条目，以一个网络地址作为主项。</p>
-</li>
-<li><p>最前面的代码，一般是一个大写字母，代表一个路由表项的来源，常见来源：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   C	直连路由</span><br><span class="line">L	本地路由</span><br><span class="line">D	EIGRP路由</span><br><span class="line">R	RIP路由</span><br><span class="line">S	静态路由</span><br><span class="line">O	OSPF路由</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>一条路由可能在最后带有一个出接口。代表去往该网络需要将数据从出接口转发出去。有些路由没有出接口。没有出接口的路由一定会带有下一跳路由器信息，根据该信息可以进行路由的递归查询。</p>
-</li>
-<li>一条路由可能在最后带有一个下一跳，代表去网该网络需要将数据发往哪个主机。</li>
-<li>一条路由（除了直连），一定会带有一个方括号，里面包含一对儿数字，其中前面的数字为AD（管理距离）后面的数字叫Metric(度量)。</li>
-<li>管理距离代表路由器对某种路由来源的信任程度。越小越好。常见管理距离，直连路由为0，静态路由默认为1，EIGRP为90，OSPF为110，RIP为120。管理距离越小，路由器越信任某种路由。</li>
-<li>度量代表路由协议通过何种方式计算到达目标网络的距离。也是越小越好。常见的度量标准有带宽（OSPF），跳数（RIP）和综合度量值（EIGRP）。目前的情况来看带宽是对数据传输能力影响最大的参数，所以推荐使用以带宽作为度量标准的路由协议（OSPF和ISIS和EIGRP）。</li>
-</ul>
-</li>
-<li>arp（地址解析协议）</li>
-</ol>
-<ul>
-<li>1）0x0806对应ARP协议</li>
-<li><p>2）ARP请求报文中的关键字段：</p>
-<ul>
-<li>源协议地址：发送主机的IP地址</li>
-<li>目的协议地址：目标主机的IP地址</li>
-<li>源硬件地址：发送主机的MAC地址</li>
-<li><p>目的硬件地址：00-00-00-00-00-00</p>
-<p>如果主机收到一个ARP请求，其中的目的协议地址是自己的IP地址，则他会向发来ARP请求的主机发送ARP回复。ARP回复是单播发送的</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="四、路由基础"><a href="#四、路由基础" class="headerlink" title="四、路由基础"></a>四、路由基础</h4><ol>
-<li>静态路由</li>
-</ol>
-<ul>
-<li><p>静态路由配置</p>
-<p>  <code>R1(config)#ip route 10.1.2.0 255.255.255.0 12.1.1.2</code></p>
-<p>  配置一条到达10.1.2.0/24的路由，下一跳路由器接口IP地址为12.1.1.2。</p>
-</li>
-<li><p>配置静态路由一定要注意，下一跳接口地址必须可达。否则该静态路由不会装载进路由表。</p>
-</li>
-<li>配置静态路由一定要注意单向路由问题。一个单向路由是没有意义的</li>
-</ul>
-<ol start="2">
-<li><p>默认路由</p>
-<p> <code>R1(config)#ip route 0.0.0.0 0.0.0.0 12.1.1.2</code><br> 配置一条指向12.1.1.2的静态默认路由。</p>
-<p> 默认路由是一种特殊的路由，它的前缀长度为0。所以默认路由可以被理解为描述一个最大的网络的路由，该网络可以包含任何一个IP网络。在末节路由器上常常配置默认路由来减少路由配置的复杂度。只要拥有任何一条明细路由，数据便不会匹配默认路由进行转发，这是由于路由表拥有最长子网掩码匹配的特性。任何明细路由子网掩码长度都会比默认路由的0更长一些，所以在有明细路由的情况下，数据不会匹配默认路由进行发送。</p>
-<h4 id="五、icmp（互联网控制协议）"><a href="#五、icmp（互联网控制协议）" class="headerlink" title="五、icmp（互联网控制协议）"></a>五、icmp（互联网控制协议）</h4></li>
-</ol>
-<ul>
-<li>IP协议号 1<ul>
-<li>校验和与IP和TCP/UDP校验和一样用于检查数据的完整性。</li>
-<li>类型用于表明该ICMP报文属于什么类型。</li>
-<li>代码用于表明该ICMP报文属于某种类型的子类型。</li>
-</ul>
-</li>
-<li>大部分ICMP类型的报文我们目前已经停止使用了。现在还在频繁使用的ICMP类型有：</li>
-</ul>
-<ol>
-<li>ICMP 类型8：回显请求。PING命令用于控制一台设备发送一个回显请求到某一个特定主机。收到回显请求的主机必须用回显应答进行响应。如果对端主机无法在规定时间内对回显请求进行响应，通常说明本主机与目标主机存在IP连通性故障。</li>
-<li>ICMP类型0：回显应答。在收到某主机发送过来的回显请求后，必须用回显应答对对端主机进行响应。这说明对端主机正在测试与本主机之间的IP连通性。</li>
-<li>ICMP类型3：差错报告报文。当一个主机由于某种原因丢弃了一个IP数据包后，会使用差错报告报文通知该数据包的源IP地址。根据不同的丢包原因，设定不同的CODE。常见丢包原因有：主机不可达，网络不可达，端口不可达等。<h3 id="六、vlan（虚拟局域网）"><a href="#六、vlan（虚拟局域网）" class="headerlink" title="六、vlan（虚拟局域网）"></a>六、vlan（虚拟局域网）</h3></li>
-<li><p>配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">VLAN配置命令</span><br><span class="line">Switch(config)#vlan 10</span><br><span class="line">创建一个VLAN号为10的VLAN</span><br><span class="line">Switch(config-vlan)#name HR</span><br><span class="line">将某个VLAN的名字改为HR</span><br><span class="line">Switch(config-if)#switchport mode access</span><br><span class="line">将该接口的模式配置为access</span><br><span class="line">Switch(config-if)#switchport access vlan 10</span><br><span class="line">将该接口分配到VLAN10中</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>trunk</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">配置命令：</span><br><span class="line">SW1(config-if)#switchport trunk encapsulation dot1q</span><br><span class="line">将接口的Trunk封装修改为802.1q</span><br><span class="line">SW1(config-if)#switchport mode trunk</span><br><span class="line">将接口的模式修改为Trunk</span><br><span class="line">SW1#show interfaces trunk</span><br><span class="line">查看一台交换机接口的trunk情况</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>vtp</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">VTP基本配置</span><br><span class="line">SW1(config)#vtp mode server</span><br><span class="line">将交换机配置为VTP服务器</span><br><span class="line">SW1(config)#vtp mode client</span><br><span class="line">将交换机配置为VTP客户端</span><br><span class="line">SW1(config)#vtp mode transparent</span><br><span class="line">将交换机配置为VTP透明模式</span><br><span class="line">SW1(config)#vtp domain CCNA</span><br><span class="line">配置VTP域名为CCNA</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="七、DHCP（动态主机配置协议）"><a href="#七、DHCP（动态主机配置协议）" class="headerlink" title="七、DHCP（动态主机配置协议）"></a>七、DHCP（动态主机配置协议）</h4><p>DHCP分4次握手从服务器获取一个IP地址。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1	客户端发送一个DISCOVER报文。（广播）</span><br><span class="line">2	服务器回应一个OFFER报文。（单播）</span><br><span class="line">3	客户端发送一个REQUEST报文。（广播）</span><br><span class="line">4	服务器回应一个ACK报文。（单播）</span><br></pre></td></tr></table></figure></p>
-<p>4次握手之后，IP地址被正常的分配给客户端使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ip dhcp pool VLAN10</span><br><span class="line"> network 10.1.10.0 255.255.255.0</span><br><span class="line"> default-router 10.1.10.254 </span><br><span class="line">ip dhcp pool VLAN20</span><br><span class="line"> network 10.1.20.0 255.255.255.0</span><br><span class="line"> default-router 10.1.20.254 </span><br><span class="line">ip dhcp pool VLAN30</span><br><span class="line"> network 10.1.30.0 255.255.255.0</span><br><span class="line"> default-router 10.1.30.254</span><br></pre></td></tr></table></figure></p>
-
+           <h3 id="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，一些思科模拟器的使用"><a href="#2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，一些思科模拟器的使用" class="headerlink" title="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，一些思科模拟器的使用"></a>2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，一些思科模拟器的使用</h3>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -688,28 +561,28 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
-            <a href="/categories/博客/">#博客</a>
-        </div>
-        
-        
         <div class="cube-box ">
             <a href="/categories/PHP/">#PHP</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/categories/CCNA/">#CCNA</a>
+            <a href="/categories/web前端/">#web前端</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/categories/MySQL/">#MySQL</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/categories/web前端/">#web前端</a>
+            <a href="/categories/博客/">#博客</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/categories/CCNA/">#CCNA</a>
         </div>
         
         
@@ -730,12 +603,12 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/hexo/">#hexo</a>
+            <a href="/tags/笔记/">#笔记</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/笔记/">#笔记</a>
+            <a href="/tags/js/">#js</a>
         </div>
         
         
@@ -745,7 +618,7 @@
         
         
         <div class="cube-box-bg ">
-            <a href="/tags/sql语句/">#sql语句</a>
+            <a href="/tags/hexo/">#hexo</a>
         </div>
         
         
@@ -754,8 +627,8 @@
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/js/">#js</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/sql语句/">#sql语句</a>
         </div>
         
     </div>
