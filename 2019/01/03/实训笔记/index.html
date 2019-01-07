@@ -179,7 +179,7 @@
     
     <div class="cube-article-content cube-markdown">
         
-        <h3 id="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，一些思科模拟器的使用"><a href="#2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，一些思科模拟器的使用" class="headerlink" title="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，一些思科模拟器的使用"></a>2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，一些思科模拟器的使用</h3><a id="more"></a>
+        <h3 id="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）"><a href="#2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）" class="headerlink" title="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）"></a>2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）</h3><a id="more"></a>
 <h4 id="一、交换机和MAC地址"><a href="#一、交换机和MAC地址" class="headerlink" title="一、交换机和MAC地址"></a>一、交换机和MAC地址</h4><ol>
 <li>单工，半双工，全双工</li>
 </ol>
@@ -294,17 +294,75 @@
 <li>ICMP类型0：回显应答。在收到某主机发送过来的回显请求后，必须用回显应答对对端主机进行响应。这说明对端主机正在测试与本主机之间的IP连通性。</li>
 <li>ICMP类型3：差错报告报文。当一个主机由于某种原因丢弃了一个IP数据包后，会使用差错报告报文通知该数据包的源IP地址。根据不同的丢包原因，设定不同的CODE。常见丢包原因有：主机不可达，网络不可达，端口不可达等。<h3 id="六、vlan（虚拟局域网）"><a href="#六、vlan（虚拟局域网）" class="headerlink" title="六、vlan（虚拟局域网）"></a>六、vlan（虚拟局域网）</h3></li>
 <li><p>配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">VLAN配置命令</span><br><span class="line">Switch(config)#vlan 10</span><br><span class="line">创建一个VLAN号为10的VLAN</span><br><span class="line">Switch(config-vlan)#name HR</span><br><span class="line">将某个VLAN的名字改为HR</span><br><span class="line">Switch(config-if)#switchport mode access</span><br><span class="line">将该接口的模式配置为access</span><br><span class="line">Switch(config-if)#switchport access vlan 10</span><br><span class="line">将该接口分配到VLAN10中</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">VLAN配置命令</span><br><span class="line">Switch(config)#vlan 10</span><br><span class="line">创建一个VLAN号为10的VLAN</span><br><span class="line">Switch(config-vlan)#name HR</span><br><span class="line">将某个VLAN的名字改为HR</span><br><span class="line">Switch(config-if)#switchport mode access</span><br><span class="line">将该接口的模式配置为access</span><br><span class="line">Switch(config-if)#switchport access vlan 10</span><br><span class="line">将该接口分配到VLAN10中</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>trunk</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">配置命令：</span><br><span class="line">SW1(config-if)#switchport trunk encapsulation dot1q</span><br><span class="line">将接口的Trunk封装修改为802.1q</span><br><span class="line">SW1(config-if)#switchport mode trunk</span><br><span class="line">将接口的模式修改为Trunk</span><br><span class="line">SW1#show interfaces trunk</span><br><span class="line">查看一台交换机接口的trunk情况</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">配置命令：</span><br><span class="line">SW1(config-if)#switchport trunk encapsulation dot1q</span><br><span class="line">将接口的Trunk封装修改为802.1q</span><br><span class="line">SW1(config-if)#switchport mode trunk</span><br><span class="line">将接口的模式修改为Trunk</span><br><span class="line">SW1#show interfaces trunk</span><br><span class="line">查看一台交换机接口的trunk情况</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>vtp</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">VTP基本配置</span><br><span class="line">SW1(config)#vtp mode server</span><br><span class="line">将交换机配置为VTP服务器</span><br><span class="line">SW1(config)#vtp mode client</span><br><span class="line">将交换机配置为VTP客户端</span><br><span class="line">SW1(config)#vtp mode transparent</span><br><span class="line">将交换机配置为VTP透明模式</span><br><span class="line">SW1(config)#vtp domain CCNA</span><br><span class="line">配置VTP域名为CCNA</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">VTP基本配置</span><br><span class="line">SW1(config)#vtp mode server</span><br><span class="line">将交换机配置为VTP服务器</span><br><span class="line">SW1(config)#vtp mode client</span><br><span class="line">将交换机配置为VTP客户端</span><br><span class="line">SW1(config)#vtp mode transparent</span><br><span class="line">将交换机配置为VTP透明模式</span><br><span class="line">SW1(config)#vtp domain CCNA</span><br><span class="line">配置VTP域名为CCNA</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h4 id="七、DHCP（动态主机配置协议）"><a href="#七、DHCP（动态主机配置协议）" class="headerlink" title="七、DHCP（动态主机配置协议）"></a>七、DHCP（动态主机配置协议）</h4><p>DHCP分4次握手从服务器获取一个IP地址。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1	客户端发送一个DISCOVER报文。（广播）</span><br><span class="line">2	服务器回应一个OFFER报文。（单播）</span><br><span class="line">3	客户端发送一个REQUEST报文。（广播）</span><br><span class="line">4	服务器回应一个ACK报文。（单播）</span><br></pre></td></tr></table></figure></p>
-<p>4次握手之后，IP地址被正常的分配给客户端使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ip dhcp pool VLAN10</span><br><span class="line"> network 10.1.10.0 255.255.255.0</span><br><span class="line"> default-router 10.1.10.254 </span><br><span class="line">ip dhcp pool VLAN20</span><br><span class="line"> network 10.1.20.0 255.255.255.0</span><br><span class="line"> default-router 10.1.20.254 </span><br><span class="line">ip dhcp pool VLAN30</span><br><span class="line"> network 10.1.30.0 255.255.255.0</span><br><span class="line"> default-router 10.1.30.254</span><br></pre></td></tr></table></figure></p>
+<h4 id="七、DHCP（动态主机配置协议）"><a href="#七、DHCP（动态主机配置协议）" class="headerlink" title="七、DHCP（动态主机配置协议）"></a>七、DHCP（动态主机配置协议）</h4><ol>
+<li><p>DHCP分4次握手从服务器获取一个IP地址。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1	客户端发送一个DISCOVER报文。（广播）</span><br><span class="line">2	服务器回应一个OFFER报文。（单播）</span><br><span class="line">3	客户端发送一个REQUEST报文。（广播）</span><br><span class="line">4	服务器回应一个ACK报文。（单播）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>4次握手之后，IP地址被正常的分配给客户端使用。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ip dhcp pool VLAN10</span><br><span class="line">network 10.1.10.0 255.255.255.0</span><br><span class="line">default-router 10.1.10.254 </span><br><span class="line">ip dhcp pool VLAN20</span><br><span class="line">network 10.1.20.0 255.255.255.0</span><br><span class="line">default-router 10.1.20.254 </span><br><span class="line">ip dhcp pool VLAN30</span><br><span class="line">network 10.1.30.0 255.255.255.0</span><br><span class="line">default-router 10.1.30.254</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="安全方向"><a href="#安全方向" class="headerlink" title="安全方向"></a>安全方向</h3><h4 id="八、ACL-访问控制列表"><a href="#八、ACL-访问控制列表" class="headerlink" title="八、ACL-访问控制列表"></a>八、ACL-访问控制列表</h4><ol>
+<li><p>概念</p>
+<p> 访问控制列表是一种工具。顾名思义，它是一个列表。该列表有非常广泛的用途是各个厂商的安全设备或安全方案中的一个基本组件。该列表最初的作用在于控制访问，后来根据不同的应用场景，发展出不同的作用并衍生出各种其他的策略工具。</p>
+</li>
+<li><p>基本操作</p>
+<p> ACL是一系列包含了permit或deny操作以及对应的条件的有序语句。整个ACL的工作过程如下：自顶向下对每条ACL语句进行评估，一旦发现条件匹配的情况则应用相对应的操作并停止继续向下匹配后续语句。所谓的顶和下是通过ACL的序号来决定的。序号越小，越优先匹配，序号越大匹配的顺序越靠后。</p>
+<p> 所有ACL的末尾，都存在一个deny any的ACL语句。它的序号相当于无限大，也就是说任何用户定义的ACL都将优先于它进行匹配，也就是说如果一个数据没有被任何用户定义的ACL匹配，则它一定会被末尾的deny any语句匹配，并且流量会被拒绝。一方面默认的deny any操作体现了安全策略的基本原则，另一方面要注意，在编辑一个黑名单时，一定要在整个ACL的末尾，明确的permit any。否则，一个所有操作均为deny的ACL是没有实际意义的。<br> <img src="/2019/01/03/实训笔记/ACL示例.png" alt="ACL示例"></p>
+</li>
+<li>分类<ul>
+<li>标准ACL：只能以数据的源IP地址作为条件匹配流量。</li>
+<li>扩展ACL：可以以数据的源IP，目的IP以及其它一些三层和四层报文内容作为条件匹配流量。我们比较常用的是扩展ACL。</li>
+</ul>
+</li>
+<li><p>配置<br> ACL配置：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">R3(config)#access-list 1 deny   10.1.3.0 0.0.0.255     </span><br><span class="line">//定义一个编号的标准ACL，拒绝10.1.3.0/24为源的数据</span><br><span class="line">R3(config)#access-list 1 permit any</span><br><span class="line">//定义一个编号的标准ACL，放行所有流量</span><br><span class="line">R3(config-if)#ip access-group 1 out </span><br><span class="line">//将编号ACL 1 调用在该接口的出方向上（注意配置模式）</span><br><span class="line">R3#show ip access-lists</span><br><span class="line">//检查配置的ACL以及命中情况。</span><br></pre></td></tr></table></figure>
+<p> 命名的扩展ACL配置：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">R3(config)#ip access-list extended DENYHR2SRV</span><br><span class="line">//配置一个名为DENYHR2SRV的扩展ACL</span><br><span class="line">R3(config-ext-nacl)# deny ip 10.1.2.0 0.0.0.255 10.1.100.0 0.0.0.255</span><br><span class="line">//拒绝从10.1.2.0/24去往10.1.100.0/24的所有IP流量</span><br><span class="line">R3(config-ext-nacl)# permit ip any any</span><br><span class="line">//放行所有其它流量</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="九、NAT（网络地址转换）"><a href="#九、NAT（网络地址转换）" class="headerlink" title="九、NAT（网络地址转换）"></a>九、NAT（网络地址转换）</h4><ol>
+<li><p>由来</p>
+<p> IPv4地址资源十分有限，总数只要43亿个左右，而且有大量地址是保留的无法直接分配给主机使用。随着互联网以及物联网的不断发展，接入到互联网中的设备数量越来越多。每一个需要在互联网上通信的设备都需要一个IP地址才能正常工作。私有IP地址的使用不受任何限制，也无需向IANA申请，但私有IP地址在Internet上是不被路由的，因为它破坏了IP地址唯一标识一台互联网主机的特点。在这种情况下，我们想要正常使用互联网资源，需要借助NAT技术。</p>
+</li>
+<li>静态nat配置</li>
+</ol>
+<ul>
+<li>问题:配置静态NAT。马同学家里有运营商分配的合法IP地址12.1.1.1和12.1.1.3。12.1.1.1被配置在TP-LINK路由器的公网接口e0/1上。现在要求配置静态NAT，在内网主机192.168.1.128访问公网时，将他的源IP地址转换为12.1.1.3。（注意配置默认路由）。<br><img src="/2019/01/03/实训笔记/静态nat.png" alt="nat"></li>
+<li>配置  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">TPLINK(config)#ip route 0.0.0.0 0.0.0.0 12.1.1.2</span><br><span class="line">//配置一条下一跳指向12.1.1.2的默认路由。注意，如果不添加此默认路由，则网关路由器没有到达目的主机的路由会丢弃数据包。但添加去往目的主机的明细路由并不可取，因为目的主机模拟互联网主机，实际上互联网主机的数量会非常庞大，不可能每一个网络的路由都配置在网关路由器上，所以必须使用默认路由。</span><br><span class="line">TPLINK(config)#ip nat inside source static 192.168.1.128 12.1.1.3</span><br><span class="line">//配置内部源转换静态NAT。将内部本地地址192.168.1.128转换为12.1.1.3。</span><br><span class="line">interface Ethernet0/0</span><br><span class="line">ip address 192.168.1.1 255.255.255.0</span><br><span class="line">ip nat inside</span><br><span class="line">interface Ethernet0/1</span><br><span class="line">ip address 12.1.1.1 255.255.255.0</span><br><span class="line">ip nat outside</span><br><span class="line">//配置接口的IP地址以及NAT方向。注意方向不要写反。且必须配置</span><br><span class="line">检查NAT的命令：</span><br><span class="line">TPLINK#show ip nat statistics</span><br><span class="line">//查看NAT的统计信息，包括配置的内部和外部NAT接口以及NAT的命中情况</span><br><span class="line">TPLINK#show ip nat translations</span><br><span class="line">//查看NAT转换表，查看已经配置的NAT的转换情况</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol start="3">
+<li>地址类型<ul>
+<li>所有Inside的地址，都是属于你内部设备的地址。</li>
+<li>所有Outside的地址，都是不属于你内部设备的地址。</li>
+<li>所有Local地址，一般是私有IP地址。</li>
+<li>所有Global地址，一般是公有IP地址。</li>
+<li>Inside Local Address:内部主机使用的私有IP地址。</li>
+<li>Inside Global Address:内部主机访问外部网络，将私有IP地址换成的共有IP地址。</li>
+<li>Outside Local Address:外部主机访问内部网络，为其分配的私有IP地址。</li>
+<li>Outside Global Address:外部主机的公有IP地址。</li>
+</ul>
+</li>
+<li>类型</li>
+</ol>
+<ul>
+<li>静态NAT：内部本地地址与内部全局地址的一一对应。每个内部本地地址访问外部网络的时候，需要一个单独的内部全局地址。</li>
+<li>动态NAT：内部本地地址数量多余可用的内部全局地址。所有内部全局地址被放入一个NAT地址池。在内部主机需要访问外部网络的时候，从地址池中获取一个内部全局地址并进行NAT，如果地址池空了，则内部主机无法进行NAT。</li>
+<li><p>PAT：端口地址转换，在转换三层地址的同时，对四层的端口号也进行转换，从而支持一个内部全局地址对应多个内部主机。</p>
+<p>  PAT基本配置</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TPLINK(config)#access-list 1 permit 192.168.1.0 0.0.0.255</span><br><span class="line">//配置一个ACL，匹配NAT的感兴趣流量，本例中，感兴趣流量是源IP地址为192.168.1.0/24的流量。</span><br><span class="line">TPLINK(config)#ip nat inside source list 1 interface Ethernet0/1 overload</span><br><span class="line">//配置一个内部源转换，对ACL1匹配的感兴趣流进行地址转换，将源地址转换为接口E0/1的IP地址，进行超载转换允许多个内部主机同时通过一个内部全局地址访问公网。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
     </div>
 </div>
@@ -459,23 +517,23 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
-            <a href="/categories/博客/">#博客</a>
-        </div>
-        
-        
         <div class="cube-box ">
             <a href="/categories/PHP/">#PHP</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/categories/MySQL/">#MySQL</a>
+            <a href="/categories/博客/">#博客</a>
         </div>
         
         
         <div class="cube-box-bg ">
             <a href="/categories/web前端/">#web前端</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/categories/MySQL/">#MySQL</a>
         </div>
         
         
@@ -500,18 +558,13 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/hexo/">#hexo</a>
-        </div>
-        
-        
         <div class="cube-box ">
             <a href="/tags/笔记/">#笔记</a>
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/MySQL/">#MySQL</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/hexo/">#hexo</a>
         </div>
         
         
@@ -520,13 +573,18 @@
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/sql语句/">#sql语句</a>
+        <div class="cube-box ">
+            <a href="/tags/MySQL/">#MySQL</a>
         </div>
         
         
         <div class="cube-box-bg ">
             <a href="/tags/tp5/">#tp5</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/sql语句/">#sql语句</a>
         </div>
         
     </div>
