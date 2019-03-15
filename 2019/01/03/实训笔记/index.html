@@ -179,7 +179,7 @@
     
     <div class="cube-article-content cube-markdown">
         
-        <h3 id="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）"><a href="#2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）" class="headerlink" title="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）"></a>2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）</h3><a id="more"></a>
+        <h3 id="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）-使用的是思科的eve"><a href="#2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）-使用的是思科的eve" class="headerlink" title="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）,使用的是思科的eve"></a>2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）,使用的是思科的eve</h3><a id="more"></a>
 <h4 id="一、交换机和MAC地址"><a href="#一、交换机和MAC地址" class="headerlink" title="一、交换机和MAC地址"></a>一、交换机和MAC地址</h4><ol>
 <li>单工，半双工，全双工</li>
 </ol>
@@ -363,6 +363,133 @@
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TPLINK(config)#access-list 1 permit 192.168.1.0 0.0.0.255</span><br><span class="line">//配置一个ACL，匹配NAT的感兴趣流量，本例中，感兴趣流量是源IP地址为192.168.1.0/24的流量。</span><br><span class="line">TPLINK(config)#ip nat inside source list 1 interface Ethernet0/1 overload</span><br><span class="line">//配置一个内部源转换，对ACL1匹配的感兴趣流进行地址转换，将源地址转换为接口E0/1的IP地址，进行超载转换允许多个内部主机同时通过一个内部全局地址访问公网。</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<h4 id="十、简易密码学"><a href="#十、简易密码学" class="headerlink" title="十、简易密码学"></a>十、简易密码学</h4><ol>
+<li>特点<ul>
+<li>机密性：信息不能被非授权的第三方所读取和理解。</li>
+<li>数据完整性：信息不能被有意或无意的篡改或破坏。</li>
+<li>抗抵赖：不能否认曾经发送过的某些信息或执行过的某些操作。</li>
+<li>源认证：对于数据真实的源进行的识别。</li>
+<li>反重放：防止重复接收看似合法的数据的副本。</li>
+</ul>
+</li>
+<li>散列算法<ul>
+<li>例如MD5加密，哈希算法（SHA）</li>
+</ul>
+</li>
+<li>HMAC算法<ul>
+<li>是基于HASH的消息认证代码，使用一个预共享密钥连同数据一起计算散列值。</li>
+</ul>
+</li>
+<li>加密技术<ul>
+<li>对称加密算法</li>
+<li>非对称加密算法<h4 id="十一、ASA防火墙基础"><a href="#十一、ASA防火墙基础" class="headerlink" title="十一、ASA防火墙基础"></a>十一、ASA防火墙基础</h4></li>
+</ul>
+</li>
+<li>防火墙<ol>
+<li>常见分区<ul>
+<li>公共区域：一般指Internet、公共网络、菲私有网络、不受信任、不受保护。</li>
+<li>DMZ区域：放置企业的公网服务器。</li>
+<li>内部区域：一般指企业内网。</li>
+</ul>
+</li>
+<li>防火墙在各个分区之间强制执行访问控制策略，如果一个区域被攻陷，防止攻击蔓延到另一个区域。</li>
+<li>功能<ul>
+<li>包过滤技术</li>
+<li>状态检测技术（节省资源、相对较安全）</li>
+<li>应用检测功能（AIC）</li>
+</ul>
+</li>
+<li>代理服务器：是客户端和服务器的一个中转站</li>
+<li>IPS与IDS：入侵防御系统和入侵检测系统，与防火墙类似。IPS可以采取阻断的动作，IDS可以向管理员发出警报。</li>
+</ol>
+</li>
+<li><p>ASA配置</p>
+<ol>
+<li>接口配置<ul>
+<li>接口IP地址：配置防火墙接口的IP地址</li>
+<li>接口的安全等级：防火墙接口必须有一个1-100的安全级别。通常接口连接到的区域受信任程度越高，该级别就越高</li>
+<li>接口的名字：防火墙接口必须有一个名字，在很多防火墙特性配置的时候，只能引用防火墙的接口名进行配置</li>
+<li>开启接口： no shutdown</li>
+</ul>
+</li>
+<li>默认访问控制策略：防火墙默认约需所有出站流量，拒绝所有入站流量。<ul>
+<li>出站流量：当流量从一个高安全级别接口始发，去往一个低安全级别接口时，被认为是出站流量</li>
+<li>入站流量：当流量从一个低安全级别接口始发，去往一个高安全级别接口时，被认为是入站流量</li>
+</ul>
+</li>
+<li><p>防火墙基本配置<br> <img src="/2019/01/03/实训笔记/ASA基础配置.png" alt="ASA基础配置"></p>
+<ul>
+<li><p>ASA配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">interface GigabitEthernet0/0</span><br><span class="line">    nameif DMZ</span><br><span class="line">    security-level 50</span><br><span class="line">    ip address 24.1.1.2 255.255.255.0 </span><br><span class="line">interface GigabitEthernet0/1</span><br><span class="line">    nameif INSIDE</span><br><span class="line">    security-level 100</span><br><span class="line">    ip address 23.1.1.2 255.255.255.0 </span><br><span class="line">interface GigabitEthernet0/2</span><br><span class="line">    nameif OUTSIDE</span><br><span class="line">    security-level 0</span><br><span class="line">    ip address 12.1.1.2 255.255.255.0</span><br><span class="line">//给每个接口配置了IP地址，接口名以及安全级别。</span><br><span class="line">policy-map global_policy</span><br><span class="line">    class inspection_default</span><br><span class="line">    inspect icmp</span><br><span class="line">//为默认全局策略的默认检测类开启ICMP检测。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>路由器开启telnet服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">line vty 0 4</span><br><span class="line">    login local</span><br><span class="line">    transport input telnet</span><br><span class="line">    username name(主机名) password password(密码)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>ASA网络目标配置</p>
+<ol>
+<li>网络目标是一种预定义的元素。分为三种类型，分别是主机(描述一台主机)，范围(描述从某IP地址到某IP地址的一组主机)，子网(描述一个子网的所有主机)。</li>
+<li><p>配置<br><img src="/2019/01/03/实训笔记/ASA网络目标配置.png" alt=""></p>
+<ol>
+<li><p>第一部分：按照图中所示配置所有设备的IP地址。正确配置模拟终端设备的路由器（关路由功能，设默认网关，配置IP地址并开启相应服务）。</p>
+<ul>
+<li>配置内网路由：在ASA和CORE之间配置动态路由协议</li>
+<li>配置公网路由：在CORE和ASA上配置指向电信的默认路由</li>
+<li>配置自动NAT:实现内网客户端访问公网服务器</li>
+<li><p>防火墙接口配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">interface GigabitEthernet0/0</span><br><span class="line">nameif INSIDE</span><br><span class="line">security-level 100</span><br><span class="line">ip address 10.1.23.2 255.255.255.0 </span><br><span class="line">interface GigabitEthernet0/1</span><br><span class="line">nameif OUTSIDE</span><br><span class="line">security-level 0</span><br><span class="line">ip address 12.1.1.2 255.255.255.0 </span><br><span class="line">interface GigabitEthernet0/2</span><br><span class="line">nameif DMZ</span><br><span class="line">security-level 50</span><br><span class="line">ip address 10.1.100.254 255.255.255.0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>防火墙动态路由配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">router rigrp 1</span><br><span class="line">network 10.1.12.2 255.255.255.255</span><br><span class="line">network 10.1.100.254 255.255.255.255</span><br><span class="line">//开启了eigrp进程1，精确宣告了两个内网接口</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>发布防火墙静态路由配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">route OUTSIDE 0.0.0.0 0.0.0.0 12.1.1.1</span><br><span class="line">//配置了静态的默认路由指向TELECOM</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>防火墙自动NAT配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">object network ITSUBNET</span><br><span class="line">subnet 10.1.1.0 255.255.255.0</span><br><span class="line">nat(INSIIDE,OUTSIDE) dynamic interface</span><br><span class="line">//配置网络目标NAT（自动NAT），注意缩进。配置从10.1.1.0/24子网发起的流量，从INSIDE接口进入防火墙，从OUTSIDE接口离开防火墙。这些流量将源IP地址转化为接口OUTSIDE的IP地址。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>第二部分：要求DMZServer开启HTTP服务，配置自动NAT和严格ACL允许公网主机访问DMZServerHTTP服务。</p>
+<ul>
+<li><p>配置自动NAT</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">object network DMZSERVER1</span><br><span class="line">host 10.1.100.1</span><br><span class="line">nat(DMZ,OUTSIDE) static 12.1.1.100</span><br><span class="line">//将主机10.1.100.1进行静态NAT转换，转换后的地址为12.1.1.100</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置ACL放行OUTSIDE到DMZ的合法流量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">access-list FORDMZSRV extended permit tcp any host   10.1.100.1 eq www</span><br><span class="line">//配置一个叫做FORDMZSRV的ACL，允许任何主机法网10.1.100.1的http流量。注意在这个位置写的IP地址和端口号是服务器的真实IP地址和端口号。</span><br><span class="line">access-group FORDMZSRV in interface OUTSIDE</span><br><span class="line">//将FORDMZSRV 调用在OUTSIDE接口的入方向上，放行公网主机访问内网服务器的首包。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>SSH(安全外壳协议):SSH和TELNET一样都可用于远程访问目标主机的CLI，SSH较安全。SSH使用TCP端口22作为目的</p>
+</li>
+<li><p>综合实验<br><img src="/2019/01/03/实训笔记/综合实验.png" alt=""></p>
+<h5 id="实验需求：配置防火墙，实现内网主机可以访问公网的HTTP服务。公网客户端可以访问内网的DMZ服务器的HTTP和SSH服务。要求在防火墙上配置适当的自动NAT策略和严格ACL来完成这个需求。"><a href="#实验需求：配置防火墙，实现内网主机可以访问公网的HTTP服务。公网客户端可以访问内网的DMZ服务器的HTTP和SSH服务。要求在防火墙上配置适当的自动NAT策略和严格ACL来完成这个需求。" class="headerlink" title="实验需求：配置防火墙，实现内网主机可以访问公网的HTTP服务。公网客户端可以访问内网的DMZ服务器的HTTP和SSH服务。要求在防火墙上配置适当的自动NAT策略和严格ACL来完成这个需求。"></a>实验需求：配置防火墙，实现内网主机可以访问公网的HTTP服务。公网客户端可以访问内网的DMZ服务器的HTTP和SSH服务。要求在防火墙上配置适当的自动NAT策略和严格ACL来完成这个需求。</h5><ol>
+<li>交换机配置各个VLAN以及各VLAN的SVI接口。交换机连接防火墙的接口使用RSI。</li>
+<li>配置IP地址。（主机ping直连检查IP连通性）</li>
+<li>配置内网路由（用EIGRP来实现。注意在ASA上连接ISP的接口不要运行EIGRP）</li>
+<li>配置默认路由。（三层交换机和防火墙都需要默认路由来确保公网连通性）</li>
+<li>配置ACL放行合法流量。（应用在出接口的入方向，ACL必须精确）。</li>
+<li>配置自动NAT。（为HR和IT配置动态PAT，让他们能够访问公网，为DMZ服务器配置静态端口映射，让公网能够访问他们）。</li>
+</ol>
+<ul>
+<li>实验解答</li>
+</ul>
+<ol>
+<li><p>核心配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">object network SRV1</span><br><span class="line"> host 10.1.100.1</span><br><span class="line">object network SRV2</span><br><span class="line"> host 10.1.100.2</span><br><span class="line">object network SRV3</span><br><span class="line"> host 10.1.100.3</span><br><span class="line">object network IT</span><br><span class="line"> subnet 10.1.10.0 255.255.255.0</span><br><span class="line">object network HR</span><br><span class="line"> subnet 10.1.20.0 255.255.255.0</span><br><span class="line">object service HTTP</span><br><span class="line"> service tcp destination eq www </span><br><span class="line">object service TELNET</span><br><span class="line"> service tcp destination eq telnet</span><br><span class="line">object-group network SRVCluster</span><br><span class="line"> network-object object SRV1</span><br><span class="line"> network-object object SRV2</span><br><span class="line"> network-object object SRV3</span><br><span class="line">object-group network SRVUser</span><br><span class="line"> network-object object IT</span><br><span class="line"> network-object object HR</span><br><span class="line">object-group service SRVService</span><br><span class="line"> service-object object HTTP </span><br><span class="line"> service-object object TELNET</span><br><span class="line">配置并调用ACL：</span><br><span class="line">access-list ININSIDE extended permit object-group SRVService object-group SRVUser object-group SRVCluster</span><br><span class="line">access-group ININSIDE in interface INSIDE</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ssh配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">SRV1(config)#hostname SRV1</span><br><span class="line">SRV1(config)#ip domain-name zbh.com</span><br><span class="line">//配置主机名和域名。主机名和域名对RSA密钥并无影响但RSA生成密钥需要这两个参数作为密钥标签。所以在生成RSA密钥对之前必须先配置主机名和域名。</span><br><span class="line">SRV1(config)#crypto key generate rsa modulus 1024</span><br><span class="line">//生成一个以1024为素模的RSA密钥对，模数越大，RSA密钥长度越长，强度越高</span><br><span class="line">SRV1(config)#ip ssh version 2</span><br><span class="line">//开启SSH版本2，SSH版本1的连接会被拒绝。推荐使用SSHv2</span><br><span class="line">SRV1(config)#line vty 0 4</span><br><span class="line">login local</span><br><span class="line"> transport input ssh</span><br><span class="line">//开启vty线路，并允许在入向传输时使用SSH协议，注意这里没有包括telnet关键字，所以设备当前无法通过telnet进行远程管理。</span><br><span class="line">SRV1(config)#username zbh password cisco123</span><br><span class="line">//配置本地用户账户数据库用于对SSH远程连接进行身份认证</span><br><span class="line">HR#ssh -l zbh 10.1.100.1</span><br><span class="line">//以用户名zbh对10.1.100.1发起一个SSH远程访问。注意-l参数后面需要空格再填写用户名。</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
 
     </div>
 </div>
@@ -527,7 +654,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/categories/web前端/">#web前端</a>
         </div>
         
@@ -558,7 +685,7 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/笔记/">#笔记</a>
         </div>
         
@@ -574,12 +701,12 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/MySQL/">#MySQL</a>
+            <a href="/tags/sql语句/">#sql语句</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/sql语句/">#sql语句</a>
+            <a href="/tags/MySQL/">#MySQL</a>
         </div>
         
         
