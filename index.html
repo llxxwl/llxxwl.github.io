@@ -161,6 +161,40 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-php验证码">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/03/25/php验证码/">php验证码</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-03-25
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/代码/" class="cube-excerpt-tag-link">#代码</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <h3 id="刚刚看了验证码的实现过程，觉得有必要记一下"><a href="#刚刚看了验证码的实现过程，觉得有必要记一下" class="headerlink" title="刚刚看了验证码的实现过程，觉得有必要记一下"></a>刚刚看了验证码的实现过程，觉得有必要记一下</h3><ol>
+<li>实现函数<br> 1) imagecreatefromjpeg() 载入图片<br> 2) imageTTFText() 设置字体颜色<br> 3) imagefill() 填充背景<br> 4) imagejpeg() 创建jpg图片<br> 5) imagedestory() 销毁图片，释放内存空间</li>
+<li><p>代码实现</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//制作验证码</span><br><span class="line">//创建画布</span><br><span class="line">$img = imagecreatetruecolor(170, 40);</span><br><span class="line">//填充背景色</span><br><span class="line">$backcolor = imagecolorallocate($img, 255, 255, 255);//默认红、绿、蓝三色。</span><br><span class="line">imagefill($img, 0, 0, $backcolor);</span><br><span class="line">//产生随机验证码字符串</span><br><span class="line">$arr = array_merge(range(0,9),range(&apos;a&apos;,&apos;z&apos;),range(&apos;A&apos;,&apos;Z&apos;));//array_merge() 将一个或多个数组的单元合并起来，一个数组中的值附加在前一个数组的后面。返回作为结果的数组。</span><br><span class="line">shuffle($arr);//打乱数组，伪随机</span><br><span class="line">$rand_keys = array_rand($arr,4);</span><br><span class="line">$str = &apos;&apos;;</span><br><span class="line">foreach ($rand_keys as  $value) &#123;</span><br><span class="line">    $str .= $arr[$value]; </span><br><span class="line">&#125;</span><br><span class="line">//保存到session</span><br><span class="line">session_start();</span><br><span class="line">$_SESSION[&apos;captcha&apos;] = $str;//将获取的随机数验证码写入到session变量中</span><br><span class="line">//添加文字</span><br><span class="line">$span = floor(170/(4+1));</span><br><span class="line">for($i=1;$i&lt;=4;$i++) &#123;</span><br><span class="line">    $stringcolor = imagecolorallocate($img, mt_rand(0,255), mt_rand(0,100), mt_rand(0,80));</span><br><span class="line">    imagestring($img, 5, $i*$span, 12, $str[$i-1], $stringcolor);//水平输出字符</span><br><span class="line">&#125;</span><br><span class="line">//添加干扰线</span><br><span class="line">for ($i=1; $i&lt;=6 ; $i++) &#123;</span><br><span class="line">    $linecolor = imagecolorallocate($img,mt_rand(0,255),mt_rand(0,100),mt_rand(0,80));</span><br><span class="line">    imageline($img,mt_rand(0,169),mt_rand(0,39),mt_rand(0,169),mt_rand(0,39),$linecolor);//设置随机字体和x,y坐标</span><br><span class="line">&#125;</span><br><span class="line">//添加干扰点</span><br><span class="line">for($i=0;$i&lt;strlen($_SESSION[&apos;captcha&apos;]);$i++)&#123;</span><br><span class="line">    $pixel = imagecolorallocate($img,mt_rand(100,150),mt_rand(0,120),mt_rand(0,255));//设置背景色</span><br><span class="line">    imagesetpixel($img, mt_rand(0,169), mt_rand(0,39), $pixel);//设置随机字体和x,y坐标</span><br><span class="line">&#125;</span><br><span class="line">//输出图片</span><br><span class="line">header(&quot;Content-type:image/png&quot;);</span><br><span class="line">ob_clean();//清理缓冲区</span><br><span class="line">imagepng($img);//输出图片</span><br><span class="line">imagedestroy($img);//销毁图片</span><br></pre></td></tr></table></figure>
+<p> mt_rand()返回随机整数</p>
+</li>
+</ol>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/03/25/php验证码/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-关于http的一些总结">
     <header class="cube-excerpt-header">
         <h1><a href="/2019/03/19/关于http的一些总结/">关于http的一些总结</a></h1>
@@ -406,31 +440,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-first">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/07/06/first/">first</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-07-06
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <h1 id="你好，欢迎来到lpower’s的博客"><a href="#你好，欢迎来到lpower’s的博客" class="headerlink" title="你好，欢迎来到lpower’s的博客"></a>你好，欢迎来到lpower’s的博客</h1>
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/07/06/first/">Read More</a>
-    </footer>
-</div>
-
 
 
 <ul class="cube-pagination cube-pagination-6">
@@ -447,11 +456,17 @@
             </li>
             
         
+            
+            <li class="cube-pagination-index">
+                <a href="/page/2">2</a>
+            </li>
+            
+        
     
 
     
-    <li class="cube-pagination-next disabled">
-        <span>Next »</span>
+    <li class="cube-pagination-next">
+        <a href="/page/2/">Next »</a>
     </li>
     
 </ul>
@@ -494,8 +509,8 @@
     
     
     <div class="count">
-        <a class="count articles"><span>10</span>Article</a>
-        <a class="count tags"><span>7</span>Tags</a>
+        <a class="count articles"><span>11</span>Article</a>
+        <a class="count tags"><span>8</span>Tags</a>
         <a class="count categories"><span>7</span>Categories</a>
     </div>
 </div>
@@ -517,7 +532,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/19/关于http的一些总结/" title="关于http的一些总结">关于http的一些总结</a>
+                    <a href="/2019/03/25/php验证码/" title="php验证码">php验证码</a>
                 </p>
             </div>
             
@@ -531,7 +546,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/01/03/实训笔记/" title="实训笔记">实训笔记</a>
+                    <a href="/2019/03/19/关于http的一些总结/" title="关于http的一些总结">关于http的一些总结</a>
                 </p>
             </div>
         </li>
@@ -544,7 +559,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/11/30/tp5基础/" title="tp5基础">tp5基础</a>
+                    <a href="/2019/01/03/实训笔记/" title="实训笔记">实训笔记</a>
                 </p>
             </div>
         </li>
@@ -557,7 +572,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/11/25/PHPmvc笔记/" title="PHPmvc笔记">PHPmvc笔记</a>
+                    <a href="/2018/11/30/tp5基础/" title="tp5基础">tp5基础</a>
                 </p>
             </div>
         </li>
@@ -570,7 +585,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/11/25/数据结构/" title="数据结构基础">数据结构基础</a>
+                    <a href="/2018/11/25/PHPmvc笔记/" title="PHPmvc笔记">PHPmvc笔记</a>
                 </p>
             </div>
         </li>
@@ -589,12 +604,12 @@
         
         
         <div class="cube-box ">
-            <a href="/categories/协议/">#协议</a>
+            <a href="/categories/PHP/">#PHP</a>
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/categories/PHP/">#PHP</a>
+        <div class="cube-box ">
+            <a href="/categories/web前端/">#web前端</a>
         </div>
         
         
@@ -604,21 +619,21 @@
         
         
         <div class="cube-box ">
-            <a href="/categories/web前端/">#web前端</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/categories/MySQL/">#MySQL</a>
+            <a href="/categories/协议/">#协议</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/categories/数据结构/">#数据结构</a>
+            <a href="/categories/MySQL/">#MySQL</a>
         </div>
         
         
         <div class="cube-box-bg ">
+            <a href="/categories/数据结构/">#数据结构</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/categories/CCNA/">#CCNA</a>
         </div>
         
@@ -635,17 +650,12 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/HTTP/">#HTTP</a>
-        </div>
-        
-        
-        <div class="cube-box ">
             <a href="/tags/笔记/">#笔记</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/hexo/">#hexo</a>
+            <a href="/tags/代码/">#代码</a>
         </div>
         
         
@@ -655,11 +665,21 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/MySQL/">#MySQL</a>
+            <a href="/tags/hexo/">#hexo</a>
         </div>
         
         
         <div class="cube-box ">
+            <a href="/tags/HTTP/">#HTTP</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/MySQL/">#MySQL</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
             <a href="/tags/sql语句/">#sql语句</a>
         </div>
         
