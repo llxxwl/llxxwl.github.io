@@ -180,14 +180,7 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <h3 id="刚刚看了验证码的实现过程，觉得有必要记一下"><a href="#刚刚看了验证码的实现过程，觉得有必要记一下" class="headerlink" title="刚刚看了验证码的实现过程，觉得有必要记一下"></a>刚刚看了验证码的实现过程，觉得有必要记一下</h3><ol>
-<li>实现函数<br> 1) imagecreatefromjpeg() 载入图片<br> 2) imageTTFText() 设置字体颜色<br> 3) imagefill() 填充背景<br> 4) imagejpeg() 创建jpg图片<br> 5) imagedestory() 销毁图片，释放内存空间</li>
-<li><p>代码实现</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//制作验证码</span><br><span class="line">//创建画布</span><br><span class="line">$img = imagecreatetruecolor(170, 40);</span><br><span class="line">//填充背景色</span><br><span class="line">$backcolor = imagecolorallocate($img, 255, 255, 255);//默认红、绿、蓝三色。</span><br><span class="line">imagefill($img, 0, 0, $backcolor);</span><br><span class="line">//产生随机验证码字符串</span><br><span class="line">$arr = array_merge(range(0,9),range(&apos;a&apos;,&apos;z&apos;),range(&apos;A&apos;,&apos;Z&apos;));//array_merge() 将一个或多个数组的单元合并起来，一个数组中的值附加在前一个数组的后面。返回作为结果的数组。</span><br><span class="line">shuffle($arr);//打乱数组，伪随机</span><br><span class="line">$rand_keys = array_rand($arr,4);</span><br><span class="line">$str = &apos;&apos;;</span><br><span class="line">foreach ($rand_keys as  $value) &#123;</span><br><span class="line">    $str .= $arr[$value]; </span><br><span class="line">&#125;</span><br><span class="line">//保存到session</span><br><span class="line">session_start();</span><br><span class="line">$_SESSION[&apos;captcha&apos;] = $str;//将获取的随机数验证码写入到session变量中</span><br><span class="line">//添加文字</span><br><span class="line">$span = floor(170/(4+1));</span><br><span class="line">for($i=1;$i&lt;=4;$i++) &#123;</span><br><span class="line">    $stringcolor = imagecolorallocate($img, mt_rand(0,255), mt_rand(0,100), mt_rand(0,80));</span><br><span class="line">    imagestring($img, 5, $i*$span, 12, $str[$i-1], $stringcolor);//水平输出字符</span><br><span class="line">&#125;</span><br><span class="line">//添加干扰线</span><br><span class="line">for ($i=1; $i&lt;=6 ; $i++) &#123;</span><br><span class="line">    $linecolor = imagecolorallocate($img,mt_rand(0,255),mt_rand(0,100),mt_rand(0,80));</span><br><span class="line">    imageline($img,mt_rand(0,169),mt_rand(0,39),mt_rand(0,169),mt_rand(0,39),$linecolor);//设置随机字体和x,y坐标</span><br><span class="line">&#125;</span><br><span class="line">//添加干扰点</span><br><span class="line">for($i=0;$i&lt;strlen($_SESSION[&apos;captcha&apos;]);$i++)&#123;</span><br><span class="line">    $pixel = imagecolorallocate($img,mt_rand(100,150),mt_rand(0,120),mt_rand(0,255));//设置背景色</span><br><span class="line">    imagesetpixel($img, mt_rand(0,169), mt_rand(0,39), $pixel);//设置随机字体和x,y坐标</span><br><span class="line">&#125;</span><br><span class="line">//输出图片</span><br><span class="line">header(&quot;Content-type:image/png&quot;);</span><br><span class="line">ob_clean();//清理缓冲区</span><br><span class="line">imagepng($img);//输出图片</span><br><span class="line">imagedestroy($img);//销毁图片</span><br></pre></td></tr></table></figure>
-<p> mt_rand()返回随机整数</p>
-</li>
-</ol>
-
+           <h3 id="刚刚看了验证码的实现过程，觉得有必要记一下"><a href="#刚刚看了验证码的实现过程，觉得有必要记一下" class="headerlink" title="刚刚看了验证码的实现过程，觉得有必要记一下"></a>刚刚看了验证码的实现过程，觉得有必要记一下</h3>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -609,12 +602,17 @@
         
         
         <div class="cube-box ">
-            <a href="/categories/web前端/">#web前端</a>
+            <a href="/categories/博客/">#博客</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/categories/博客/">#博客</a>
+            <a href="/categories/web前端/">#web前端</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/categories/MySQL/">#MySQL</a>
         </div>
         
         
@@ -624,16 +622,11 @@
         
         
         <div class="cube-box ">
-            <a href="/categories/MySQL/">#MySQL</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/categories/数据结构/">#数据结构</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/categories/CCNA/">#CCNA</a>
         </div>
         
@@ -649,18 +642,8 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/笔记/">#笔记</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/代码/">#代码</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/js/">#js</a>
         </div>
         
         
@@ -670,7 +653,7 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/HTTP/">#HTTP</a>
+            <a href="/tags/js/">#js</a>
         </div>
         
         
@@ -680,11 +663,21 @@
         
         
         <div class="cube-box-bg ">
+            <a href="/tags/代码/">#代码</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/sql语句/">#sql语句</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
+            <a href="/tags/HTTP/">#HTTP</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/tp5/">#tp5</a>
         </div>
         
