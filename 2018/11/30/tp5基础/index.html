@@ -263,70 +263,90 @@
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&apos;template&apos;               =&gt; [</span><br><span class="line">        // 模板引擎类型 支持 php think 支持扩展</span><br><span class="line">        &apos;type&apos;         =&gt; &apos;Think&apos;,</span><br><span class="line">        // 默认模板渲染规则 1 解析为小写+下划线 2 全部转换小写</span><br><span class="line">        &apos;auto_rule&apos;    =&gt; 1,</span><br><span class="line">        // 模板路径</span><br><span class="line">        &apos;view_path&apos;    =&gt; &apos;&apos;,</span><br><span class="line">        // 模板后缀</span><br><span class="line">        &apos;view_suffix&apos;  =&gt; &apos;html&apos;,</span><br><span class="line">        // 模板文件名分隔符</span><br><span class="line">        &apos;view_depr&apos;    =&gt; DS,</span><br><span class="line">        // 模板引擎普通标签开始标记</span><br><span class="line">        &apos;tpl_begin&apos;    =&gt; &apos;&#123;&apos;,</span><br><span class="line">        // 模板引擎普通标签结束标记</span><br><span class="line">        &apos;tpl_end&apos;      =&gt; &apos;&#125;&apos;,</span><br><span class="line">        // 标签库标签开始标记</span><br><span class="line">        &apos;taglib_begin&apos; =&gt; &apos;&#123;&apos;,</span><br><span class="line">        // 标签库标签结束标记</span><br><span class="line">        &apos;taglib_end&apos;   =&gt; &apos;&#125;&apos;,</span><br><span class="line">    ],</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>模板布局</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    &apos;layout_on&apos;=&gt;true  //开启模板布局</span><br><span class="line">    &apos;layout_name&apos;=&gt;&apos;layout&apos;  //使用layout文件</span><br><span class="line">    &apos;layout_item&apos;=&gt;&apos;&#123;__CONTENT__&#125;&apos;</span><br><span class="line">    ``` </span><br><span class="line"></span><br><span class="line">图片显示：![模板布局](tp5基础/模板布局.png)</span><br><span class="line">### 调试和日志</span><br><span class="line">1. 页面trace(官方推荐)</span><br><span class="line">* 修改配置，启动调试</span><br></pre></td></tr></table></figure>
-<p>  // 应用Trace<br>  ‘app_trace’              =&gt; true,<br>  ‘trace’                  =&gt; [</p>
-<pre><code>// 内置Html Console 支持扩展
-&apos;type&apos; =&gt; &apos;Html&apos;,
-</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    在显示页面时，浏览器底部会有调试信息![trace](tp5基础/trace.png)</span><br><span class="line">2. 异常页面</span><br><span class="line">* 直接报错调试，显示错误信息</span><br><span class="line">3. 断点调试</span><br><span class="line">* dump调试输出</span><br><span class="line">* halt变量调试中断并输出(打印之后就不会再打印)</span><br><span class="line">* trace 控制台输出</span><br><span class="line"></span><br><span class="line">4. 日志分析</span><br><span class="line">* log常规日志，用于记录日志</span><br><span class="line">* error错误，一般会导致程序的中止</span><br><span class="line">* notice 警告，程序可以运行但是不够完美的错误</span><br><span class="line">* info 信息，程序输出信息</span><br><span class="line">* debug 调试，用于调试信息</span><br><span class="line">* sql SQL语句，用于SQL记录，只在数据库的调试模式开启时有效</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&apos;layout_on&apos;=&gt;true  //开启模板布局</span><br><span class="line">&apos;layout_name&apos;=&gt;&apos;layout&apos;  //使用layout文件</span><br><span class="line">&apos;layout_item&apos;=&gt;&apos;&#123;__CONTENT__&#125;&apos;</span><br></pre></td></tr></table></figure>
+<p>  图片显示：<br><img src="/2018/11/30/tp5基础/模板布局.png" alt="模板布局"></p>
+<h3 id="调试和日志"><a href="#调试和日志" class="headerlink" title="调试和日志"></a>调试和日志</h3></li>
+</ul>
+<ol>
+<li>页面trace(官方推荐)</li>
+</ol>
+<ul>
+<li><p>修改配置，启动调试</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 应用Trace</span><br><span class="line">&apos;app_trace&apos;              =&gt; true,</span><br><span class="line">&apos;trace&apos;                  =&gt; [</span><br><span class="line">    // 内置Html Console 支持扩展</span><br><span class="line">    &apos;type&apos; =&gt; &apos;Html&apos;,</span><br></pre></td></tr></table></figure>
+<p>  在显示页面时，浏览器底部会有调试信息<img src="/2018/11/30/tp5基础/trace.png" alt="trace"></p>
 </li>
 </ul>
-<p>//在runtime下的log文件<br>Log::error(‘错误信息1’);<br>Log::info(‘日志信息2’);<br>trace(‘错误信息3’，’error’);<br>trace(‘日志信息4’，’info’);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">5. 远程调试</span><br><span class="line">### api调用（需要json返回）</span><br><span class="line">![api](tp5基础/api.png)</span><br><span class="line">* 创建api模块</span><br><span class="line">* 模拟提交测试（用php工具箱）</span><br><span class="line">### 扩展</span><br><span class="line">* 如果有些函数需要全栈共用，就要在application\common.php文件中自己定义。创建的类库存放于extend目录下面，在extend\org\文件名.php，跟项目有关系的类放在application\common\文件名.php。如果没有这些文件夹，需要自己创建。</span><br><span class="line">* 驱动扩展</span><br><span class="line">![扩展](tp5基础/驱动扩展.png)</span><br><span class="line">### session与cookie</span><br><span class="line">1. session文件存放位置 </span><br><span class="line">* php.ini session.save_path</span><br><span class="line">2. 开启session</span><br><span class="line">* session_start</span><br><span class="line">3. tp5里session设置config.php</span><br></pre></td></tr></table></figure></p>
-<pre><code>&apos;session&apos;                =&gt; [
-        &apos;id&apos;             =&gt; &apos;&apos;,
-        // SESSION_ID的提交变量,解决flash上传跨域
-        &apos;var_session_id&apos; =&gt; &apos;&apos;,
-        // SESSION 前缀
-        &apos;prefix&apos;         =&gt; &apos;think&apos;,
-        // 驱动方式 支持redis memcache memcached
-        &apos;type&apos;           =&gt; &apos;&apos;,
-        // 是否自动开启 SESSION
-        &apos;auto_start&apos;     =&gt; true,
-    ],
-
-    session::set() //赋值当前作用域
-    session::has() //判断
-    session::get() //取值
-    session::delete() //删除
-    session::clear() //清除session
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4. cookie</span><br></pre></td></tr></table></figure>
-
-&apos;cookie&apos;                 =&gt; [
-        // cookie 名称前缀
-        &apos;prefix&apos;    =&gt; &apos;&apos;,
-        // cookie 保存时间
-        &apos;expire&apos;    =&gt; 0,
-        // cookie 保存路径
-        &apos;path&apos;      =&gt; &apos;/&apos;,
-        // cookie 有效域名
-        &apos;domain&apos;    =&gt; &apos;&apos;,
-        //  cookie 启用安全传输
-        &apos;secure&apos;    =&gt; false,
-        // httponly设置
-        &apos;httponly&apos;  =&gt; &apos;&apos;,
-        // 是否使用 setcookie
-        &apos;setcookie&apos; =&gt; true,
-    ],
-
-    cookie::set()  //设置cookie
-    cookie::delete() //删除
-    cookie::clear() //清除cookie
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">支持数组，支持使用cookie类直接读取</span><br><span class="line">### 验证码</span><br><span class="line">安装composer，然后使用它安装验证码类库</span><br><span class="line">![](tp5基础/验证码配置.png)</span><br><span class="line">### 文件上传</span><br><span class="line">1. 上传form表单的enctype属性一定要设置成multipart/form-data</span><br><span class="line">2. 校验：用validate方法校验上传的是否是需要的文件</span><br><span class="line">3. 上传![](tp5基础/上传.png)</span><br><span class="line">md5是表示用MD5方式命名，也可改为date，即根据上传时间命名。如果想要保持上传文件的原文件名，可以将rule(&apos;md5&apos;)改为$file.</span><br><span class="line">4. 多文件上传</span><br><span class="line">* 将单文件上传foreach循环遍历，变为多文件上传</span><br><span class="line">### 图像处理</span><br><span class="line">1. 安装图像处理类库</span><br><span class="line">2. 图片读取 `Image::open($file)`</span><br></pre></td></tr></table></figure>
-
-//图片裁剪(宽度，高度，x坐标，y坐标)
-$image-&gt;crop(300,300,200,200);
-//缩略图(最大宽度，最大高度，裁剪类型)
-$image-&gt;thumb(150,150,Image::THUMB_CENTER);
-//垂直翻转
-$image-&gt;flip();
-//水平翻转
-$image-&gt;flip(Image::FLIP_Y);
-//图片旋转(顺时针旋转的度数)
-$image-&gt;rotate(30);
-//图片水印
-$image-&gt;water(ROOT_PATH.&apos;图片名&apos;,Image::WATER_NORTHWEST,50)
-//文字水印(水印文字，字体文件路径，文字大小，文字颜色，文字写入位置，偏移量，文字倾斜角度)
-$image-&gt;text();
-</code></pre><p><code>`</code></p>
+<ol start="2">
+<li>异常页面</li>
+</ol>
+<ul>
+<li>直接报错调试，显示错误信息</li>
+</ul>
+<ol start="3">
+<li>断点调试</li>
+</ol>
+<ul>
+<li>dump调试输出</li>
+<li>halt变量调试中断并输出(打印之后就不会再打印)</li>
+<li>trace 控制台输出</li>
+</ul>
+<ol start="4">
+<li>日志分析</li>
+</ol>
+<ul>
+<li>log常规日志，用于记录日志</li>
+<li>error错误，一般会导致程序的中止</li>
+<li>notice 警告，程序可以运行但是不够完美的错误</li>
+<li>info 信息，程序输出信息</li>
+<li>debug 调试，用于调试信息</li>
+<li>sql SQL语句，用于SQL记录，只在数据库的调试模式开启时有效</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//在runtime下的log文件</span><br><span class="line">Log::error(&apos;错误信息1&apos;);</span><br><span class="line">Log::info(&apos;日志信息2&apos;);</span><br><span class="line">trace(&apos;错误信息3&apos;，&apos;error&apos;);</span><br><span class="line">trace(&apos;日志信息4&apos;，&apos;info&apos;);</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>远程调试<h3 id="api调用（需要json返回）"><a href="#api调用（需要json返回）" class="headerlink" title="api调用（需要json返回）"></a>api调用（需要json返回）</h3><img src="/2018/11/30/tp5基础/api.png" alt="api"></li>
+</ol>
+<ul>
+<li>创建api模块</li>
+<li>模拟提交测试（用php工具箱）<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3></li>
+<li>如果有些函数需要全栈共用，就要在application\common.php文件中自己定义。创建的类库存放于extend目录下面，在extend\org\文件名.php，跟项目有关系的类放在application\common\文件名.php。如果没有这些文件夹，需要自己创建。</li>
+<li>驱动扩展<br><img src="/2018/11/30/tp5基础/驱动扩展.png" alt="扩展"><h3 id="session与cookie"><a href="#session与cookie" class="headerlink" title="session与cookie"></a>session与cookie</h3></li>
+</ul>
+<ol>
+<li>session文件存放位置 </li>
+</ol>
+<ul>
+<li>php.ini session.save_path</li>
+</ul>
+<ol start="2">
+<li>开启session</li>
+</ol>
+<ul>
+<li>session_start</li>
+</ul>
+<ol start="3">
+<li><p>tp5里session设置config.php</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&apos;session&apos;                =&gt; [</span><br><span class="line">        &apos;id&apos;             =&gt; &apos;&apos;,</span><br><span class="line">        // SESSION_ID的提交变量,解决flash上传跨域</span><br><span class="line">        &apos;var_session_id&apos; =&gt; &apos;&apos;,</span><br><span class="line">        // SESSION 前缀</span><br><span class="line">        &apos;prefix&apos;         =&gt; &apos;think&apos;,</span><br><span class="line">        // 驱动方式 支持redis memcache memcached</span><br><span class="line">        &apos;type&apos;           =&gt; &apos;&apos;,</span><br><span class="line">        // 是否自动开启 SESSION</span><br><span class="line">        &apos;auto_start&apos;     =&gt; true,</span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    session::set() //赋值当前作用域</span><br><span class="line">    session::has() //判断</span><br><span class="line">    session::get() //取值</span><br><span class="line">    session::delete() //删除</span><br><span class="line">    session::clear() //清除session</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cookie</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&apos;cookie&apos;                 =&gt; [</span><br><span class="line">        // cookie 名称前缀</span><br><span class="line">        &apos;prefix&apos;    =&gt; &apos;&apos;,</span><br><span class="line">        // cookie 保存时间</span><br><span class="line">        &apos;expire&apos;    =&gt; 0,</span><br><span class="line">        // cookie 保存路径</span><br><span class="line">        &apos;path&apos;      =&gt; &apos;/&apos;,</span><br><span class="line">        // cookie 有效域名</span><br><span class="line">        &apos;domain&apos;    =&gt; &apos;&apos;,</span><br><span class="line">        //  cookie 启用安全传输</span><br><span class="line">        &apos;secure&apos;    =&gt; false,</span><br><span class="line">        // httponly设置</span><br><span class="line">        &apos;httponly&apos;  =&gt; &apos;&apos;,</span><br><span class="line">        // 是否使用 setcookie</span><br><span class="line">        &apos;setcookie&apos; =&gt; true,</span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    cookie::set()  //设置cookie</span><br><span class="line">    cookie::delete() //删除</span><br><span class="line">    cookie::clear() //清除cookie</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>支持数组，支持使用cookie类直接读取</p>
+<h3 id="验证码"><a href="#验证码" class="headerlink" title="验证码"></a>验证码</h3><p>安装composer，然后使用它安装验证码类库<br><img src="/2018/11/30/tp5基础/验证码配置.png" alt=""></p>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><ol>
+<li>上传form表单的enctype属性一定要设置成multipart/form-data</li>
+<li>校验：用validate方法校验上传的是否是需要的文件</li>
+<li>上传<img src="/2018/11/30/tp5基础/上传.png" alt=""><br>md5是表示用MD5方式命名，也可改为date，即根据上传时间命名。如果想要保持上传文件的原文件名，可以将rule(‘md5’)改为$file.</li>
+<li>多文件上传</li>
+</ol>
+<ul>
+<li>将单文件上传foreach循环遍历，变为多文件上传<h3 id="图像处理"><a href="#图像处理" class="headerlink" title="图像处理"></a>图像处理</h3></li>
+</ul>
+<ol>
+<li>安装图像处理类库</li>
+<li>图片读取 <code>Image::open($file)</code></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//图片裁剪(宽度，高度，x坐标，y坐标)</span><br><span class="line">$image-&gt;crop(300,300,200,200);</span><br><span class="line">//缩略图(最大宽度，最大高度，裁剪类型)</span><br><span class="line">$image-&gt;thumb(150,150,Image::THUMB_CENTER);</span><br><span class="line">//垂直翻转</span><br><span class="line">$image-&gt;flip();</span><br><span class="line">//水平翻转</span><br><span class="line">$image-&gt;flip(Image::FLIP_Y);</span><br><span class="line">//图片旋转(顺时针旋转的度数)</span><br><span class="line">$image-&gt;rotate(30);</span><br><span class="line">//图片水印</span><br><span class="line">$image-&gt;water(ROOT_PATH.&apos;图片名&apos;,Image::WATER_NORTHWEST,50)</span><br><span class="line">//文字水印(水印文字，字体文件路径，文字大小，文字颜色，文字写入位置，偏移量，文字倾斜角度)</span><br><span class="line">$image-&gt;text();</span><br></pre></td></tr></table></figure>
 <p><img src="/2018/11/30/tp5基础/缩略图裁剪.png" alt=""><br><img src="/2018/11/30/tp5基础/图片水印.png" alt=""></p>
 <ol start="3">
 <li>图片保存 <code>$image-&gt;save()</code><h3 id="tp5自带的方法"><a href="#tp5自带的方法" class="headerlink" title="tp5自带的方法"></a>tp5自带的方法</h3></li>
@@ -508,7 +528,7 @@ $image-&gt;text();
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/categories/博客/">#博客</a>
         </div>
         
@@ -523,7 +543,7 @@ $image-&gt;text();
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/categories/协议/">#协议</a>
         </div>
         
@@ -549,12 +569,12 @@ $image-&gt;text();
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/笔记/">#笔记</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/hexo/">#hexo</a>
         </div>
         
@@ -569,17 +589,17 @@ $image-&gt;text();
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/代码/">#代码</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/sql语句/">#sql语句</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/HTTP/">#HTTP</a>
         </div>
         
