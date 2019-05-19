@@ -188,10 +188,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update user set authentication_string = PASSWORD(&apos;你自己的密码&apos;) where user=&apos;root&apos;;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使设定立即生效</p>
+</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>exit 退出；</p>
-</li>
+<ol start="6">
+<li>exit 退出；</li>
 </ol>
 <h3 id="基础语句"><a href="#基础语句" class="headerlink" title="基础语句"></a>基础语句</h3><ol>
 <li>登陆wamp；</li>
@@ -207,24 +208,25 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table （id int username varchar(20)password varchar(20）</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>往表中加入记录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  insert into admin values(1,&apos;admin&apos;,&apos;hhh&apos;)</span><br><span class="line">```		  </span><br><span class="line">7. 显示表的字段信息  desc 表名</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  insert into admin values(1,&apos;admin&apos;,&apos;hhh&apos;)</span><br><span class="line">```	</span><br><span class="line"></span><br><span class="line">7. 显示表的字段信息  desc 表名</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>mysql&gt; desc admin;<br>+———-+————-+——+—–+———+——-+<br>| Field    | Type        | Null | Key | Default | Extra |<br>+———-+————-+——+—–+———+——-+<br>| id       | int(11)     | YES  |     | NULL    |       |<br>| username | varchar(20) | YES  |     | NULL    |       |<br>| password | varchar(20) | YES  |     | NULL    |       |<br>+———-+————-+——+—–<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">8. 查询操作</span><br><span class="line">* 查询admin中所有数据   select * from 表名;</span><br></pre></td></tr></table></figure></p>
-<p>mysql&gt; select * from admin;<br>+——+———-+———-+<br>| id   | username | password |<br>+——+———-+———-+<br>|    1 | admin    | hhh      |<br>|    1 | user     | dida     |<br>|    1 | hack     | zzz      |<br>|    2 | use      | ida      |<br>|    3 | hak      | zz       |<br>+——+———-+———-+<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（因为手残所以多加了两个id=1的  以后忽略）</span><br><span class="line">* 查询admin中id=2的信息</span><br><span class="line">select * from 表名 where id =2</span><br></pre></td></tr></table></figure></p>
-<p>mysql&gt; select * from admin where id =2;<br>+——+———-+———-+<br>| id   | username | password |<br>+——+———-+———-+<br>|    2 | use      | ida      |<br>+——+———-+———-+<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* 查询admin中id=2的用户名和密码 </span><br><span class="line">select username,password from admin where id =2;</span><br></pre></td></tr></table></figure></p>
-<p>mysql&gt; select username,password from admin where id =2;<br>+———-+———-+<br>| username | password |<br>+———-+———-+<br>| use      | ida      |<br>+———-+———-+<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9. 判断其他表是否存在</span><br></pre></td></tr></table></figure></p>
-<p>select <em> from admin where id=‘1’and exists(select </em> from task）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果不存在 会出现Table &apos;user.task&apos; doesn&apos;t exist</span><br></pre></td></tr></table></figure></p>
-<p> mysql&gt; select <em> from admin where id=’2’and exists(select </em> from task );<br>ERROR 1146 (42S02): Table ‘user.task’ doesn’t exist<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#### 一些不常用的</span><br><span class="line">* @@version_compile_os显示服务器系统</span><br><span class="line">* @@basedir   显示MySQL的安装路径</span><br><span class="line">* @@datadir   显示MySQL数据库文件的路径</span><br><span class="line"></span><br><span class="line">1. order by n  查字段与排序</span><br></pre></td></tr></table></figure></p>
-<p>mysql&gt; select <em> from admin  order by 4;<br>ERROR 1054 (42S22): Unknown column ‘4’ in ‘order clause’<br>mysql&gt; select </em> from admin  order by 3;<br>+——+———-+———-+<br>| id   | username | password |<br>+——+———-+———-+<br>|    1 | user     | dida     |<br>|    1 | admin    | hhh      |<br>|    2 | use      | ida      |<br>|    3 | hak      | zz       |<br>|    1 | hack     | zzz      |<br>+——+———-+–<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">联合查询：前后字段必须一致。</span><br><span class="line">2. 告诉服务器你的字符集</span><br></pre></td></tr></table></figure></p>
-<p>mysql&gt;set names gbk/utf-8<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">10. 快速清空表</span><br><span class="line">truncate 表名</span><br><span class="line">11. distinct 在结果中去除重复行</span><br></pre></td></tr></table></figure></p>
-<p>mysql&gt; select distinct name from aaa;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">12. order by 对结果排序</span><br></pre></td></tr></table></figure></p>
-<p>select * from hhh order by id;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13. 修改数据表记录</span><br></pre></td></tr></table></figure></p>
-<p>mysql&gt; update hhh set age=’15’ where id=’3’;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">14. concat联合多列</span><br></pre></td></tr></table></figure></p>
-<p>mysql&gt; select id,concat(name,”:”,age) from hhh;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">15. 修改字符编码</span><br></pre></td></tr></table></figure></p>
-<p>alter table users modify username char(20) character set gbk;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">16. 建立索引</span><br></pre></td></tr></table></figure></p>
-<p>create unique index &lt;索引名&gt; on &lt;表名&gt; &lt;列名&gt;<br><code>`</code><br><!--more--></p>
-
+<p>mysql&gt; desc admin;<br>+———-+————-+——+—–+———+——-+<br>| Field    | Type        | Null | Key | Default | Extra |<br>+———-+————-+——+—–+———+——-+<br>| id       | int(11)     | YES  |     | NULL    |       |<br>| username | varchar(20) | YES  |     | NULL    |       |<br>| password | varchar(20) | YES  |     | NULL    |       |<br>+———-+————-+——+—–<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">8. 查询操作</span><br><span class="line">* 查询admin中所有数据   select * from 表名;</span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; select * from admin;<br>+——+———-+———-+<br>| id   | username | password |<br>+——+———-+———-+<br>|    1 | admin    | hhh      |<br>|    1 | user     | dida     |<br>|    1 | hack     | zzz      |<br>|    2 | use      | ida      |<br>|    3 | hak      | zz       |<br>+——+———-+———-+<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">（因为手残所以多加了两个id=1的  以后忽略）</span><br><span class="line">* 查询admin中id=2的信息</span><br><span class="line">select * from 表名 where id =2</span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; select * from admin where id =2;<br>+——+———-+———-+<br>| id   | username | password |<br>+——+———-+———-+<br>|    2 | use      | ida      |<br>+——+———-+———-+<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 查询admin中id=2的用户名和密码 </span><br><span class="line">select username,password from admin where id =2;</span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; select username,password from admin where id =2;<br>+———-+———-+<br>| username | password |<br>+———-+———-+<br>| use      | ida      |<br>+———-+———-+</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9. 判断其他表是否存在</span><br></pre></td></tr></table></figure>
+<p>select <em> from admin where id=‘1’and exists(select </em> from task）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">如果不存在 会出现Table &apos;user.task&apos; doesn&apos;t exist</span><br></pre></td></tr></table></figure></p>
+<p> mysql&gt; select <em> from admin where id=’2’and exists(select </em> from task );<br>ERROR 1146 (42S02): Table ‘user.task’ doesn’t exist<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 一些不常用的</span><br><span class="line">* @@version_compile_os显示服务器系统</span><br><span class="line">* @@basedir   显示MySQL的安装路径</span><br><span class="line">* @@datadir   显示MySQL数据库文件的路径</span><br><span class="line"></span><br><span class="line">1. order by n  查字段与排序</span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; select <em> from admin  order by 4;<br>ERROR 1054 (42S22): Unknown column ‘4’ in ‘order clause’<br>mysql&gt; select </em> from admin  order by 3;<br>+——+———-+———-+<br>| id   | username | password |<br>+——+———-+———-+<br>|    1 | user     | dida     |<br>|    1 | admin    | hhh      |<br>|    2 | use      | ida      |<br>|    3 | hak      | zz       |<br>|    1 | hack     | zzz      |<br>+——+———-+–<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">联合查询：前后字段必须一致。</span><br><span class="line">2. 告诉服务器你的字符集</span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt;set names gbk/utf-8<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">10. 快速清空表</span><br><span class="line">truncate 表名</span><br><span class="line">11. distinct 在结果中去除重复行</span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; select distinct name from aaa;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">12. order by 对结果排序</span><br></pre></td></tr></table></figure></p>
+<p>select * from hhh order by id;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">13. 修改数据表记录</span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; update hhh set age=’15’ where id=’3’;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">14. concat联合多列</span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; select id,concat(name,”:”,age) from hhh;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">15. 修改字符编码</span><br></pre></td></tr></table></figure></p>
+<p>alter table users modify username char(20) character set gbk;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">16. 建立索引</span><br></pre></td></tr></table></figure></p>
+<p>create unique index &lt;索引名&gt; on &lt;表名&gt; &lt;列名&gt;<br><code>`</code></p>
+<!--more-->
     </div>
 </div>
 
@@ -385,8 +387,8 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
-            <a href="/categories/数据库/">#数据库</a>
+        <div class="cube-box ">
+            <a href="/categories/PHP/">#PHP</a>
         </div>
         
         
@@ -396,16 +398,16 @@
         
         
         <div class="cube-box ">
+            <a href="/categories/数据库/">#数据库</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
             <a href="/categories/博客/">#博客</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/categories/PHP/">#PHP</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/categories/MySQL/">#MySQL</a>
         </div>
         
@@ -436,13 +438,18 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box ">
-            <a href="/tags/redis/">#redis</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/笔记/">#笔记</a>
         </div>
         
         
         <div class="cube-box ">
             <a href="/tags/js/">#js</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/redis/">#redis</a>
         </div>
         
         
@@ -456,23 +463,18 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/MySQL/">#MySQL</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/笔记/">#笔记</a>
+            <a href="/tags/sql语句/">#sql语句</a>
         </div>
         
         
         <div class="cube-box ">
             <a href="/tags/HTTP/">#HTTP</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/tags/sql语句/">#sql语句</a>
         </div>
         
         
