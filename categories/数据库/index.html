@@ -10,7 +10,7 @@
     
     
     
-    <title>debug | lpower</title>
+    <title>Categories: 数据库 | lpower</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -160,69 +160,33 @@
     
     <div class="cube-content">
         <div class="cube-left">
-            <div class="cube-article">
-    <h1 class="title">debug</h1>
+            <style>
+    @media(max-width: 768px) {
+        body {
+            background-color: #fff!important;
+        }
+    }
+</style>
+<div class="cube-archives">
     
-    <div class="cube-article-header">
-        <div class="cube-article-date">
-            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-            <!-- moment.js对象 -->
-            2019-06-10
-        </div>
-        <div class="cube-article-tags">
-    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-    
-    <a href="/tags/调试/">#调试</a>
-    
-</div>
+    <div class="cube-archive" style="margin-top: 0;">
+        <h1 class="title">数据库</h1>
+        
+        <ul class="posts">
+            
+            <li class="post">
+                <a href="/2019/04/20/redis命令/">redis命令</a>
+            </li>
+            
+            <li class="post">
+                <a href="/2019/04/17/linux下使用Redis/">linux下配置与使用Redis</a>
+            </li>
+            
+        </ul>
+        
     </div>
     
-    <div class="cube-article-content cube-markdown">
-        
-        <h4 id="phpdbg是一个PHP的SAPI模块，可以在不用修改代码和不影响性能的情况下控制PHP的运行环境"><a href="#phpdbg是一个PHP的SAPI模块，可以在不用修改代码和不影响性能的情况下控制PHP的运行环境" class="headerlink" title="phpdbg是一个PHP的SAPI模块，可以在不用修改代码和不影响性能的情况下控制PHP的运行环境"></a>phpdbg是一个PHP的SAPI模块，可以在不用修改代码和不影响性能的情况下控制PHP的运行环境</h4><a id="more"></a>
-<h4 id="phpdbg的目标是成为一个轻量级，强大，易用的PHP调试平台。可以在PHP5-4及以上版本使用，在PHP5-6及以上版本已经内置"><a href="#phpdbg的目标是成为一个轻量级，强大，易用的PHP调试平台。可以在PHP5-4及以上版本使用，在PHP5-6及以上版本已经内置" class="headerlink" title="phpdbg的目标是成为一个轻量级，强大，易用的PHP调试平台。可以在PHP5.4及以上版本使用，在PHP5.6及以上版本已经内置"></a>phpdbg的目标是成为一个轻量级，强大，易用的PHP调试平台。可以在PHP5.4及以上版本使用，在PHP5.6及以上版本已经内置</h4><h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><p>以下面的代码为例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">function test($a,$b)&#123;</span><br><span class="line">    $c = $a + $b;</span><br><span class="line">    return $c;</span><br><span class="line">&#125;</span><br><span class="line">$i = 1;</span><br><span class="line">$j = 2;</span><br><span class="line">echo test($i,$j),PHP_EOL;</span><br><span class="line">$name = &apos;白菜&apos;;</span><br><span class="line">class TestClass&#123;</span><br><span class="line">    public function printSth($a)&#123;</span><br><span class="line">        echo $a.&apos;----&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$test = new TestClass();</span><br><span class="line">$test-&gt;printSth(&apos;123&apos;);</span><br></pre></td></tr></table></figure></p>
-<ol>
-<li>如果想要加载要调试的脚本，只需执行exec命令即可，如下：<br><img src="/2019/06/10/debug/exec.png" alt=""><br>显示successful即成功。当然我们也可以在启动的时候指定e参数：<br><img src="/2019/06/10/debug/e.png" alt=""></li>
-<li>设置断点<ul>
-<li>按opline设置断点：这里所说的opline，就是以方法入口作为起点，当前所在代码的行号。在上面的示例中，第三行的’$c = $a + $b;’的opline就是1.<br><img src="/2019/06/10/debug/break.png" alt=""><br>执行：<img src="/2019/06/10/debug/run.png" alt="">可以看到断点执行情况</li>
-<li>按方法设置断点<img src="/2019/06/10/debug/1.png" alt=""></li>
-<li>按行数设置断点<img src="/2019/06/10/debug/2.png" alt=""></li>
-</ul>
-</li>
-<li>查看断点<img src="/2019/06/10/debug/info.png" alt=""><br>info break的显示结果中会把断点的类型也给显示出来。#后面的数字是断点号，我们可以根据断点号删除断点</li>
-<li>删除断点<img src="/2019/06/10/debug/del.png" alt=""></li>
-<li>单步执行<img src="/2019/06/10/debug/step.png" alt=""><br>phpdbg的单步执行只有一个命令 step。是一行一行的执行代码。</li>
-<li><p>继续执行<img src="/2019/06/10/debug/c.png" alt="">continue继续执行代码，简写为c</p>
-</li>
-<li><p>查看代码 </p>
-<p> <img src="/2019/06/10/debug/list.png" alt=""></p>
-<p> list命令显示test函数的代码</p>
-</li>
-<li>查看opcode<img src="/2019/06/10/debug/op.png" alt="">print 命令查看opcode</li>
-</ol>
-
-    </div>
 </div>
-
-<div class="cube-article-nav">
-    <ul>
-        
-        
-        <li class="next">
-            <a href="/2019/04/19/php文件上传/">
-                php文件上传
-                <i class="cube-icon cube-next" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-    </ul>
-</div>
-
-
-<!-- TODO 根据theme.comment的内容进行入口选择 -->
-
-
-
         </div>
         <div class="cube-right">
             
@@ -260,9 +224,9 @@
     
     
     <div class="count">
-        <a class="count articles"><span>13</span>Article</a>
-        <a class="count tags"><span>9</span>Tags</a>
-        <a class="count categories"><span>7</span>Categories</a>
+        <a class="count articles"><span>15</span>Article</a>
+        <a class="count tags"><span>10</span>Tags</a>
+        <a class="count categories"><span>8</span>Categories</a>
     </div>
 </div>
 
@@ -283,7 +247,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/06/10/debug/" title="debug">debug</a>
+                    <a href="/2019/06/10/phpdbg/" title="debug">debug</a>
                 </p>
             </div>
             
@@ -297,7 +261,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/04/19/php文件上传/" title="php文件上传">php文件上传</a>
+                    <a href="/2019/04/20/redis命令/" title="redis命令">redis命令</a>
                 </p>
             </div>
         </li>
@@ -310,7 +274,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/25/php验证码/" title="php验证码">php验证码</a>
+                    <a href="/2019/04/19/php文件上传/" title="php文件上传">php文件上传</a>
                 </p>
             </div>
         </li>
@@ -323,7 +287,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/19/关于http的一些总结/" title="关于http的一些总结">关于http的一些总结</a>
+                    <a href="/2019/04/17/linux下使用Redis/" title="linux下配置与使用Redis">linux下配置与使用Redis</a>
                 </p>
             </div>
         </li>
@@ -336,7 +300,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/01/03/实训笔记/" title="实训笔记">实训笔记</a>
+                    <a href="/2019/03/25/php验证码/" title="php验证码">php验证码</a>
                 </p>
             </div>
         </li>
@@ -355,22 +319,27 @@
         
         
         <div class="cube-box ">
-            <a href="/categories/PHP/">#PHP</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/categories/博客/">#博客</a>
+            <a href="/categories/web前端/">#web前端</a>
         </div>
         
         
         <div class="cube-box-bg ">
-            <a href="/categories/web前端/">#web前端</a>
+            <a href="/categories/博客/">#博客</a>
         </div>
         
         
         <div class="cube-box ">
             <a href="/categories/MySQL/">#MySQL</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/PHP/">#PHP</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/categories/数据库/">#数据库</a>
         </div>
         
         
@@ -384,7 +353,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/categories/CCNA/">#CCNA</a>
         </div>
         
@@ -401,7 +370,22 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/调试/">#调试</a>
+            <a href="/tags/js/">#js</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/hexo/">#hexo</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/MySQL/">#MySQL</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/笔记/">#笔记</a>
         </div>
         
         
@@ -411,22 +395,12 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/hexo/">#hexo</a>
+            <a href="/tags/redis/">#redis</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/js/">#js</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/MySQL/">#MySQL</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/笔记/">#笔记</a>
+            <a href="/tags/sql语句/">#sql语句</a>
         </div>
         
         
@@ -436,11 +410,11 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/sql语句/">#sql语句</a>
+            <a href="/tags/调试/">#调试</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/tp5/">#tp5</a>
         </div>
         
