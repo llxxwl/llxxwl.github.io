@@ -10,7 +10,7 @@
     
     
     
-    <title>Categories: 数据库 | lpower</title>
+    <title>ubuntu16.04下搭建lnmp | lpower</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -160,33 +160,88 @@
     
     <div class="cube-content">
         <div class="cube-left">
-            <style>
-    @media(max-width: 768px) {
-        body {
-            background-color: #fff!important;
-        }
-    }
-</style>
-<div class="cube-archives">
+            <div class="cube-article">
+    <h1 class="title">ubuntu16.04下搭建lnmp</h1>
     
-    <div class="cube-archive" style="margin-top: 0;">
-        <h1 class="title">数据库</h1>
-        
-        <ul class="posts">
-            
-            <li class="post">
-                <a href="/2019/04/20/redis命令/">redis命令</a>
-            </li>
-            
-            <li class="post">
-                <a href="/2019/04/17/linux下使用Redis/">linux下配置与使用Redis</a>
-            </li>
-            
-        </ul>
-        
-    </div>
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2019-06-12
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/tags/环境搭建/">#环境搭建</a>
     
 </div>
+    </div>
+    
+    <div class="cube-article-content cube-markdown">
+        
+        <h4 id="记一次Linux下搭建lnmp环境走过的坑"><a href="#记一次Linux下搭建lnmp环境走过的坑" class="headerlink" title="记一次Linux下搭建lnmp环境走过的坑"></a>记一次Linux下搭建lnmp环境走过的坑</h4><a id="more"></a>
+<ol>
+<li>更新源<br><code>sudo apt-get update</code></li>
+<li><p>安装nginx</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br><span class="line">sudo service nginx start  //开启nginx服务</span><br><span class="line">systemctl status nginx  //查看nignx状态</span><br></pre></td></tr></table></figure>
+<p> 在浏览器输入127.0.0.1，出现如下界面，说明已经安装成功<img src="/2019/06/12/ubuntu16-04-下搭建lnmp/nginx.png" alt=""></p>
+</li>
+<li><p>安装php7.1与php7.1-fpm</p>
+<p> 直接运行<code>sudo apt-get</code>命令a女装PHP会报错，原因是 PHP7 等并不在 Ubuntu的软件库中，因此要使用 PPA ppa:ondrej/php 库，所以需要运行如下命令：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-add-repository ppa:ondrej/php</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install php7.1 php7.1-fpm</span><br></pre></td></tr></table></figure>
+<p> 安装完成后运行<code>php -v</code>命令查看php版本，确定php安装完成</p>
+</li>
+<li><p>安装MySQL及PHP-MySQL扩展</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install mysql-server mysql-client php7.1-mysql</span><br></pre></td></tr></table></figure>
+<p> 安装过程中会需要输入MySQL的密码，输入自己想要设置的密码即可。安装完成后，运行<code>systemctl start mysql</code>开启MySQL服务</p>
+</li>
+<li><p>Nginx 与 PHP-FPM集成</p>
+<ul>
+<li><p>修改nginx配置文件</p>
+<p>  nginx配置文件在/etc/nginx/sites-available/default 配置文件中（网站根目录也在是这里更改）,nginx已经默认与php-fpm集成好了，只需修改以下配置即可</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">root   /var/www/html    //网站默认根目录</span><br><span class="line">index index.php index.html index.htm index.nginx-debian.html;//默认文件</span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">            include snippets/fastcgi-php.conf;</span><br><span class="line">    #       # With php7.0-cgi alone:</span><br><span class="line">    #       fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">    #       # With php7.0-fpm:</span><br><span class="line">            fastcgi_pass unix:/run/php/php7.1-fpm.sock;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  配置完成后，保存退出。运行<code>nginx -t</code>命令检测配置文件是否有错误。我在检测的时候遇到了一个错误<img src="/2019/06/12/ubuntu16-04-下搭建lnmp/error.png" alt="">这种情况是80端口被占用，此时我们可以输入<code>lsof -i :80</code>命令来查看80端口的pid，然后<code>kill pid号</code>将进程关闭，再运行<code>nginx -t</code>，如果出现<br>  <img src="/2019/06/12/ubuntu16-04-下搭建lnmp/ok.png" alt=""></p>
+<p>  证明配置完成，再重新载入nginx配置（<code>nginx -s reload</code>）</p>
+</li>
+</ul>
+</li>
+<li>完成搭建<ul>
+<li>改完配置文件后，重新启动nginx服务<code>systemctl start nginx</code>,此时可能会报错，查看nginx状态<code>systemctl status nginx</code>，会发现出现下列情况<img src="/2019/06/12/ubuntu16-04-下搭建lnmp/502.png" alt="">  这个错误还是端口80被占用，用上述方法再修复一次即可。</li>
+<li>启动php-fpm服务 <code>systemctl start php7.1-fpm</code></li>
+<li><code>sudo echo &#39;&lt;?php echo phpinfo();&#39;  &gt; /var/www/html/test.php</code>运行此命令，将test.php存放到网站根目录下，访问<code>127.0.0.1/test.php</code>，如果成功，会出现  <img src="/2019/06/12/ubuntu16-04-下搭建lnmp/success.png" alt="">.但是注意，这里还会有一个坑，访问这个页面之后可能会出现502的情况，如果出现502，应该就是nginx配置文件出错<pre><code>location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+        #       # With php7.0-cgi alone:
+        #       fastcgi_pass 127.0.0.1:9000;
+        #       # With php7.0-fpm:
+                fastcgi_pass unix:/run/php/php7.1-fpm.sock;
+    }
+</code></pre>  仔细看这个配置文件最后一行，php的版本一定要与自己系统里的php版本一样，如果是7.2，就要改为7.2，否则就会出现502错误。改完以后，重新载入配置，启动服务，在测试一遍，就会成功。 </li>
+</ul>
+</li>
+</ol>
+
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        
+        <li class="next">
+            <a href="/2019/06/10/phpdbg/">
+                phpdbg
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+
         </div>
         <div class="cube-right">
             
@@ -318,7 +373,7 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/categories/PHP/">#PHP</a>
         </div>
         
@@ -333,7 +388,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/categories/数据库/">#数据库</a>
         </div>
         
@@ -343,12 +398,12 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/categories/协议/">#协议</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/categories/数据结构/">#数据结构</a>
         </div>
         
@@ -394,12 +449,12 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/MySQL/">#MySQL</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/调试/">#调试</a>
         </div>
         
@@ -409,7 +464,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/HTTP/">#HTTP</a>
         </div>
         
