@@ -249,13 +249,40 @@
 <li>＠Quelifier  与＠Autowired 组合在一起，通过类型和名称一起找到 Bean</li>
 <li>@Override  重写，验证下面的方法名是否是你父类中所有的</li>
 <li>@Conditional 只有在特定条件满足时才启用一些配置</li>
-<li>@ImportResource ，通过它可以引入对应的 XML 文件，用 以加载 Bean</li>
+<li>@ImportResource ，通过它可以引入对应的 XML 文件，用以加载Bean</li>
+<li>＠Aspect  当以此为注解时，spring就会知道这是一个切面，然后我们就可以通过各类注解来定义各类的通知了</li>
+<li>＠Repository  在将来讨论扫描加载MyBatis接口Bean时是十分有用的</li>
+<li>@Responsebody 该方法的返回结果直接写入HTTP response body中，一般在异步获取数据时使用</li>
 </ol>
 </li>
 <li><p>DI （Dependency Injection） 依赖注入</p>
-<pre><code>例如，人类（ Person ）有 时候利用一些动物 (Animal）去完成一些事情，比方说狗 （Dog）是用来 看门的，猫（ Cat）是用来抓老鼠的， 鹦鹉（Paηot) 是用来迎客的……于是做一些事情就依赖于那些可爱的动物了
+<pre><code>例如，人类（ Person ）有时候利用一些动物 (Animal）去完成一些事情，比方说狗（Dog）是用来看门的，猫（Cat）是用来抓老鼠的， 鹦鹉（Paηot)是用来迎客的……于是做一些事情就依赖于那些可爱的动物了
 </code></pre></li>
-<li>生命周期<br> <img src="/2019/07/16/java笔记/1.png" alt=""><br> <img src="/2019/07/16/java笔记/2.png" alt=""></li>
+<li>生命周期<br> <img src="/2019/07/16/java笔记/1.png" alt=""><br> 生命周期：<br> <img src="/2019/07/16/java笔记/2.png" alt=""></li>
+<li>约定编程<br> <img src="/2019/07/16/java笔记/3.png" alt=""><br> AOP（面向切面编程）可以解决对数据库事务的管控问题，还可以减少大量重复的工作。使用Spring AOP可以处理一些无法使用 OOP 实现的业务逻辑。其次，通过约定，可以将一些业务逻辑织入流程中，并且可以将一些通用的逻辑抽取出来，然后给予默认实现，这样你只需要完成部分的功能就可以了，这样做可以使得开发者的代码更加简短，同时可维护性也得到提高。</li>
+<li><p>JPA（Hibernate）操作数据</p>
+<p> Java持久化API，是定义了对象关系映射（ORM）以及实体对象持久化的标准接口。JPA所维护的核心是实体，而它是通过持久化上下文来使用的。持久化上下文包含以下三个部分：</p>
+<ul>
+<li>对象关系映射，主要通过注解实现</li>
+<li>实体操作API，实现对实体对象的CRUD操作，来完成对象的持久化和查询</li>
+<li>查询语言，约定了面向对象的查询语言JPQL，通过这层关系可以实现比较灵活地查询</li>
+</ul>
+</li>
+<li>MyBatis<ul>
+<li>定义：MyBatis是支持定制化SQL、存储过程以及高级映射的优秀的持久层框架。 MyBatis避免了几乎所有的JDBC代码和手动设置参数以及获取结果集。MyBatis 可以对配置和原生Map使用简单的XML或注解，将接口和Java的POJO ( Plain Old Java O均ect，普通的 Java 对象）映射成数据库中的记录。 </li>
+<li>配置内容<ul>
+<li>properties（属性）</li>
+<li>settings（设置）：改变Mybatis的底层行为</li>
+<li>typeAliases（别名）</li>
+<li>typeHandles（类型处理器）：是重要配置之一，在写入和读取数据库的过程中对于不同类型的数据进行自定义转换</li>
+<li>plugins(插件)：也称拦截器，是最强大也是最危险的组件。通过动态代理和责任链模式完成，可以修改底层上的实现功能</li>
+</ul>
+<ul>
+<li>mappers（映射器）是最核心的组件，提供SQL和POJO的映射关系，是Mybatis开发的核心</li>
+</ul>
+</li>
+</ul>
+</li>
 </ol>
 
     </div>
@@ -318,7 +345,7 @@
     
     <div class="count">
         <a class="count articles"><span>17</span>Article</a>
-        <a class="count tags"><span>12</span>Tags</a>
+        <a class="count tags"><span>13</span>Tags</a>
         <a class="count categories"><span>9</span>Categories</a>
     </div>
 </div>
@@ -427,11 +454,6 @@
         
         
         <div class="cube-box ">
-            <a href="/categories/MySQL/">#MySQL</a>
-        </div>
-        
-        
-        <div class="cube-box ">
             <a href="/categories/Java/">#Java</a>
         </div>
         
@@ -441,7 +463,12 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
+            <a href="/categories/MySQL/">#MySQL</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/categories/协议/">#协议</a>
         </div>
         
@@ -483,7 +510,7 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/MySQL/">#MySQL</a>
+            <a href="/tags/jQuery/">#jQuery</a>
         </div>
         
         
@@ -493,17 +520,22 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/调试/">#调试</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/tags/redis/">#redis</a>
         </div>
         
         
         <div class="cube-box ">
+            <a href="/tags/MySQL/">#MySQL</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/代码/">#代码</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/调试/">#调试</a>
         </div>
         
         
@@ -517,7 +549,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/HTTP/">#HTTP</a>
         </div>
         
