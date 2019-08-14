@@ -180,151 +180,7 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <h5 id="正则表达式是学习PHP的基础之一"><a href="#正则表达式是学习PHP的基础之一" class="headerlink" title="正则表达式是学习PHP的基础之一"></a>正则表达式是学习PHP的基础之一</h5><ol>
-<li>元字符</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">元字符</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">.</td>
-<td style="text-align:center">匹配任意单个字符除了换行符</td>
-</tr>
-<tr>
-<td style="text-align:center">[]</td>
-<td style="text-align:center">匹配方括号内的任意字符</td>
-</tr>
-<tr>
-<td style="text-align:center">[^]</td>
-<td style="text-align:center">否定的字符种类，匹配除了方括号里的任意字符</td>
-</tr>
-<tr>
-<td style="text-align:center">*</td>
-<td style="text-align:center">匹配&gt;=0个重复的*号之前的字符</td>
-</tr>
-<tr>
-<td style="text-align:center">+</td>
-<td style="text-align:center">匹配&gt;=1个重复的+号之前的字符</td>
-</tr>
-<tr>
-<td style="text-align:center">？</td>
-<td style="text-align:center">标记？之前的字符为可选</td>
-</tr>
-<tr>
-<td style="text-align:center">^</td>
-<td style="text-align:center">从开始行开始匹配</td>
-</tr>
-<tr>
-<td style="text-align:center">$</td>
-<td style="text-align:center">从末端开始匹配</td>
-</tr>
-</tbody>
-</table>
-<ol start="2">
-<li>{}号</li>
-</ol>
-<p>在正则表达式中{}是一个量词，常用来一个或一组字符可以重复出现的次数。例如，表达式[0-9]{2,3}匹配最少2位最多3位0-9的数字</p>
-<ol start="3">
-<li>(…)特征标群</li>
-</ol>
-<p>特征标群是一组写在(…)中的子模式。例如，表达式(ab)*匹配连续出现0或更多个ab</p>
-<ol start="4">
-<li>简写字符集</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">简写</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">.</td>
-<td style="text-align:center">除换行符外的所有字符</td>
-</tr>
-<tr>
-<td style="text-align:center">\w</td>
-<td style="text-align:center">匹配所有字母数字</td>
-</tr>
-<tr>
-<td style="text-align:center">\W</td>
-<td style="text-align:center">匹配所有非字母数字</td>
-</tr>
-<tr>
-<td style="text-align:center">\d</td>
-<td style="text-align:center">匹配数字</td>
-</tr>
-<tr>
-<td style="text-align:center">\D</td>
-<td style="text-align:center">匹配非数字</td>
-</tr>
-<tr>
-<td style="text-align:center">\s</td>
-<td style="text-align:center">匹配所有空格字符，等同于：[\t\n\f\r\p{Z}]</td>
-</tr>
-<tr>
-<td style="text-align:center">\S</td>
-<td style="text-align:center">匹配所有非空格字符</td>
-</tr>
-<tr>
-<td style="text-align:center">\f</td>
-<td style="text-align:center">匹配一个换页符</td>
-</tr>
-<tr>
-<td style="text-align:center">\n</td>
-<td style="text-align:center">匹配一个换行符</td>
-</tr>
-<tr>
-<td style="text-align:center">\r</td>
-<td style="text-align:center">匹配一个回车符</td>
-</tr>
-<tr>
-<td style="text-align:center">\t</td>
-<td style="text-align:center">匹配一个制表符</td>
-</tr>
-<tr>
-<td style="text-align:center">\v</td>
-<td style="text-align:center">匹配一个垂直制表符</td>
-</tr>
-<tr>
-<td style="text-align:center">\p</td>
-<td style="text-align:center">匹配 CR/LF (等同于 \r\n)，用来匹配 DOS 行终止符</td>
-</tr>
-</tbody>
-</table>
-<ol start="5">
-<li>标志</li>
-</ol>
-<p>标志也叫模式修正符，因为它可以用来修改表达式的搜索结果</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">标志</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">i</td>
-<td style="text-align:left">忽略大小写</td>
-</tr>
-<tr>
-<td style="text-align:center">g</td>
-<td style="text-align:left">全局搜索</td>
-</tr>
-<tr>
-<td style="text-align:center">m</td>
-<td style="text-align:left">多行的: 锚点元字符 ^ $ 工作范围在每行的起始</td>
-</tr>
-</tbody>
-</table>
-
+           <h5 id="正则表达式是学习PHP的基础之一"><a href="#正则表达式是学习PHP的基础之一" class="headerlink" title="正则表达式是学习PHP的基础之一"></a>正则表达式是学习PHP的基础之一</h5>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -738,8 +594,8 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
-            <a href="/categories/web前端/">#web前端</a>
+        <div class="cube-box ">
+            <a href="/categories/PHP/">#PHP</a>
         </div>
         
         
@@ -749,37 +605,37 @@
         
         
         <div class="cube-box ">
-            <a href="/categories/数据库/">#数据库</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/categories/PHP/">#PHP</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/categories/博客/">#博客</a>
         </div>
         
         
         <div class="cube-box ">
+            <a href="/categories/数据库/">#数据库</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/categories/MySQL/">#MySQL</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/web前端/">#web前端</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
             <a href="/categories/协议/">#协议</a>
         </div>
         
         
         <div class="cube-box-bg ">
-            <a href="/categories/正则/">#正则</a>
-        </div>
-        
-        
-        <div class="cube-box ">
             <a href="/categories/数据结构/">#数据结构</a>
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/categories/MySQL/">#MySQL</a>
+        <div class="cube-box-bg ">
+            <a href="/categories/正则/">#正则</a>
         </div>
         
         
@@ -800,27 +656,12 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/js/">#js</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/jQuery/">#jQuery</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/Java基础/">#Java基础</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/redis/">#redis</a>
+            <a href="/tags/笔记/">#笔记</a>
         </div>
         
         
         <div class="cube-box-bg ">
-            <a href="/tags/调试/">#调试</a>
+            <a href="/tags/Java基础/">#Java基础</a>
         </div>
         
         
@@ -829,33 +670,8 @@
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/代码/">#代码</a>
-        </div>
-        
-        
         <div class="cube-box ">
-            <a href="/tags/HTTP/">#HTTP</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/笔记/">#笔记</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/环境搭建/">#环境搭建</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/tags/正则/">#正则</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/sql语句/">#sql语句</a>
+            <a href="/tags/redis/">#redis</a>
         </div>
         
         
@@ -865,6 +681,46 @@
         
         
         <div class="cube-box ">
+            <a href="/tags/js/">#js</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/jQuery/">#jQuery</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/代码/">#代码</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/调试/">#调试</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/环境搭建/">#环境搭建</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/sql语句/">#sql语句</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/HTTP/">#HTTP</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/正则/">#正则</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
             <a href="/tags/tp5/">#tp5</a>
         </div>
         
