@@ -158,7 +158,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Búsqueda">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -260,7 +260,7 @@
 </li>
 <li><p>安装PHP：执行以下命令</p>
  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum install php  //安装PHP</span><br><span class="line">systemctl start php-fpm  //开启PHP服务</span><br><span class="line">cd /var/www/html   // 切换到www路径，写一下测试</span><br><span class="line">vim index.php    //这里随便起名</span><br><span class="line">//这里是测试用例</span><br><span class="line">&lt;?php</span><br><span class="line">phpinfo();</span><br><span class="line">?</span><br></pre></td></tr></tbody></table></figure>
-<p> 写完以后，确保Apache服务是开启的，可以执行<code>systemctl status httpd</code>这个语句来确定Apache的状态，如果是running，证明是开启的。然后去浏览器里输入localhost/index.php，如果出现以下的结果，证明安装成功。<br> <img src="/2019/04/17/linux下使用Redis/phpinfo.png" alt></p>
+<p> 写完以后，确保Apache服务是开启的，可以执行<code>systemctl status httpd</code>这个语句来确定Apache的状态，如果是running，证明是开启的。然后去浏览器里输入localhost/index.php，如果出现以下的结果，证明安装成功。<br> <img src="/2019/04/17/linux下使用Redis/phpinfo.png" alt=""></p>
 </li>
 <li><p>安装Redis：执行以下命令</p>
  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum install redis</span><br><span class="line">yum install epel-release</span><br><span class="line">yum install redis</span><br><span class="line">systemctl start redis</span><br><span class="line">systemctl status redis</span><br><span class="line">systemctl enable redis</span><br></pre></td></tr></tbody></table></figure>
@@ -269,7 +269,7 @@
  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h 127.0.0.1 -p 6379  //redis端口号6379，本地登录</span><br><span class="line">//查看配置</span><br><span class="line">config get *    //查看所有配置</span><br><span class="line">//为redis设置密码</span><br><span class="line">config set requirepass 'password' </span><br><span class="line">auth password</span><br><span class="line">config get requirepass</span><br></pre></td></tr></tbody></table></figure>
 <p> 设置完密码后，重新登陆。如果不输入密码，当你输入命令后，会提示报错。因此当你登录进去后，首先要输入<code>auth password</code>才能继续使用。当然，也可以在登录时直接输入密码，命令是<code>redis-cli -h 127.0.0.1 -p 6379 -a password</code>，这样登陆进去之后就可以直接使用。</p>
 <p> 查看全部配置：</p>
-<p> <img src="/2019/04/17/linux下使用Redis/全部配置.png" alt></p>
+<p> <img src="/2019/04/17/linux下使用Redis/全部配置.png" alt=""></p>
 </li>
 <li><p>php与redis</p>
 <ul>
@@ -280,7 +280,7 @@
 </li>
 <li><p>测试：去Apache目录下vim一个测试文件</p>
   <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cd /var/www/html</span><br><span class="line">vim test.php</span><br><span class="line">&lt;?php</span><br><span class="line">//连接本地的 Redis 服务</span><br><span class="line">$redis = new Redis();</span><br><span class="line">$redis-&gt;connect('127.0.0.1', 6379);</span><br><span class="line">$redis-&gt;auth('password');</span><br><span class="line">echo "Connection to server successfully";</span><br><span class="line">        //查看服务是否运行</span><br><span class="line">echo "Server is running: " . $redis-&gt;ping();</span><br><span class="line">?&gt;</span><br></pre></td></tr></tbody></table></figure>
-<p>  成功之后，会输出Connection to server successfullyServer is running: +PONG<br>  <img src="/2019/04/17/linux下使用Redis/测试.png" alt><br>  这样就代表我们能够使用PHP操作Redis了。</p>
+<p>  成功之后，会输出Connection to server successfullyServer is running: +PONG<br>  <img src="/2019/04/17/linux下使用Redis/测试.png" alt=""><br>  这样就代表我们能够使用PHP操作Redis了。</p>
 </li>
 </ul>
 </li>
@@ -294,7 +294,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-08-03T11:33:31.637Z" itemprop="dateUpdated">2021-08-03 19:33:31</time>
+    Última actualización<time datetime="2021-08-03T11:33:31.637Z" itemprop="dateUpdated">2021-08-03 19:33:31</time>
 </span>
 
 
@@ -440,7 +440,7 @@
         </span>
         <br/>
 
-        <span class="license">This blog is licensed under a <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        <span class="license">Este blog está licenciado bajo una <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">licencia internacional Creative Commons Attribution 4.0</a>.</span>
     </div>
 </footer>
 
