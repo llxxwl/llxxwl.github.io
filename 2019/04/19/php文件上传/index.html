@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>php文件上传 | lpower</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="代码">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="PHP实现文件上传">
+<meta name="keywords" content="代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php文件上传">
+<meta property="og:url" content="http://lpower.com/2019/04/19/php文件上传/index.html">
+<meta property="og:site_name" content="lpower">
+<meta property="og:description" content="PHP实现文件上传">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-08-03T11:33:31.633Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="php文件上传">
+<meta name="twitter:description" content="PHP实现文件上传">
+    
+        <link rel="alternate" type="application/atom+xml" title="lpower" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">lpower</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about-me"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/llxxwl" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">php文件上传</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#PHP实现文件上传"><span class="post-toc-number">1.</span> <span class="post-toc-text">PHP实现文件上传</span></a></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-php文件上传"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">php文件上传</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2019-04-19 14:53:58" datetime="2019-04-19T06:53:58.000Z"  itemprop="datePublished">2019-04-19</time>
+
+            <br id="mybreak"/>
+            
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/PHP/">PHP</a></li></ul>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">3</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h4 id="PHP实现文件上传"><a href="#PHP实现文件上传" class="headerlink" title="PHP实现文件上传"></a>PHP实现文件上传</h4><a id="more"></a>
+<ol>
+<li><p>_FILES</p>
+<p> $_FILES是PHP的全局数组，可以上传文件。第一个参数是文件名，第二个参数可以使如下所示的几个：</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$_FILES["file"]["name"] - 上传文件的名称</span><br><span class="line">$_FILES["file"]["type"] - 上传文件的类型</span><br><span class="line">$_FILES["file"]["size"] - 上传文件的大小，以字节计</span><br><span class="line">$_FILES["file"]["tmp_name"] - 存储在服务器的文件的临时副本的名称</span><br><span class="line">$_FILES["file"]["error"] - 由文件上传导致的错误代码</span><br></pre></td></tr></tbody></table></figure>
+<p> 错误代码各值所代表的意思：</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">UPLOAD_ERR_OK           //其值为 0，没有错误发生，文件上传成功。 </span><br><span class="line">UPLOAD_ERR_INI_SIZE     //其值为 1，上传的文件超过了 php.ini 中 upload_max_filesize 选项限制的值。 </span><br><span class="line">UPLOAD_ERR_FORM_SIZE    //其值为 2，上传文件的大小超过了 HTML 表单中 MAX_FILE_SIZE 选项指定的值。 </span><br><span class="line">UPLOAD_ERR_PARTIAL      //其值为 3，文件只有部分被上传。 </span><br><span class="line">UPLOAD_ERR_NO_FILE      //其值为 4，没有文件被上传。 </span><br><span class="line">UPLOAD_ERR_NO_TMP_DIR   //其值为 6，找不到临时文件夹。PHP 4.3.10 和 PHP 5.0.3 引进。 </span><br><span class="line">UPLOAD_ERR_CANT_WRITE   //其值为 7，文件写入失败。PHP 5.1.0 引进。</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>move_uploaded_file</p>
+<ul>
+<li>move_uploaded_file函数，将上传的文件移动到新的位置。</li>
+<li>说明：<code>move_uploaded_file( string $filename, string $destination) : bool</code>,本函数检查并确保由 filename 指定的文件是合法的上传文件（即通过 PHP 的 HTTP POST 上传机制所上传的）。如果文件合法，则将其移动为由 destination 指定的文件。 这种检查显得格外重要，如果上传的文件有可能会造成对用户或本系统的其他用户显示其内容的话。 </li>
+<li>参数：<code>filename</code> 上传的文件名      <code>destination</code> 要移动到的位置</li>
+</ul>
+</li>
+<li><p>文件上传表单</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset="utf-8"&gt;</span><br><span class="line">&lt;title&gt;lpower&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;form action="upload_file.php" method="post" enctype="multipart/form-data"&gt;</span><br><span class="line">    &lt;label for="file"&gt;文件名：&lt;/label&gt;</span><br><span class="line">    &lt;input type="file" name="file" id="file"&gt;&lt;br&gt;</span><br><span class="line">    &lt;input type="submit" name="submit" value="提交"&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+<p> 注意：</p><form> 标签的 enctype 属性规定了在提交表单时要使用哪种内容类型。在表单需要二进制数据时，比如文件内容，请使用 “multipart/form-data”。</form><p></p>
+</li>
+<li><p>上传脚本</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">// 允许上传的图片后缀</span><br><span class="line">$allowedExts = array("gif", "jpeg", "jpg", "png");</span><br><span class="line">$temp = explode(".", $_FILES["file"]["name"]);</span><br><span class="line">echo $_FILES["file"]["size"];</span><br><span class="line">$extension = end($temp);     // 获取文件后缀名</span><br><span class="line">if ((($_FILES["file"]["type"] == "image/gif")</span><br><span class="line">|| ($_FILES["file"]["type"] == "image/jpeg")</span><br><span class="line">|| ($_FILES["file"]["type"] == "image/jpg")</span><br><span class="line">|| ($_FILES["file"]["type"] == "image/pjpeg")</span><br><span class="line">|| ($_FILES["file"]["type"] == "image/x-png")</span><br><span class="line">|| ($_FILES["file"]["type"] == "image/png"))</span><br><span class="line">&amp;&amp; ($_FILES["file"]["size"] &lt; 204800)   // 小于 200 kb</span><br><span class="line">&amp;&amp; in_array($extension, $allowedExts))</span><br><span class="line">{</span><br><span class="line">    if ($_FILES["file"]["error"] &gt; 0)</span><br><span class="line">    {</span><br><span class="line">        echo "错误：: " . $_FILES["file"]["error"] . "&lt;br&gt;";</span><br><span class="line">    }</span><br><span class="line">    else</span><br><span class="line">    {</span><br><span class="line">        echo "上传文件名: " . $_FILES["file"]["name"] . "&lt;br&gt;";</span><br><span class="line">        echo "文件类型: " . $_FILES["file"]["type"] . "&lt;br&gt;";</span><br><span class="line">        echo "文件大小: " . ($_FILES["file"]["size"] / 1024) . " kB&lt;br&gt;";</span><br><span class="line">        echo "文件临时存储的位置: " . $_FILES["file"]["tmp_name"] . "&lt;br&gt;";</span><br><span class="line">        </span><br><span class="line">        // 判断当期目录下的 upload 目录是否存在该文件</span><br><span class="line">        // 如果没有 upload 目录，你需要创建它，upload 目录权限为 777</span><br><span class="line">        if (file_exists("upload/" . $_FILES["file"]["name"]))</span><br><span class="line">        {</span><br><span class="line">            echo $_FILES["file"]["name"] . " 文件已经存在。 ";</span><br><span class="line">        }</span><br><span class="line">        else</span><br><span class="line">        {</span><br><span class="line">            // 如果 upload 目录不存在该文件则将文件上传到 upload 目录下</span><br><span class="line">            move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $_FILES["file"]["name"]);</span><br><span class="line">            echo "文件存储在: " . "upload/" . $_FILES["file"]["name"];</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line">else</span><br><span class="line">{</span><br><span class="line">    echo "非法的文件格式";</span><br><span class="line">}</span><br><span class="line">?&gt;</span><br></pre></td></tr></tbody></table></figure>
+<p> 服务器的 PHP 临时文件夹中创建了一个被上传文件的临时副本,要保存上传的文件，要拷贝到upload文件下。</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-03T11:33:31.633Z" itemprop="dateUpdated">2021-08-03 19:33:31</time>
+</span>
+
+
+        
+        原文链接：<a href="/2019/04/19/php文件上传/" target="_blank" rel="external">http://lpower.com/2019/04/19/php文件上传/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='http://lpower.com'">
+            <img src="/img/avatar.jpg" alt="lpower">
+            <a>lpower</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码/">代码</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2019/04/19/php文件上传/&title=《php文件上传》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2019/04/19/php文件上传/&title=《php文件上传》 — lpower&source=PHP实现文件上传" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2019/04/19/php文件上传/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《php文件上传》 — lpower&url=http://lpower.com/2019/04/19/php文件上传/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2019/04/19/php文件上传/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/04/20/redis命令/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：redis命令
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/17/linux下使用Redis/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：linux下配置与使用Redis">下一篇：linux下配置与使用Redis</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2017
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="http://lpower.com">tomotoes.com</a>
+            <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br/>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license">This blog is licensed under a <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2019/04/19/php文件上传/&title=《php文件上传》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2019/04/19/php文件上传/&title=《php文件上传》 — lpower&source=PHP实现文件上传" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2019/04/19/php文件上传/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《php文件上传》 — lpower&url=http://lpower.com/2019/04/19/php文件上传/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2019/04/19/php文件上传/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3ay26EMAwF0P7/T9NtpRFwbTOVSE5WiFaQw8LjR35+4nX8WclfP6/P7nw+8+wtDywMDIzXMo7Ldc3o/U/1+npvGBgY+zDOItj1dTXgXgfu5F2n9zEwMDCCdK0XuJNPgIGBgdFjJElhEpTzVBIDAwMjCZS9UNtLJb9Yi2NgYLyQkXfd///6K/MNDAyMVzGO4spTvTxxTJ5zsysMDIylGZNW2nVJ2RsA5GkfBgbGboxkK/lGkw1Nxgbl3iEGBsbLGXm5OC84vzjaxMDAWJpRTdrmyKO1ol8MDAyMRRm5tfroaoFaHZdGqSEGBsYSjOpRid79/JhF8/cBAwNjaca8od87EZG/K/oEGBgYSzN6Rx/yR/eObsxLXAwMjJUY1YBbHWc+VayW5xsYGBiLMnqtt16QrQ4mbw6iYWBgbMPIB5CTO0nqWT5ggYGBsRlj0nXPB59J6llIUjEwMJZm5A336vAyHwbkAffmjRgYGBsw5g24vOmfh93CGBUDA2MDxmRDk+ckn6YwHsDAwFiaUW2WPdAmG5SvGBgYezJ6Tf+8DJ4cvIhSRgwMjEUZR3H1jlwkgXtS9GJgYKzNyFe1WfbUE6qHPzAwMFZlVIvS3iurKWk1oGNgYOzA6BWZ+ScojyR7pSwGBgZGEBCfOgQ2OjOCgYGBEQTQ/PBENVl8LDXEwMB4ISNP754KuFXqzbgCAwNjaUYeNHtNsXwr1XIXAwNjA8YvTXGyUPG4E9cAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2018/10/11");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "lpower");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 一个坏掉的番茄 %c  © Simon Ma  http://tomotoes.com \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>

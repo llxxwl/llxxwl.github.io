@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>设计模式 | lpower</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="设计模式">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="设计模式">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式">
+<meta property="og:url" content="http://lpower.com/2019/11/17/设计模式/index.html">
+<meta property="og:site_name" content="lpower">
+<meta property="og:description" content="设计模式">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-08-03T11:33:31.705Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式">
+<meta name="twitter:description" content="设计模式">
+    
+        <link rel="alternate" type="application/atom+xml" title="lpower" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">lpower</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about-me"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/llxxwl" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">设计模式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#设计模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">设计模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#五大原则（SOLID）"><span class="post-toc-number">1.0.0.1.</span> <span class="post-toc-text">五大原则（SOLID）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#简单工厂模式"><span class="post-toc-number">1.0.0.2.</span> <span class="post-toc-text">简单工厂模式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#单例模式"><span class="post-toc-number">1.0.0.3.</span> <span class="post-toc-text">单例模式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#工厂方法模式"><span class="post-toc-number">1.0.0.4.</span> <span class="post-toc-text">工厂方法模式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#抽象工厂模式"><span class="post-toc-number">1.0.0.5.</span> <span class="post-toc-text">抽象工厂模式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#观察者模式"><span class="post-toc-number">1.0.0.6.</span> <span class="post-toc-text">观察者模式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#模板方法模式"><span class="post-toc-number">1.0.0.7.</span> <span class="post-toc-text">模板方法模式</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-设计模式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">设计模式</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2019-11-17 17:52:51" datetime="2019-11-17T09:52:51.000Z"  itemprop="datePublished">2019-11-17</time>
+
+            <br id="mybreak"/>
+            
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/PHP/">PHP</a></li></ul>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">10</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><a id="more"></a>
+<p><a name="KzZfi"></a></p>
+<h4 id="五大原则（SOLID）"><a href="#五大原则（SOLID）" class="headerlink" title="五大原则（SOLID）"></a>五大原则（SOLID）</h4><ol>
+<li>单一职责原则（SRP）：一个类只应承担一种责任</li>
+<li>开放-封闭原则（OCP）：实体可扩展，不可修改。面对需求，对程序的改动是通过增加新代码进行的，而不是更改现有的代码</li>
+<li>里氏替换原则（LSP）：一个对象在其出现的任何地方，都可以用子类实例做替换，并且不会导致程序的错误</li>
+<li>接口分离原则（ISP）：一个类实现的接口中，包含了它不需要的方法。将接口拆分成更小的和更具体的接口，有助于解耦。从而更容易重构、解耦</li>
+<li>依赖倒置原则（DIP）：高层次的模块不应该依赖低层次的模块、他们都应该依赖于抽象。抽象不应该依赖于具体实现，具体实现应依赖抽象。针对接口编程，不要对实现编程</li>
+<li>迪米特法则（Lod）：如果两个类不彼此直接通信，那么这两个类就不应当发生直接的相互作用。如果其中一个类需要调用另一个类的某一个方法的话，可以通过这个第三者转发这个调用。在类的结构设计上，每一个类都应当尽量降低成员的访问权限<br><a name="C51Ia"></a><h4 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h4></li>
+</ol>
+<ul>
+<li>又称静态工厂方法。专门定义一个类来负责其他类的实例，被创建的实例通常都具有共同的父类<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//简单工厂模式</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Operation</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">protected</span> $a = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">protected</span> $b = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setA</span><span class="params">($a)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">$this</span>-&gt;a = $a;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setB</span><span class="params">($b)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">$this</span>-&gt;b = $b;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getResult</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        $res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> $res;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OperationAdd</span> <span class="keyword">extends</span> <span class="title">Operation</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getResult</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;a + <span class="keyword">$this</span>-&gt;b;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OperationMul</span> <span class="keyword">extends</span> <span class="title">Operation</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getResult</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;a * <span class="keyword">$this</span>-&gt;b;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OperationSub</span> <span class="keyword">extends</span> <span class="title">Operation</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getResult</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;a - <span class="keyword">$this</span>-&gt;b;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OperationDiv</span> <span class="keyword">extends</span> <span class="title">Operation</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getResult</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;b == <span class="number">0</span>) {</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"被除数不能为0"</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;a / <span class="keyword">$this</span>-&gt;b;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OperationFactory</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">createOpreation</span><span class="params">($operation)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">switch</span> ($operation) {</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'+'</span>:</span><br><span class="line">                $oper = <span class="keyword">new</span> OperationAdd();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'-'</span>:</span><br><span class="line">                $oper = <span class="keyword">new</span> OperationSub();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'*'</span>:</span><br><span class="line">                $oper = <span class="keyword">new</span> OperationMul();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'/'</span>:</span><br><span class="line">                $oper = <span class="keyword">new</span> OperationDiv();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> $oper;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">$operation = OperationFactory::createOpreation(<span class="string">'+'</span>);</span><br><span class="line">$operation-&gt;setA(<span class="number">1</span>);</span><br><span class="line">$operation-&gt;setB(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">echo</span> $operation-&gt;getResult() . PHP_EOL;</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<p><a name="1S1KT"></a></p>
+<h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><ul>
+<li>保证一个类只有一个实例，并提供一个访问它的全局访问点。让类自身负责保存它的唯一实例。这个类可以保证没有其它实例可以被创建，并且他可以提供一个访问该实例的方法。</li>
+<li>可以严格地控制客户怎样访问以及何时访问他。简单地说就是对唯一实例的受控访问</li>
+</ul>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//单例模式</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> $instance;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getInstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">static</span>::$instance == <span class="keyword">null</span>) {</span><br><span class="line">            <span class="keyword">static</span>::$instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">static</span>::$instance;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">$s1 = Singleton::getInstance();</span><br><span class="line">$s2 = Singleton::getInstance();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ($s1 == $s2) {</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'same class'</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><a name="LOSHJ"></a></p>
+<h4 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h4><ul>
+<li>定义一个用于创建对象的接口，让子类决定实例化哪个类。工厂方法使一个类的实例化延迟到其子类</li>
+<li>实现时，客户端需要决定实例化哪一个工厂来实现运算类，选择判断的问题还是存在的，也就是说，工厂方法把简单工厂的内部逻辑判断移动到了客户端代码执行，如果要添加功能，本来应该修改工厂类，现在是修改客户端</li>
+</ul>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//工厂方法模式</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Operation</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">protected</span> $a = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">protected</span> $b = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setA</span><span class="params">($a)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">$this</span>-&gt;a = $a;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setB</span><span class="params">($b)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">$this</span>-&gt;b = $b;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getResult</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        $res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> $res;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OperationAdd</span> <span class="keyword">extends</span> <span class="title">Operation</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getResult</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;a + <span class="keyword">$this</span>-&gt;b;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OperationMul</span> <span class="keyword">extends</span> <span class="title">Operation</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getResult</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;a * <span class="keyword">$this</span>-&gt;b;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OperationSub</span> <span class="keyword">extends</span> <span class="title">Operation</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getResult</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;a - <span class="keyword">$this</span>-&gt;b;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OperationDiv</span> <span class="keyword">extends</span> <span class="title">Operation</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getResult</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;b == <span class="number">0</span>) {</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"被除数不能为0"</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;a / <span class="keyword">$this</span>-&gt;b;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Ifactory</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">CreateOperation</span><span class="params">()</span></span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AddFactory</span> <span class="keyword">implements</span> <span class="title">Ifactory</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">CreateOperation</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> OperationAdd();</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SubFactory</span> <span class="keyword">implements</span> <span class="title">IFactory</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">CreateOperation</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> OperationSub();</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MulFactory</span> <span class="keyword">implements</span> <span class="title">IFactory</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">CreateOperation</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> OperationMul();</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DivFactory</span> <span class="keyword">implements</span> <span class="title">IFactory</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">CreateOperation</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> OperationDiv();</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//客户端代码</span></span><br><span class="line">$operationFactory = <span class="keyword">new</span> AddFactory();</span><br><span class="line">$operation = $operationFactory-&gt;CreateOperation();</span><br><span class="line">$operation-&gt;setA(<span class="number">10</span>);</span><br><span class="line">$operation-&gt;setB(<span class="number">10</span>);</span><br><span class="line"><span class="keyword">echo</span> $operation-&gt;getResult().<span class="string">"\n"</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p><a name="wTewm"></a></p>
+<h4 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h4><ul>
+<li>提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类</li>
+<li>所有在用简单工厂的地方，都可以考虑用反射技术来去除switch或if，解除分支判断代码的耦合</li>
+</ul>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//抽象工厂模式</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">private</span> $id = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setId</span><span class="params">($id)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">$this</span>-&gt;id = $id;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getId</span><span class="params">($id)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;id;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> $name = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setName</span><span class="params">($name)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">$this</span>-&gt;name = $name;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getName</span><span class="params">($name)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;name;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Department</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">private</span> $id = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setId</span><span class="params">($id)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">$this</span>-&gt;id = $id;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getId</span><span class="params">($id)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;id;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> $name = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setName</span><span class="params">($name)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">$this</span>-&gt;name = $name;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getName</span><span class="params">($name)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;name;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IUser</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">insert</span><span class="params">(User $user)</span></span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getUser</span><span class="params">($id)</span></span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SqlserverUser</span> <span class="keyword">implements</span> <span class="title">IUser</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">insert</span><span class="params">(User $user)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"往SQL Server中的User表添加一条记录\n"</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getUser</span><span class="params">($id)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"根据id得到SQL Server中User表一条记录\n"</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AccessUser</span> <span class="keyword">implements</span> <span class="title">IUser</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">insert</span><span class="params">(User $user)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"往Access Server中的User表添加一条记录\n"</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getUser</span><span class="params">($id)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"根据id得到Access Server中User表一条记录\n"</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//简单工厂替换抽象工厂</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DataBase</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">const</span> DB = <span class="string">'Access'</span>;</span><br><span class="line">    <span class="comment">// private $db = 'Access';</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">CreateUser</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        $class = <span class="keyword">static</span>::DB . <span class="string">'User'</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> $class();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">CreateDepartment</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        $class = <span class="keyword">static</span>::DB . <span class="string">'Department'</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> $class();</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IDepartment</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">insert</span><span class="params">(Department $user)</span></span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getDepartment</span><span class="params">($id)</span></span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SqlserverDepartment</span> <span class="keyword">implements</span> <span class="title">IDepartment</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">insert</span><span class="params">(Department $department)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"往SQL Server中的Department表添加一条记录\n"</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getDepartment</span><span class="params">($id)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"根据id得到SQL Server中Department表一条记录\n"</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AccessDepartment</span> <span class="keyword">implements</span> <span class="title">IDepartment</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">insert</span><span class="params">(Department $department)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"往Access Server中的Department表添加一条记录\n"</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getDepartment</span><span class="params">($id)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"根据id得到Access Server中Department表一条记录\n"</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//改为简单工厂后的客户端代码</span></span><br><span class="line">$user = <span class="keyword">new</span> User();</span><br><span class="line">$iu = DataBase::CreateUser();</span><br><span class="line">$iu-&gt;insert($user);</span><br><span class="line">$iu-&gt;getUser(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">$department = <span class="keyword">new</span> Department();</span><br><span class="line">$id = DataBase::CreateDepartment();</span><br><span class="line">$id-&gt;insert($department);</span><br><span class="line">$id-&gt;getDepartment(<span class="number">1</span>);</span><br></pre></td></tr></tbody></table></figure>
+<p><a name="UhYFD"></a></p>
+<h4 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h4><ul>
+<li>定义了一种多对多的依赖关系，让多个观察者对象同时监听某一个主体对象。当一个对象的状态发生改变时，所有依赖他的对象都得到通知并自动刷新</li>
+<li>符合接口隔离原则，实现了对象之间的松耦合</li>
+<li>抽象主题（subject）：他把所有的观察者对象的引用保存到一个聚集里，每个主题都可以有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象</li>
+<li>具体主题（concretesubject）：将有关状态存入具体观察者对象；在具体主题内部状态改变时，给所有登记过的观察者发通知</li>
+<li>抽象观察者（observer）：为所有的具体观察者定义一个接口，在得到主题通知时更新自己</li>
+<li>具体观察者（concreteobserver）：实现抽象观察者角色所需要的更新接口，以便使本身的状态与主题状态协调</li>
+</ul>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//观察者模式</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//抽象主题：提供一个接口，增加和删除对象</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Subject</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">private</span> $observers = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">attach</span><span class="params">(Observer $observer)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        array_push(<span class="keyword">$this</span>-&gt;observers, $observer);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">detatch</span><span class="params">($observer)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;observers <span class="keyword">as</span> $key =&gt; $value) {</span><br><span class="line">            <span class="keyword">if</span> ($observer === $value) {</span><br><span class="line">                <span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;observers[$key]);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">notify</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;observers <span class="keyword">as</span> $observer) {</span><br><span class="line">            $observer-&gt;update();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//抽象观察者，为所有的具体观察者定义一个接口，在得到主题是更新自己</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">observer</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">abstract</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span><span class="params">()</span></span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//具体主题，发生改变时，给所有登记过的观察者发出通知</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteSubject</span> <span class="keyword">extends</span> <span class="title">Subject</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">private</span> $subjectState;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setState</span><span class="params">($state)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">$this</span>-&gt;subjectState = $state;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getState</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;subjectState;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//具体观察者：实现抽象观察者角色所要求的的更新接口，以便使本身的状态与主体状态协调</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteObserver</span> <span class="keyword">extends</span> <span class="title">Observer</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">private</span> $name;</span><br><span class="line">    <span class="keyword">private</span> $subject;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(ConcreteSubject $subject, $name)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">$this</span>-&gt;subject = $subject;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;name = $name;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"观察者 "</span> . <span class="keyword">$this</span>-&gt;name . <span class="string">"的新状态是:"</span> . <span class="keyword">$this</span>-&gt;subject-&gt;getState() . <span class="string">"\n"</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">$s = <span class="keyword">new</span> ConcreteSubject();</span><br><span class="line">$s-&gt;attach(<span class="keyword">new</span> ConcreteObserver($s, <span class="string">"x"</span>));</span><br><span class="line">$s-&gt;attach(<span class="keyword">new</span> ConcreteObserver($s, <span class="string">"y"</span>));</span><br><span class="line">$z = <span class="keyword">new</span> ConcreteObserver($s, <span class="string">"z"</span>);</span><br><span class="line">$s-&gt;attach($z);</span><br><span class="line">$s-&gt;detatch($z);</span><br><span class="line">$s-&gt;setState(<span class="string">'ABC'</span>);</span><br><span class="line">$s-&gt;notify();</span><br></pre></td></tr></tbody></table></figure>
+<p><a name="0ESIO"></a></p>
+<h4 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h4><ul>
+<li>定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变算法的节结构即可重定义该算法的某些特定步骤</li>
+<li>既然用了继承，并且肯定这个继承有意义，就应该要成为子类的模板，所有重复的代码都应该要上升到父类去，而不是让每个子类去重复。当我们要完成某一细节层次一致的一个过程或一系列步骤，但其中个别的步骤在更详细的层次上的实现可能不同时，我们通常考虑用模板方法模式</li>
+</ul>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="comment">// 对甲乙两名同学所抄试卷，尽量将相同的部分提到父类</span></span><br><span class="line"><span class="comment">// 金庸小说考题试卷</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestPaper</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">TestQuestion1</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"杨过说过，后来给了郭靖，炼成倚天剑、屠龙刀的玄铁可能是［］a.球磨铸铁 b.马口铁 c.高速合金钢 d.碳素纤维 \n"</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"答案 "</span>.<span class="keyword">$this</span>-&gt;answer1().<span class="string">"\n"</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">TestQuestion2</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"杨过、程英、陆无双铲除了情花，造成［］a.使这种植物不在害人 b.使一种珍惜物种灭绝 c.破坏了那个生态圈的生态平衡 d.造成该地区沙漠化 \n"</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"答案 "</span>.<span class="keyword">$this</span>-&gt;answer2().<span class="string">"\n"</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">TestQuestion3</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"蓝凤凰致使华山师徒、桃谷六仙呕吐不止，如果你是大夫，会给他们开什么药［］a.阿司匹林 b.牛黄解毒片 c.氟哌酸 d.让他们喝大量的生牛奶 e.以上全不对 \n"</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"答案 "</span>.<span class="keyword">$this</span>-&gt;answer3().<span class="string">"\n"</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">answer1</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">answer2</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">answer3</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 学生甲抄的试卷</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestPaperA</span> <span class="keyword">extends</span> <span class="title">TestPaper</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">answer1</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'a'</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">answer2</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'b'</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">answer3</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'c'</span>;</span><br><span class="line">    } </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 学生乙抄的试卷</span></span><br><span class="line"><span class="comment">// 学生甲抄的试卷</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestPaperB</span> <span class="keyword">extends</span> <span class="title">TestPaper</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">answer1</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'d'</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">answer2</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'c'</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">answer3</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'a'</span>;</span><br><span class="line">    } </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 客户端代码</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"学生甲抄的试卷: \n"</span>;</span><br><span class="line">$student = <span class="keyword">new</span> TestPaperA();</span><br><span class="line">$student-&gt;TestQuestion1();</span><br><span class="line">$student-&gt;TestQuestion2();</span><br><span class="line">$student-&gt;TestQuestion3();</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"学生乙抄的试卷: \n"</span>;</span><br><span class="line">$student2 = <span class="keyword">new</span> TestPaperB();</span><br><span class="line">$student2-&gt;TestQuestion1();</span><br><span class="line">$student2-&gt;TestQuestion2();</span><br><span class="line">$student2-&gt;TestQuestion3();</span><br></pre></td></tr></tbody></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-03T11:33:31.705Z" itemprop="dateUpdated">2021-08-03 19:33:31</time>
+</span>
+
+
+        
+        原文链接：<a href="/2019/11/17/设计模式/" target="_blank" rel="external">http://lpower.com/2019/11/17/设计模式/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='http://lpower.com'">
+            <img src="/img/avatar.jpg" alt="lpower">
+            <a>lpower</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2019/11/17/设计模式/&title=《设计模式》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2019/11/17/设计模式/&title=《设计模式》 — lpower&source=设计模式" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2019/11/17/设计模式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式》 — lpower&url=http://lpower.com/2019/11/17/设计模式/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2019/11/17/设计模式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/03/17/PHP面试/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：PHP面试
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/14/正则表达式/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：正则表达式">下一篇：正则表达式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2017
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="http://lpower.com">tomotoes.com</a>
+            <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br/>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license">This blog is licensed under a <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2019/11/17/设计模式/&title=《设计模式》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2019/11/17/设计模式/&title=《设计模式》 — lpower&source=设计模式" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2019/11/17/设计模式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式》 — lpower&url=http://lpower.com/2019/11/17/设计模式/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2019/11/17/设计模式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwUlEQVR42u3aQW7DMAwEwPz/0ynQUw61sqRs2gVGp6Bx5XEOhLj06xWv9+9af/78y+c62u3o2xMWLi7uNve9XDlrfc36YRIDLi7uPDcpXtXyVH2MtQEXF/eZ3GS75L929sfFxX0at9fq4OLi/l9u0vxUS17SGl3Yq+Hi4m5wzwpMdz7fkO/i4uK2phLV8PTc4vXHPri4uCPc5PbJcLT6SElzdVjmcHFxx7nVQlM9geStVDRkxcXFvYDbCz7ylzCSUpX/ELi4uJPcamPTG7QkperLnri4uCPcJB6thp55LJJf/wWNi4s7yK3e8orwtDliwcXF3eDujD93JrrNUSsuLu4g97QmJC5k690Or8fFxR3hVstTb4xaHavg4uLey83bkiqoOj5JAlZcXNwZbh5JVCOM/HCT/xy4uLgz3Lys7IxU90c1uLi489xeVHF1komLi3svN19JgJLvU54A4+LijnB7Y9E8OknKX68pwsXFvZqbF518iLJ/MDosc7i4uIPc/EWK6vGo+jrXl2twcXEfxu0Fo/lBJyqCuLi4j+RWjzLV4oiLi/sc7s4rVr3yd3ksgouLOxiY9l7h6t0FFxd3nPsDoAB2nYTAjwQAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2018/10/11");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "lpower");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 一个坏掉的番茄 %c  © Simon Ma  http://tomotoes.com \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>

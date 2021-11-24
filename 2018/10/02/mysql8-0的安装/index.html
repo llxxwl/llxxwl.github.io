@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>mysql8.0的安装 | lpower</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="MySQL">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="Windows下MySQL安装今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。1.官网下载社区版MySQL（zip包），然后解压。2.配置环境变量。">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql8.0的安装">
+<meta property="og:url" content="http://lpower.com/2018/10/02/mysql8-0的安装/index.html">
+<meta property="og:site_name" content="lpower">
+<meta property="og:description" content="Windows下MySQL安装今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。1.官网下载社区版MySQL（zip包），然后解压。2.配置环境变量。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-08-03T11:33:31.632Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql8.0的安装">
+<meta name="twitter:description" content="Windows下MySQL安装今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。1.官网下载社区版MySQL（zip包），然后解压。2.配置环境变量。">
+    
+        <link rel="alternate" type="application/atom+xml" title="lpower" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">lpower</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about-me"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/llxxwl" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">mysql8.0的安装</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Windows下MySQL安装"><span class="post-toc-number">1.</span> <span class="post-toc-text">Windows下MySQL安装</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。"><span class="post-toc-number"></span> <span class="post-toc-text">今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-官网下载社区版MySQL（zip包），然后解压。"><span class="post-toc-number"></span> <span class="post-toc-text">1.官网下载社区版MySQL（zip包），然后解压。</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-配置环境变量。"><span class="post-toc-number"></span> <span class="post-toc-text">2.配置环境变量。</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-添加配置文件"><span class="post-toc-number"></span> <span class="post-toc-text">3.添加配置文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-以管理员身份运行cmd（在搜索框敲cmd，右键，以管理员身份运行）"><span class="post-toc-number"></span> <span class="post-toc-text">4.以管理员身份运行cmd（在搜索框敲cmd，右键，以管理员身份运行）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-安装mysqld"><span class="post-toc-number"></span> <span class="post-toc-text">5.安装mysqld</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-启动MySQL"><span class="post-toc-number"></span> <span class="post-toc-text">6.启动MySQL</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-上述步骤完成后，就不需要管理员权限了，直接cmd"><span class="post-toc-number"></span> <span class="post-toc-text">7.上述步骤完成后，就不需要管理员权限了，直接cmd</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-修改密码"><span class="post-toc-number"></span> <span class="post-toc-text">8.修改密码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-刷新，使修改生效"><span class="post-toc-number"></span> <span class="post-toc-text">9.刷新，使修改生效</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-退出，重新登陆MySQL"><span class="post-toc-number"></span> <span class="post-toc-text">10.退出，重新登陆MySQL</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#附：mysql的导入导出"><span class="post-toc-number"></span> <span class="post-toc-text">附：mysql的导入导出</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-导入："><span class="post-toc-number"></span> <span class="post-toc-text">1.导入：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-导出："><span class="post-toc-number"></span> <span class="post-toc-text">2.导出：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#当然还有一种更简单的方法，就是直接用图形化界面，直接导出。"><span class="post-toc-number"></span> <span class="post-toc-text">当然还有一种更简单的方法，就是直接用图形化界面，直接导出。</span></a>
+        </nav>
+    </aside>
+   
+<article id="post-mysql8-0的安装"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">mysql8.0的安装</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2018-10-02 14:43:26" datetime="2018-10-02T06:43:26.000Z"  itemprop="datePublished">2018-10-02</time>
+
+            <br id="mybreak"/>
+            
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a></li></ul>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">2</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="Windows下MySQL安装"><a href="#Windows下MySQL安装" class="headerlink" title="Windows下MySQL安装"></a>Windows下MySQL安装</h3><h2 id="今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。"><a href="#今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。" class="headerlink" title="今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。"></a>今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。</h2><h2 id="1-官网下载社区版MySQL（zip包），然后解压。"><a href="#1-官网下载社区版MySQL（zip包），然后解压。" class="headerlink" title="1.官网下载社区版MySQL（zip包），然后解压。"></a>1.官网下载社区版MySQL（zip包），然后解压。</h2><h2 id="2-配置环境变量。"><a href="#2-配置环境变量。" class="headerlink" title="2.配置环境变量。"></a>2.配置环境变量。</h2><a id="more"></a>
+<p>我的电脑-&gt;右键-&gt;高级系统设置-&gt;环境变量，在系统变量的path后添加解压后的MySQL文件夹里的bin目录的路径</p>
+<h2 id="3-添加配置文件"><a href="#3-添加配置文件" class="headerlink" title="3.添加配置文件"></a>3.添加配置文件</h2><p>在MySQL文件夹下创建my.ini文件<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[mysql]</span><br><span class="line"># 设置mysql客户端默认字符集</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysqld]</span><br><span class="line"># 设置3306端口</span><br><span class="line">port = 3306</span><br><span class="line"># 设置mysql的安装目录</span><br><span class="line">basedir=C:\web\mysql-8.0.11</span><br><span class="line"># 设置mysql数据库的数据的存放目录</span><br><span class="line">datadir=C:\web\sqldata</span><br><span class="line"># 允许最大连接数</span><br><span class="line">max_connections=20</span><br><span class="line"># 服务端使用的字符集默认为8比特编码的latin1字符集</span><br><span class="line">character-set-server=utf8</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="4-以管理员身份运行cmd（在搜索框敲cmd，右键，以管理员身份运行）"><a href="#4-以管理员身份运行cmd（在搜索框敲cmd，右键，以管理员身份运行）" class="headerlink" title="4.以管理员身份运行cmd（在搜索框敲cmd，右键，以管理员身份运行）"></a>4.以管理员身份运行cmd（在搜索框敲cmd，右键，以管理员身份运行）</h2><p>这里一定一定要用管理员身份运行cmd，不然在后续步骤时会报错<br>进入cmd后切到bin目录下，初始化数据库<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --initialize --console</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>待执行完成后，会出现root的初始密码<br>root@localhost后面的字符串就是密码<br>记住密码，保存下来，之后第一次登陆时会用到。</p>
+<h2 id="5-安装mysqld"><a href="#5-安装mysqld" class="headerlink" title="5.安装mysqld"></a>5.安装mysqld</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld -install</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="6-启动MySQL"><a href="#6-启动MySQL" class="headerlink" title="6.启动MySQL"></a>6.启动MySQL</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start mysql</span><br></pre></td></tr></tbody></table></figure>
+<p>这里就是上文提到的如果不是管理员身份运行，会提示安装失败。</p>
+<h2 id="7-上述步骤完成后，就不需要管理员权限了，直接cmd"><a href="#7-上述步骤完成后，就不需要管理员权限了，直接cmd" class="headerlink" title="7.上述步骤完成后，就不需要管理员权限了，直接cmd"></a>7.上述步骤完成后，就不需要管理员权限了，直接cmd</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></tbody></table></figure>
+<p>回车后会提示输入密码，把刚才保存的输入密码输入之后就可以登录了</p>
+<h2 id="8-修改密码"><a href="#8-修改密码" class="headerlink" title="8.修改密码"></a>8.修改密码</h2><p>因为初始密码过于难记，所以大部分人都需要重置密码，重置密码有很多种方法，我试了很多，只有下面这条能用<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter user 'root'@'localhost' identified by '你的密码';</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>其他的都会报错，这里一定要有耐心，因为我不知道试了多少语句。</p>
+<h2 id="9-刷新，使修改生效"><a href="#9-刷新，使修改生效" class="headerlink" title="9.刷新，使修改生效"></a>9.刷新，使修改生效</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="10-退出，重新登陆MySQL"><a href="#10-退出，重新登陆MySQL" class="headerlink" title="10.退出，重新登陆MySQL"></a>10.退出，重新登陆MySQL</h2><p>退出mysql<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>重新登陆MySQL<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>然后输入你修改后的密码，发现能够登陆，MySQL安装完成</p>
+<h1 id="附：mysql的导入导出"><a href="#附：mysql的导入导出" class="headerlink" title="附：mysql的导入导出"></a>附：mysql的导入导出</h1><h2 id="1-导入："><a href="#1-导入：" class="headerlink" title="1.导入："></a>1.导入：</h2><ul>
+<li>运行cmd</li>
+<li>mysql -u 用户名 -p 密码</li>
+<li>source 数据库名 &lt; 要导入的文件名.sql<h2 id="2-导出："><a href="#2-导出：" class="headerlink" title="2.导出："></a>2.导出：</h2></li>
+<li>到MySQL的bin目录下，运行cmd</li>
+<li>输入 mysqldump 数据库名 &gt; 文件名.sql。如果要指定路径，例如如果想放到C盘下，可以直接 mysqldump 数据库名 &gt;  c:\文件名.sql<h2 id="当然还有一种更简单的方法，就是直接用图形化界面，直接导出。"><a href="#当然还有一种更简单的方法，就是直接用图形化界面，直接导出。" class="headerlink" title="当然还有一种更简单的方法，就是直接用图形化界面，直接导出。"></a>当然还有一种更简单的方法，就是直接用图形化界面，直接导出。</h2><!--more--></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-03T11:33:31.632Z" itemprop="dateUpdated">2021-08-03 19:33:31</time>
+</span>
+
+
+        
+        原文链接：<a href="/2018/10/02/mysql8-0的安装/" target="_blank" rel="external">http://lpower.com/2018/10/02/mysql8-0的安装/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='http://lpower.com'">
+            <img src="/img/avatar.jpg" alt="lpower">
+            <a>lpower</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2018/10/02/mysql8-0的安装/&title=《mysql8.0的安装》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2018/10/02/mysql8-0的安装/&title=《mysql8.0的安装》 — lpower&source=Windows下MySQL安装今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。1.官网下载社区..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2018/10/02/mysql8-0的安装/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mysql8.0的安装》 — lpower&url=http://lpower.com/2018/10/02/mysql8-0的安装/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2018/10/02/mysql8-0的安装/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/11/22/hexo博客上传图片/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：hexo博客上传图片
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/07/25/js的一点小基础/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：js,jquery的一点小基础">下一篇：js,jquery的一点小基础</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2017
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="http://lpower.com">tomotoes.com</a>
+            <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br/>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license">This blog is licensed under a <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2018/10/02/mysql8-0的安装/&title=《mysql8.0的安装》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2018/10/02/mysql8-0的安装/&title=《mysql8.0的安装》 — lpower&source=Windows下MySQL安装今天闲来无事，就脑残的想安装个MySQL玩玩，结果遇到了各种各样的麻烦，搞得心态差点炸了，还好最后安装完了。1.官网下载社区..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2018/10/02/mysql8-0的安装/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mysql8.0的安装》 — lpower&url=http://lpower.com/2018/10/02/mysql8-0的安装/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2018/10/02/mysql8-0的安装/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3azW7qQAwGUN7/pal0V1eqJny2Q6XMnKyqAmFOFsZ/r1d8vf9d1ff//6nf/1ndv/pdLwwMjAMY78trdevJsa55q1dXZ8PAwDiHkR8lCY7JQ1kdKL8/BgYGRh4W730cGBgYGPcG3PzV5MLAwMC4ZlSTubyVNgnlX6nFMTAwHsjoffHf/P3F+QYGBsZDGO/Wdd0yy8cA1eC+/BQGBsbWjEliN2/o50lhFIgxMDA2ZeQNr/nQMWmZ5WXqh98NDAyMjRj3LlX0HkG+onFznY2BgfEQRtLiz0eSkyI2STqXd8bAwDiAUV2h6L2zOvIsDEoxMDAOYCRpX7VwnRy0XOhiYGAcw5gkfPMwnQTZZfDFwMDYmpG08nsFbfUovfHnK3muGBgYD2dUW/DlVa2g3ZYPPgvbbRgYGBsxvpGo9aL+bWscGBgY2zHmo8TyZkdrR+JDAYyBgXEAo1eUTtLHagvvwyPAwMA4gJG37KsBtDoSaC5zYGBgbM1Ilh7yovS6rO215PKfAQwMjHMYPUyvuJ2sZZSbbhgYGFsw8qFjtaDt9cTKjTwMDIytGUkhWh005sPO6nGjT2FgYGzEeBevSZJXbcYlqSoGBsYJjGqudW8ZXF0Fw8DAOJkxWbDIA/G9D6W85YGBgbEFo5rw3bUw0euhLQMuBgYGRuvVPB2crGtgYGBgVL++d+fRygUGBsYBjN7osdrcn2AwMDBOZkwGA+WmWDERzMEYGBibMn4Ao4j6CBXQErAAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2018/10/11");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "lpower");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 一个坏掉的番茄 %c  © Simon Ma  http://tomotoes.com \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>

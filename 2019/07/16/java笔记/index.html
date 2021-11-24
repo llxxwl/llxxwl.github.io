@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>java笔记 | lpower</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="Java基础">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="Java是一门面向对象编程语言。一个Java程序可以认为是一系列对象的集合，而这些对象通过调用彼此的方法来协同工作。">
+<meta name="keywords" content="Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java笔记">
+<meta property="og:url" content="http://lpower.com/2019/07/16/java笔记/index.html">
+<meta property="og:site_name" content="lpower">
+<meta property="og:description" content="Java是一门面向对象编程语言。一个Java程序可以认为是一系列对象的集合，而这些对象通过调用彼此的方法来协同工作。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://lpower.com/2019/07/16/java笔记/1.png">
+<meta property="og:image" content="http://lpower.com/2019/07/16/java笔记/2.png">
+<meta property="og:image" content="http://lpower.com/2019/07/16/java笔记/3.png">
+<meta property="og:updated_time" content="2021-08-03T11:33:31.631Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java笔记">
+<meta name="twitter:description" content="Java是一门面向对象编程语言。一个Java程序可以认为是一系列对象的集合，而这些对象通过调用彼此的方法来协同工作。">
+<meta name="twitter:image" content="http://lpower.com/2019/07/16/java笔记/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="lpower" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">lpower</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about-me"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/llxxwl" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">java笔记</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Java是一门面向对象编程语言。一个Java程序可以认为是一系列对象的集合，而这些对象通过调用彼此的方法来协同工作。"><span class="post-toc-number">1.</span> <span class="post-toc-text">Java是一门面向对象编程语言。一个Java程序可以认为是一系列对象的集合，而这些对象通过调用彼此的方法来协同工作。</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Spring-Boot-约定优于配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">Spring Boot   约定优于配置</span></a></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-java笔记"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">java笔记</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2019-07-16 11:53:17" datetime="2019-07-16T03:53:17.000Z"  itemprop="datePublished">2019-07-16</time>
+
+            <br id="mybreak"/>
+            
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">5</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h4 id="Java是一门面向对象编程语言。一个Java程序可以认为是一系列对象的集合，而这些对象通过调用彼此的方法来协同工作。"><a href="#Java是一门面向对象编程语言。一个Java程序可以认为是一系列对象的集合，而这些对象通过调用彼此的方法来协同工作。" class="headerlink" title="Java是一门面向对象编程语言。一个Java程序可以认为是一系列对象的集合，而这些对象通过调用彼此的方法来协同工作。"></a>Java是一门面向对象编程语言。一个Java程序可以认为是一系列对象的集合，而这些对象通过调用彼此的方法来协同工作。</h4><a id="more"></a>
+<ol>
+<li>基本语法</li>
+</ol>
+<ul>
+<li>大小写敏感</li>
+<li>类名首字母大写，如果类名由多个单词组成，那么每个单词的首字母应该大写</li>
+<li>所有的方法名都应该以小写字母开头。如果方法名含有若干单词，则后面的每个单词首字母大写</li>
+<li>原文件名必须和类名相同</li>
+<li>所有的Java程序由public static void main(String []args)方法开始执行</li>
+</ul>
+<ol start="2">
+<li>Java标识符(Java所有的组成部分都需要名字。类名、变量名及方法名都被称为标识符)</li>
+</ol>
+<ul>
+<li>所有的标识符都应该以字母，$，或者下划线开始</li>
+<li>首字符以后可以是字母，美元符，下划线或数字的任何字符组合</li>
+<li>关键字不能做标识符</li>
+<li>标识符大小写敏感</li>
+</ul>
+<ol start="3">
+<li>Java增强for循环</li>
+</ol>
+<ul>
+<li>Java5引入了一种主要用于数组的增强型for循环，语法格式如下：<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(声明语句:表达式)</span><br><span class="line">{</span><br><span class="line">    //代码句子</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<p>声明语句：声明新的局部变量，该变量的类型必须和数组元素的类型匹配。其作用域限定在循环语句块，其值与此时数组元素的值相等。</p>
+<p>表达式：表达式是要访问的数组名，或者是返回值为数组的方法</p>
+<h4 id="Spring-Boot-约定优于配置"><a href="#Spring-Boot-约定优于配置" class="headerlink" title="Spring Boot   约定优于配置"></a>Spring Boot   约定优于配置</h4><ol>
+<li>优点</li>
+</ol>
+<ul>
+<li>创建独立的spring应用程序</li>
+<li>嵌入的Tomcat、Jetty或者Undertow，无需部署WAR文件</li>
+<li>允许通过Maven来根据需要获取starter</li>
+<li>尽可能的自动配置Spring</li>
+<li>提供生产就绪型功能，如指标、健康检查和外部配置</li>
+<li>绝对没有代码生成，对XML没有要求配置</li>
+</ul>
+<ol start="2">
+<li>IOC （Inversion of Control）  控制反转容器</li>
+</ol>
+<ul>
+<li>是Spring的核心，是一种通过描述来获取或者生成对象的技术</li>
+<li>功能<ul>
+<li>通过描述管理Bean，包括发布和获取Bean    （在Spring中把每一个需要管理的对象称为Bean）</li>
+<li>通过描述完成Bean之间的依赖关系</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li><p>注解</p>
+<ol>
+<li><p>@ComponentScan 扫描当前类所在的包和子包</p>
+<ul>
+<li>@Filter的类型及意义  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ANNOTATION:注解类型</span><br><span class="line">ASSIGNABLE_TYPE:ANNOTATION:指定的类型</span><br><span class="line">REGEX:按照正则表达式</span><br><span class="line">CUSTOM:i定义规则</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+</li>
+<li><p>@Configurable  表示是Java的配置文件</p>
+</li>
+<li>@Bean 将此方法返回的 POJO 装配到 IoC 容器中，而其属性 name 定义这个 Bean 的名称，如果没有配置它，则将方法名称作为 Bean 的名称保存到 Spring IoC 容器中 。</li>
+<li>@SpringBootApplication 是一个复合注解，包括@ComponentScan，和@SpringBootConfiguration，@EnableAutoConfiguration</li>
+<li>@Component    //表明这个类将被 Spring IoC 容器扫描装配</li>
+<li>@Autowired    //根据属性的类型（by type）找到对应的 Bean 进行注入，＠Autowired 提供这样的规则， 首先它会根据类型找到对应的 Bean, 如果对应类型的 Bean 不是唯一的，那么它会根据其属性名称和 Bean 的名称进行匹配。如果匹配得上，就会使用该 Bean：如果还无法匹配，就会抛出异常。 </li>
+<li>@Primary   //消除歧义性，修改优先权</li>
+<li>＠Quelifier  与＠Autowired 组合在一起，通过类型和名称一起找到 Bean</li>
+<li>@Override  重写，验证下面的方法名是否是你父类中所有的</li>
+<li>@Conditional 只有在特定条件满足时才启用一些配置</li>
+<li>@ImportResource ，通过它可以引入对应的 XML 文件，用以加载Bean</li>
+<li>＠Aspect  当以此为注解时，spring就会知道这是一个切面，然后我们就可以通过各类注解来定义各类的通知了</li>
+<li>＠Repository  在将来讨论扫描加载MyBatis接口Bean时是十分有用的</li>
+<li>@Responsebody 该方法的返回结果直接写入HTTP response body中，一般在异步获取数据时使用</li>
+</ol>
+</li>
+<li><p>DI （Dependency Injection） 依赖注入</p>
+<pre><code>例如，人类（ Person ）有时候利用一些动物 (Animal）去完成一些事情，比方说狗（Dog）是用来看门的，猫（Cat）是用来抓老鼠的， 鹦鹉（Paηot)是用来迎客的……于是做一些事情就依赖于那些可爱的动物了
+</code></pre></li>
+<li>生命周期<br> <img src="/2019/07/16/java笔记/1.png" alt=""><br> 生命周期：<br> <img src="/2019/07/16/java笔记/2.png" alt=""></li>
+<li>约定编程<br> <img src="/2019/07/16/java笔记/3.png" alt=""><br> AOP（面向切面编程）可以解决对数据库事务的管控问题，还可以减少大量重复的工作。使用Spring AOP可以处理一些无法使用 OOP 实现的业务逻辑。其次，通过约定，可以将一些业务逻辑织入流程中，并且可以将一些通用的逻辑抽取出来，然后给予默认实现，这样你只需要完成部分的功能就可以了，这样做可以使得开发者的代码更加简短，同时可维护性也得到提高。</li>
+<li><p>JPA（Hibernate）操作数据</p>
+<p> Java持久化API，是定义了对象关系映射（ORM）以及实体对象持久化的标准接口。JPA所维护的核心是实体，而它是通过持久化上下文来使用的。持久化上下文包含以下三个部分：</p>
+<ul>
+<li>对象关系映射，主要通过注解实现</li>
+<li>实体操作API，实现对实体对象的CRUD操作，来完成对象的持久化和查询</li>
+<li>查询语言，约定了面向对象的查询语言JPQL，通过这层关系可以实现比较灵活地查询</li>
+</ul>
+</li>
+<li>MyBatis<ul>
+<li>定义：MyBatis是支持定制化SQL、存储过程以及高级映射的优秀的持久层框架。 MyBatis避免了几乎所有的JDBC代码和手动设置参数以及获取结果集。MyBatis 可以对配置和原生Map使用简单的XML或注解，将接口和Java的POJO ( Plain Old Java O均ect，普通的 Java 对象）映射成数据库中的记录。 </li>
+<li>配置内容<ul>
+<li>properties（属性）</li>
+<li>settings（设置）：改变Mybatis的底层行为</li>
+<li>typeAliases（别名）</li>
+<li>typeHandles（类型处理器）：是重要配置之一，在写入和读取数据库的过程中对于不同类型的数据进行自定义转换</li>
+<li>plugins(插件)：也称拦截器，是最强大也是最危险的组件。通过动态代理和责任链模式完成，可以修改底层上的实现功能</li>
+</ul>
+<ul>
+<li>mappers（映射器）是最核心的组件，提供SQL和POJO的映射关系，是Mybatis开发的核心</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-03T11:33:31.631Z" itemprop="dateUpdated">2021-08-03 19:33:31</time>
+</span>
+
+
+        
+        原文链接：<a href="/2019/07/16/java笔记/" target="_blank" rel="external">http://lpower.com/2019/07/16/java笔记/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='http://lpower.com'">
+            <img src="/img/avatar.jpg" alt="lpower">
+            <a>lpower</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2019/07/16/java笔记/&title=《java笔记》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2019/07/16/java笔记/&title=《java笔记》 — lpower&source=Java是一门面向对象编程语言。一个Java程序可以认为是一系列对象的集合，而这些对象通过调用彼此的方法来协同工作。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2019/07/16/java笔记/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《java笔记》 — lpower&url=http://lpower.com/2019/07/16/java笔记/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2019/07/16/java笔记/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/14/正则表达式/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：正则表达式
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/06/12/ubuntu16-04-下搭建lnmp/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：ubuntu16.04下搭建lnmp">下一篇：ubuntu16.04下搭建lnmp</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2017
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="http://lpower.com">tomotoes.com</a>
+            <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br/>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license">This blog is licensed under a <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2019/07/16/java笔记/&title=《java笔记》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2019/07/16/java笔记/&title=《java笔记》 — lpower&source=Java是一门面向对象编程语言。一个Java程序可以认为是一系列对象的集合，而这些对象通过调用彼此的方法来协同工作。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2019/07/16/java笔记/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《java笔记》 — lpower&url=http://lpower.com/2019/07/16/java笔记/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2019/07/16/java笔记/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABxUlEQVR42u3aSW7DMAwF0Nz/0u62QCGZgym3xdMqyCA/Z0GYn/p8wuv6sb6/v/9V7dPWwsXFbXOv7VptvbrYfp/VDhEDLi7ueW52u2erTcSAi4v7t7i1T3Fxcf8Ht9bY7G8DFxf3N3MjjyO1ZiZywyO9Gi4uboMbTynnXo/ku7i4uCXu1Vj73Trx6PKKuLi4R7jZohNpaZ4KUpclDxcXd5jbiTLjo9Z4eHrzd+Di4h7h1kKNeLiZDUoSTREuLu4YNxKJRpqWeAu0v7GbPwgXF/c4N17zOsWo2J/VJr24uLglbnajOOKp8nfzuIOLizvM7cxpa5FrvKPBxcV9l1u7TKfJ6QQxuLi4b3E7Jal2RKNVyHBxcdvc7Cg0MhCtHd6KxLW4uLhnuLUCtP9+dhiTleDi4k5z+xfOPk9ld7uZCePi4g5wa4PSOLcTvy73wcXFHeZeyVU7SFE7QZG4D1xc3Ee5neKSHcBkW50WGhcXt82NFK/sgapOs5RIeXFxcYe5/QgjHryO92q4uLgHubXhaK2tSpwNwcXFfZUbDz7iR7tao1ZcXNxhbqf5qY1SHjhNhouLO8aNB6a1ohYplyP5Li4uboX7BY3XgHfU+CeVAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2018/10/11");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "lpower");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 一个坏掉的番茄 %c  © Simon Ma  http://tomotoes.com \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>

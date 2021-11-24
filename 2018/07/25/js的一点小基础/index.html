@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>js,jquery的一点小基础 | lpower</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="js,jQuery">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="一、javascript 使用  HTML 中的脚本必须位于  与  标签之间。脚本可被放置在 HTML 页面的  和  部分中 .github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; colo">
+<meta name="keywords" content="js,jQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js,jquery的一点小基础">
+<meta property="og:url" content="http://lpower.com/2018/07/25/js的一点小基础/index.html">
+<meta property="og:site_name" content="lpower">
+<meta property="og:description" content="一、javascript 使用  HTML 中的脚本必须位于  与  标签之间。脚本可被放置在 HTML 页面的  和  部分中 .github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; colo">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-08-03T11:33:31.628Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js,jquery的一点小基础">
+<meta name="twitter:description" content="一、javascript 使用  HTML 中的脚本必须位于  与  标签之间。脚本可被放置在 HTML 页面的  和  部分中 .github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; colo">
+    
+        <link rel="alternate" type="application/atom+xml" title="lpower" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">lpower</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about-me"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/llxxwl" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">js,jquery的一点小基础</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一、javascript"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、javascript</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#二、jQuery"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、jQuery</span></a></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-js的一点小基础"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">js,jquery的一点小基础</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2018-07-25 16:05:05" datetime="2018-07-25T08:05:05.000Z"  itemprop="datePublished">2018-07-25</time>
+
+            <br id="mybreak"/>
+            
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/web前端/">web前端</a></li></ul>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">4</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h4 id="一、javascript"><a href="#一、javascript" class="headerlink" title="一、javascript"></a>一、javascript</h4><ol>
+<li><p>使用</p>
+<p> HTML 中的脚本必须位于 <script> 与 </script> 标签之间。脚本可被放置在 HTML 页面的  和 <meta name="generator" content="Hexo 3.9.0"> 部分中
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="lpower" type="application/atom+xml">
+</p>
+</li>
+<li><p>输出</p>
+<a id="more"></a>
+<pre><code>document.write()  大部分的输出方式，写到文档输出
+document.getElementById(id)  用id属性标识HTML元素，达到访问目的
+
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p id="demo"&gt;biaoqian&lt;/p&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">document.getElementById().innerText;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+</code></pre></li>
+<li><p>JavaScript严格区分大小写</p>
+</li>
+<li>函数<ul>
+<li>toUpperCase()   小写转大写</li>
+<li>getDay()  得到现在的日期</li>
+</ul>
+</li>
+<li>错误<br> 用try，catch检测，try与catch不可分割，成对出现。try语句里是有错的代码块，catch语句输出错误信息。throw 抛出异常 。可用可不用</li>
+<li><p>HTML事件</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">onchange   HTML元素改变</span><br><span class="line">onclick       用户点击HTML元素</span><br><span class="line">onmouseover   用户在一个HTML元素上移动鼠标</span><br><span class="line">onmouseout    用户在一个HTML元素上移开鼠标i</span><br><span class="line">onkeydown     用户按下键盘按键</span><br><span class="line">onload            浏览器已完成页面的加载</span><br></pre></td></tr></tbody></table></figure>
+<p> 可用于处理表单验证，用户输入，用户行为及浏览器动作。</p>
+</li>
+<li><p>判断对象的具体类型</p>
+<p> 通过instanceof操作符来判断</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">arr = [1,2,3];</span><br><span class="line">if(arr instanceof Array){</span><br><span class="line">    document.write("arr 是一个数组");</span><br><span class="line">} else {</span><br><span class="line">    document.write("arr 不是一个数组");</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p> 如果是返回true，如果不是则返回false。</p>
+</li>
+<li>严格模式（可用可不用）</li>
+</ol>
+<ul>
+<li>不允许使用未声明的变量</li>
+<li>不允许删除变量或对象</li>
+<li>不允许删除函数</li>
+<li>不允许变量重名</li>
+<li>不允许使用八进制</li>
+<li>不允许使用转义字符</li>
+<li>不允许对只读属性赋值</li>
+<li>不允许对一个使用getter方法读取的属性进行复制</li>
+<li>变量名不能使用eval，arguments字符串</li>
+<li>保留关键字<h4 id="二、jQuery"><a href="#二、jQuery" class="headerlink" title="二、jQuery"></a>二、jQuery</h4></li>
+</ul>
+<ol>
+<li><p>语法</p>
+<p> 通过选取HTML元素，并对选取的元素执行某些操作<br> 基础语法：<code>$(selector)action()</code></p>
+<ul>
+<li>‘$’定义jQuery</li>
+<li>选择符selector 查询和查找HTML元素</li>
+<li><p>action()执行对元素的操作</p>
+<p>为了防止文档在完全加载（就绪）之前运行 jQuery 代码，即在 DOM 加载完成后才可以对 DOM 进行操作，jQuery函数要在一个ready函数中</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(function(){</span><br><span class="line">    //jquery代码</span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+</li>
+<li><p>选择器</p>
+<ul>
+<li><p>元素选择器：基于元素名选取元素</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//在页面中选取所有&lt;p&gt;元素</span><br><span class="line">$("p")</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>#id选择器，通过唯一id选取指定元素</p>
+</li>
+<li>.class选择器，通过指定的class选取元素</li>
+</ul>
+</li>
+<li>jQuery事件<ul>
+<li>click()当按钮点击事件被触发时会调用一个函数</li>
+<li>mouseenter()当鼠标指针穿过元素时，会发生mouseenter事件</li>
+<li>mouseleave()当鼠标指针离开元素时，会发生mouseleave事件</li>
+<li>focus() 当元素获得焦点时，发生focus事件</li>
+</ul>
+</li>
+<li><p>jQuery Dom操作</p>
+<ul>
+<li><p>获取、设置内容<br>text() - 设置或返回所选元素的文本内容</p>
+<p>html() - 设置或返回所选元素的内容（包括 HTML 标记）</p>
+<p>val() - 设置或返回表单字段的值</p>
+</li>
+<li>获取、设置属性：attr()获取属性值</li>
+<li>添加元素<ul>
+<li>append() 在被选元素的结尾插入内容</li>
+<li>preappend() 在被选元素的开头插入内容</li>
+<li>before() 在被选元素之前插入内容</li>
+<li>after() 在被选元素之后插入内容</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>遍历<ul>
+<li>向上遍历Dom<ul>
+<li>parent方法返回被选元素的直接父元素</li>
+<li>parents方法返回被选元素的所有父元素，一路向上，一直到根元素</li>
+<li>parentsUntil方法返回介于两元素之间的  所有祖先元素</li>
+</ul>
+</li>
+<li>向下遍历<ul>
+<li>children方法返回被选元素的所有直接子元素</li>
+<li>find方法返回被选元素的所有后代元素，一路向下到最后一个后代</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>水平遍历<ul>
+<li>siblings返回被选元素的所有同胞元素</li>
+<li>next返回被选元素的下一个同胞元素</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-03T11:33:31.628Z" itemprop="dateUpdated">2021-08-03 19:33:31</time>
+</span>
+
+
+        
+        原文链接：<a href="/2018/07/25/js的一点小基础/" target="_blank" rel="external">http://lpower.com/2018/07/25/js的一点小基础/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='http://lpower.com'">
+            <img src="/img/avatar.jpg" alt="lpower">
+            <a>lpower</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2018/07/25/js的一点小基础/&title=《js,jquery的一点小基础》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2018/07/25/js的一点小基础/&title=《js,jquery的一点小基础》 — lpower&source=一、javascript
+使用
+ HTML 中的脚本必须位于  与  标签之间。脚本可被放置在 HTML 页面的  和  部分中
+.github-emoj..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2018/07/25/js的一点小基础/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js,jquery的一点小基础》 — lpower&url=http://lpower.com/2018/07/25/js的一点小基础/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2018/07/25/js的一点小基础/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/10/02/mysql8-0的安装/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：mysql8.0的安装
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/07/06/first/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：first">下一篇：first</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2017
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="http://lpower.com">tomotoes.com</a>
+            <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br/>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license">This blog is licensed under a <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2018/07/25/js的一点小基础/&title=《js,jquery的一点小基础》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2018/07/25/js的一点小基础/&title=《js,jquery的一点小基础》 — lpower&source=一、javascript
+使用
+ HTML 中的脚本必须位于  与  标签之间。脚本可被放置在 HTML 页面的  和  部分中
+.github-emoj..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2018/07/25/js的一点小基础/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js,jquery的一点小基础》 — lpower&url=http://lpower.com/2018/07/25/js的一点小基础/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2018/07/25/js的一点小基础/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNklEQVR42u3aS27DMBAEUd//0s7WG9HVTTmAhqWVkcginwJM5sPXC1/vj+vq55+/fS+vz3vWn2++ZMiQ8VhGt+R64TX4ag/rta72JkOGjHMY/NHkzvUzO9KXPcuQIUMGfnQXLkmglyFDhow0jK43RBLEnYJWhgwZZzJIEZve2aWYP6/FZciQ8UAG77r//+efzDdkyJDxKMY7vEjiuB+4413JkCFjNKMbYZIBABlt8pIYlbIyZMgYytg/VEEGkzzV42Xq5d9BhgwZQxlpoEyPWeynhl8KXRkyZBzJSMcGPO3jZS1v/8mQIWM2Y6cc3Z9FBHU2SVVlyJAxlMGPPpBA2W2CNPVecfSVIUPGTEaa6nUp4PoV8D1cBlwZMmQMZfBRZbcMD9Y8SQ3mGzJkyBjE6Br6fDzQJabohcqQIWM0g7e9ePHZJZG89A1OjsiQIWMcgy/MU0Py3ZQqQ4aMMxk788+urc8PmXXDURkyZExi3JXk8cDKD5kF80oZMmSMZnTDy7vKWtLaC4pbGTJkHMAgD+pCZ0dKS2gZMmSczOiGkWmzrHtlgV6GDBkPZ6TBMU0K+aGNtKsmQ4aMExhdwtcxeEDn68qQIeMERjra5Mcm+GByv+iVIUPGCQweZNPErgud5Fvxfw8ZMmSMYPCxYtcm4wPLMvTLkCFDxnZ4vauRd7kHGTJkyACJWvcKeCIYzDRkyJAxlLFfxPKNdinjlyfIkCFjNCMNynz0yO+Jm2v7/1tkyJDxDMYfQaejieE6etMAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2018/10/11");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "lpower");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 一个坏掉的番茄 %c  © Simon Ma  http://tomotoes.com \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>

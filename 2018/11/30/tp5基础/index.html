@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>tp5基础 | lpower</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="tp5">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="配置域名 在c盘下Windows文件夹下的system32文件夹下drivers文件夹下的etc文件夹下的hosts文件添加一个配置">
+<meta name="keywords" content="tp5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tp5基础">
+<meta property="og:url" content="http://lpower.com/2018/11/30/tp5基础/index.html">
+<meta property="og:site_name" content="lpower">
+<meta property="og:description" content="配置域名 在c盘下Windows文件夹下的system32文件夹下drivers文件夹下的etc文件夹下的hosts文件添加一个配置">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://lpower.com/2018/11/30/tp5基础/配置域名.png">
+<meta property="og:image" content="http://lpower.com/2018/11/30/tp5基础/目录结构.png">
+<meta property="og:image" content="http://lpower.com/2018/11/30/tp5基础/跳转.png">
+<meta property="og:image" content="http://lpower.com/2018/11/30/tp5基础/2.png">
+<meta property="og:image" content="http://lpower.com/2018/11/30/tp5基础/输入与验证.png">
+<meta property="og:image" content="http://lpower.com/2018/11/30/tp5基础/模板布局.png">
+<meta property="og:image" content="http://lpower.com/2018/11/30/tp5基础/trace.png">
+<meta property="og:image" content="http://lpower.com/2018/11/30/tp5基础/api.png">
+<meta property="og:image" content="http://lpower.com/2018/11/30/tp5基础/驱动扩展.png">
+<meta property="og:image" content="http://lpower.com/2018/11/30/tp5基础/验证码配置.png">
+<meta property="og:image" content="http://lpower.com/2018/11/30/tp5基础/上传.png">
+<meta property="og:image" content="http://lpower.com/2018/11/30/tp5基础/缩略图裁剪.png">
+<meta property="og:image" content="http://lpower.com/2018/11/30/tp5基础/图片水印.png">
+<meta property="og:image" content="http://lpower.com/2018/11/30/tp5基础/validate验证.png">
+<meta property="og:updated_time" content="2021-08-03T11:33:31.702Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tp5基础">
+<meta name="twitter:description" content="配置域名 在c盘下Windows文件夹下的system32文件夹下drivers文件夹下的etc文件夹下的hosts文件添加一个配置">
+<meta name="twitter:image" content="http://lpower.com/2018/11/30/tp5基础/配置域名.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="lpower" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">lpower</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about-me"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/llxxwl" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">tp5基础</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置域名"><span class="post-toc-number">1.</span> <span class="post-toc-text">配置域名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#命名规范"><span class="post-toc-number">2.</span> <span class="post-toc-text">命名规范</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目录结构"><span class="post-toc-number">3.</span> <span class="post-toc-text">目录结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#url和路由"><span class="post-toc-number">4.</span> <span class="post-toc-text">url和路由</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#请求和响应"><span class="post-toc-number">5.</span> <span class="post-toc-text">请求和响应</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据库基本操作"><span class="post-toc-number">6.</span> <span class="post-toc-text">数据库基本操作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#模型和关联"><span class="post-toc-number">7.</span> <span class="post-toc-text">模型和关联</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查询范围"><span class="post-toc-number">8.</span> <span class="post-toc-text">查询范围</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#strstr函数"><span class="post-toc-number">9.</span> <span class="post-toc-text">strstr函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#输入与验证"><span class="post-toc-number">10.</span> <span class="post-toc-text">输入与验证</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关联"><span class="post-toc-number">11.</span> <span class="post-toc-text">关联</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#视图与模板"><span class="post-toc-number">12.</span> <span class="post-toc-text">视图与模板</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#调试和日志"><span class="post-toc-number">13.</span> <span class="post-toc-text">调试和日志</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#api调用（需要json返回）"><span class="post-toc-number">14.</span> <span class="post-toc-text">api调用（需要json返回）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#扩展"><span class="post-toc-number">15.</span> <span class="post-toc-text">扩展</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#session与cookie"><span class="post-toc-number">16.</span> <span class="post-toc-text">session与cookie</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#验证码"><span class="post-toc-number">17.</span> <span class="post-toc-text">验证码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件上传"><span class="post-toc-number">18.</span> <span class="post-toc-text">文件上传</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#图像处理"><span class="post-toc-number">19.</span> <span class="post-toc-text">图像处理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#tp5自带的方法"><span class="post-toc-number">20.</span> <span class="post-toc-text">tp5自带的方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#附tp5完全开发手册：https-www-kancloud-cn-manual-thinkphp5-content"><span class="post-toc-number"></span> <span class="post-toc-text">附tp5完全开发手册：https://www.kancloud.cn/manual/thinkphp5/content</span></a>
+        </nav>
+    </aside>
+   
+<article id="post-tp5基础"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">tp5基础</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2018-11-30 09:15:51" datetime="2018-11-30T01:15:51.000Z"  itemprop="datePublished">2018-11-30</time>
+
+            <br id="mybreak"/>
+            
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/PHP/">PHP</a></li></ul>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">8</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="配置域名"><a href="#配置域名" class="headerlink" title="配置域名"></a>配置域名</h3><ol>
+<li>在c盘下Windows文件夹下的system32文件夹下drivers文件夹下的etc文件夹下的hosts文件添加一个配置<a id="more"></a>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1  www.tp5.com</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<p>如果不能修改的话，将文件复制到桌面修改，然后在粘贴回去就完事了。<br><!--more--></p>
+<ol start="2">
+<li>因为我用的是wamp集成环境，所以配置要在httpd-vhosts.conf下配置：<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">	ServerName www.tp5.com</span><br><span class="line">	DocumentRoot "f:/wamp/www/tp5/public"</span><br><span class="line">	&lt;Directory  "f:/wamp/www/tp5/public/"&gt;</span><br><span class="line">		Options +Indexes +Includes +FollowSymLinks +MultiViews</span><br><span class="line">		AllowOverride All</span><br><span class="line">		Require local</span><br><span class="line">	&lt;/Directory&gt;</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<p>如果用户用的的Apache，要修改Httpd.conf<br></p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/11/30/tp5基础/配置域名.png" alt="配置" title="">
+                </div>
+                <div class="image-caption">配置</div>
+            </figure><p></p>
+<h3 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h3><ol>
+<li>目录和文件<ul>
+<li>目录使用小写+下划线</li>
+<li>类文件使用驼峰命名法，首字母大写，其他文件采用小写+下划线命名</li>
+<li>类名和类文件名保持一致，统一采用驼峰法命名</li>
+</ul>
+</li>
+<li>函数和类，属性命名<ul>
+<li>类的命名采用驼峰法，首字母大写。默认不加任何后缀</li>
+<li>函数的命名使用小写+下划线命名</li>
+<li>方法的命名使用驼峰法，首字母小写</li>
+<li>属性的命名使用驼峰法，首字母小写<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/11/30/tp5基础/目录结构.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="url和路由"><a href="#url和路由" class="headerlink" title="url和路由"></a>url和路由</h3><p>路由：通过用户请求的地址，根据地址的某种规则解析，然后分发到相应的模块相应的控制器地址。</p>
+<ol>
+<li>访问路径大小写的注意：</li>
+</ol>
+<ul>
+<li>TP5全部转换为小写</li>
+<li>控制器首字母大写</li>
+<li>驼峰式命名要加下划线，如果想区分大小写的话，可以在config.php里将url_convert改为false。<br>配置路由：在route.php里配置<br>URL生成<h3 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h3></li>
+</ul>
+<ol>
+<li>详细内容请看tp5完全开发手册</li>
+</ol>
+<ul>
+<li><a href="https://www.kancloud.cn/manual/thinkphp5/158834" target="_blank" rel="noopener">请求与响应 https://www.kancloud.cn/manual/thinkphp5/158834</a></li>
+</ul>
+<ol start="2">
+<li>页面跳转：可以直接指定路径跳转，也可以重定向跳转。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/11/30/tp5基础/跳转.png" alt="跳转" title="">
+                </div>
+                <div class="image-caption">跳转</div>
+            </figure></li>
+<li>总结一下<br><img src="/2018/11/30/tp5基础/2.png" alt="总结"><h3 id="数据库基本操作"><a href="#数据库基本操作" class="headerlink" title="数据库基本操作"></a>数据库基本操作</h3></li>
+<li><p>数据库配置</p>
+<ul>
+<li><p>在database.php里配置</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 数据库类型</span><br><span class="line">   'type'            =&gt; 'mysql',</span><br><span class="line">   // 服务器地址</span><br><span class="line">   'hostname'        =&gt; '127.0.0.1',</span><br><span class="line">   // 数据库名</span><br><span class="line">   'database'        =&gt; '你的数据库名',</span><br><span class="line">   // 用户名</span><br><span class="line">   'username'        =&gt; '你的用户名',</span><br><span class="line">   // 密码</span><br><span class="line">   'password'        =&gt; '你的密码',</span><br><span class="line">   // 端口</span><br><span class="line">   'hostport'        =&gt; '你的端口号',</span><br><span class="line">   // 连接dsn</span><br><span class="line">   'dsn'             =&gt; '',</span><br><span class="line">   // 数据库连接参数</span><br><span class="line">   'params'          =&gt; [],</span><br><span class="line">   // 数据库编码默认采用utf8</span><br><span class="line">   'charset'         =&gt; 'utf8',</span><br><span class="line">   // 数据库表前缀</span><br><span class="line">   'prefix'          =&gt; '数据库表的前缀',</span><br><span class="line">   // 数据库调试模式</span><br><span class="line">   'debug'           =&gt; true,</span><br></pre></td></tr></tbody></table></figure>
+<p>一定要确定好自己的配置，否则会出错出到让你心态爆炸的，不要问我怎么知道的！！！！！！！！！！</p>
+</li>
+<li>如果要操作多数据库，只要在config.php里配置一个数组，数组里是以上的配置就好了。</li>
+</ul>
+</li>
+<li>query execute 原生态SQL语句 增删改查<ul>
+<li>查询操作用query</li>
+<li>其他操作用execute</li>
+</ul>
+</li>
+<li><p>多个数据库切换查询操作</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Db::connect('db1')-&gt;query(查询语句)</span><br><span class="line">Db::connect('db2')-&gt;query(查询语句)</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>事务支持</p>
+<ul>
+<li>需要在数据库中设置表类型为InnoDB以支持事务，然后把需要执行的事务操作封装到闭包里面即可自动完成事务。用Db::transaction函数操作。</li>
+<li>手动控制事务的提交。首先启动事务（Db::startTrans()）,然后用try，catch来提交，回滚事务（Db::rollback()）。<h3 id="模型和关联"><a href="#模型和关联" class="headerlink" title="模型和关联"></a>模型和关联</h3>模型是一种对象-关系映射的封装，并且提供了简洁的ActiveRecord实现，一般来说，每个数据表会和一个模型对应。创建一个子类，类名跟数据表名相同（需要用驼峰命名法，会自己转换），继承Model父类。在调用的时候，会自动查询主键。<h3 id="查询范围"><a href="#查询范围" class="headerlink" title="查询范围"></a>查询范围</h3></li>
+</ul>
+</li>
+<li>scope + 查询范围名称  定义函数   </li>
+<li>全局查询范围，定义之后，会自动调用</li>
+</ol>
+<h3 id="strstr函数"><a href="#strstr函数" class="headerlink" title="strstr函数"></a>strstr函数</h3><pre><code>搜索一个字符串在另一个字符串中的第一次出现，并返回字符串剩余的部分，对大小写敏感。
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查找 "Shanghai" 在 "I love Beijing!" 中的第一次出现，并返回字符串的剩余部分：</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">echo strstr("I love Beijing!","Beijing");</span><br><span class="line">?&gt;</span><br></pre></td></tr></tbody></table></figure>
+</code></pre><h3 id="输入与验证"><a href="#输入与验证" class="headerlink" title="输入与验证"></a>输入与验证</h3><p>简单来说就是表单操作，然后要用validate函数来验证，实现对数据库的操作。<br></p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/11/30/tp5基础/输入与验证.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><p></p>
+<h3 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h3><p>一对一：has_one以及相对的belongs_to</p>
+<p>多对多：has_many以及相对的belongs_to</p>
+<p>一对多：belongs_to_many</p>
+<h3 id="视图与模板"><a href="#视图与模板" class="headerlink" title="视图与模板"></a>视图与模板</h3><ol>
+<li>volist标签</li>
+</ol>
+<ul>
+<li>属性       <ul>
+<li>name(必须)：要输出的数据模板变量</li>
+<li>id(必须)：循环变量</li>
+<li>offset（可选）：要输出数据的offset</li>
+<li>length（可选）：输出数据的长度</li>
+<li>key（可选）：循环的key变量，默认值为i</li>
+<li>mod（可选）：对key值取模，默认为2</li>
+<li>empty（可选）：如果数据为空显示的字符串</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>公共模板</li>
+</ol>
+<ul>
+<li><p>模板定位</p>
+  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">'template'               =&gt; [</span><br><span class="line">        // 模板引擎类型 支持 php think 支持扩展</span><br><span class="line">        'type'         =&gt; 'Think',</span><br><span class="line">        // 默认模板渲染规则 1 解析为小写+下划线 2 全部转换小写</span><br><span class="line">        'auto_rule'    =&gt; 1,</span><br><span class="line">        // 模板路径</span><br><span class="line">        'view_path'    =&gt; '',</span><br><span class="line">        // 模板后缀</span><br><span class="line">        'view_suffix'  =&gt; 'html',</span><br><span class="line">        // 模板文件名分隔符</span><br><span class="line">        'view_depr'    =&gt; DS,</span><br><span class="line">        // 模板引擎普通标签开始标记</span><br><span class="line">        'tpl_begin'    =&gt; '{',</span><br><span class="line">        // 模板引擎普通标签结束标记</span><br><span class="line">        'tpl_end'      =&gt; '}',</span><br><span class="line">        // 标签库标签开始标记</span><br><span class="line">        'taglib_begin' =&gt; '{',</span><br><span class="line">        // 标签库标签结束标记</span><br><span class="line">        'taglib_end'   =&gt; '}',</span><br><span class="line">    ],</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>模板布局</p>
+  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">'layout_on'=&gt;true  //开启模板布局</span><br><span class="line">'layout_name'=&gt;'layout'  //使用layout文件</span><br><span class="line">'layout_item'=&gt;'{__CONTENT__}'</span><br></pre></td></tr></tbody></table></figure>
+<p>  图片显示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/11/30/tp5基础/模板布局.png" alt="模板布局" title="">
+                </div>
+                <div class="image-caption">模板布局</div>
+            </figure>
+<h3 id="调试和日志"><a href="#调试和日志" class="headerlink" title="调试和日志"></a>调试和日志</h3></li>
+</ul>
+<ol>
+<li>页面trace(官方推荐)</li>
+</ol>
+<ul>
+<li><p>修改配置，启动调试</p>
+  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 应用Trace</span><br><span class="line">'app_trace'              =&gt; true,</span><br><span class="line">'trace'                  =&gt; [</span><br><span class="line">    // 内置Html Console 支持扩展</span><br><span class="line">    'type' =&gt; 'Html',</span><br></pre></td></tr></tbody></table></figure>
+<p>  在显示页面时，浏览器底部会有调试信息</p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/11/30/tp5基础/trace.png" alt="trace" title="">
+                </div>
+                <div class="image-caption">trace</div>
+            </figure><p></p>
+</li>
+</ul>
+<ol start="2">
+<li>异常页面</li>
+</ol>
+<ul>
+<li>直接报错调试，显示错误信息</li>
+</ul>
+<ol start="3">
+<li>断点调试</li>
+</ol>
+<ul>
+<li>dump调试输出</li>
+<li>halt变量调试中断并输出(打印之后就不会再打印)</li>
+<li>trace 控制台输出</li>
+</ul>
+<ol start="4">
+<li>日志分析</li>
+</ol>
+<ul>
+<li>log常规日志，用于记录日志</li>
+<li>error错误，一般会导致程序的中止</li>
+<li>notice 警告，程序可以运行但是不够完美的错误</li>
+<li>info 信息，程序输出信息</li>
+<li>debug 调试，用于调试信息</li>
+<li>sql SQL语句，用于SQL记录，只在数据库的调试模式开启时有效</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//在runtime下的log文件</span><br><span class="line">Log::error('错误信息1');</span><br><span class="line">Log::info('日志信息2');</span><br><span class="line">trace('错误信息3'，'error');</span><br><span class="line">trace('日志信息4'，'info');</span><br></pre></td></tr></tbody></table></figure>
+<ol start="5">
+<li>远程调试<h3 id="api调用（需要json返回）"><a href="#api调用（需要json返回）" class="headerlink" title="api调用（需要json返回）"></a>api调用（需要json返回）</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/11/30/tp5基础/api.png" alt="api" title="">
+                </div>
+                <div class="image-caption">api</div>
+            </figure></li>
+</ol>
+<ul>
+<li>创建api模块</li>
+<li>模拟提交测试（用php工具箱）<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3></li>
+<li>如果有些函数需要全栈共用，就要在application\common.php文件中自己定义。创建的类库存放于extend目录下面，在extend\org\文件名.php，跟项目有关系的类放在application\common\文件名.php。如果没有这些文件夹，需要自己创建。</li>
+<li>驱动扩展<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/11/30/tp5基础/驱动扩展.png" alt="扩展" title="">
+                </div>
+                <div class="image-caption">扩展</div>
+            </figure>
+<h3 id="session与cookie"><a href="#session与cookie" class="headerlink" title="session与cookie"></a>session与cookie</h3></li>
+</ul>
+<ol>
+<li>session文件存放位置 </li>
+</ol>
+<ul>
+<li>php.ini session.save_path</li>
+</ul>
+<ol start="2">
+<li>开启session</li>
+</ol>
+<ul>
+<li>session_start</li>
+</ul>
+<ol start="3">
+<li><p>tp5里session设置config.php</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">'session'                =&gt; [</span><br><span class="line">        'id'             =&gt; '',</span><br><span class="line">        // SESSION_ID的提交变量,解决flash上传跨域</span><br><span class="line">        'var_session_id' =&gt; '',</span><br><span class="line">        // SESSION 前缀</span><br><span class="line">        'prefix'         =&gt; 'think',</span><br><span class="line">        // 驱动方式 支持redis memcache memcached</span><br><span class="line">        'type'           =&gt; '',</span><br><span class="line">        // 是否自动开启 SESSION</span><br><span class="line">        'auto_start'     =&gt; true,</span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    session::set() //赋值当前作用域</span><br><span class="line">    session::has() //判断</span><br><span class="line">    session::get() //取值</span><br><span class="line">    session::delete() //删除</span><br><span class="line">    session::clear() //清除session</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>cookie</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">'cookie'                 =&gt; [</span><br><span class="line">        // cookie 名称前缀</span><br><span class="line">        'prefix'    =&gt; '',</span><br><span class="line">        // cookie 保存时间</span><br><span class="line">        'expire'    =&gt; 0,</span><br><span class="line">        // cookie 保存路径</span><br><span class="line">        'path'      =&gt; '/',</span><br><span class="line">        // cookie 有效域名</span><br><span class="line">        'domain'    =&gt; '',</span><br><span class="line">        //  cookie 启用安全传输</span><br><span class="line">        'secure'    =&gt; false,</span><br><span class="line">        // httponly设置</span><br><span class="line">        'httponly'  =&gt; '',</span><br><span class="line">        // 是否使用 setcookie</span><br><span class="line">        'setcookie' =&gt; true,</span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    cookie::set()  //设置cookie</span><br><span class="line">    cookie::delete() //删除</span><br><span class="line">    cookie::clear() //清除cookie</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<p>支持数组，支持使用cookie类直接读取</p>
+<h3 id="验证码"><a href="#验证码" class="headerlink" title="验证码"></a>验证码</h3><p>安装composer，然后使用它安装验证码类库<br></p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/11/30/tp5基础/验证码配置.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><p></p>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><ol>
+<li>上传form表单的enctype属性一定要设置成multipart/form-data</li>
+<li>校验：用validate方法校验上传的是否是需要的文件</li>
+<li>上传<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/11/30/tp5基础/上传.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>md5是表示用MD5方式命名，也可改为date，即根据上传时间命名。如果想要保持上传文件的原文件名，可以将rule(‘md5’)改为$file.</li>
+<li>多文件上传</li>
+</ol>
+<ul>
+<li>将单文件上传foreach循环遍历，变为多文件上传<h3 id="图像处理"><a href="#图像处理" class="headerlink" title="图像处理"></a>图像处理</h3></li>
+</ul>
+<ol>
+<li>安装图像处理类库</li>
+<li>图片读取 <code>Image::open($file)</code></li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//图片裁剪(宽度，高度，x坐标，y坐标)</span><br><span class="line">$image-&gt;crop(300,300,200,200);</span><br><span class="line">//缩略图(最大宽度，最大高度，裁剪类型)</span><br><span class="line">$image-&gt;thumb(150,150,Image::THUMB_CENTER);</span><br><span class="line">//垂直翻转</span><br><span class="line">$image-&gt;flip();</span><br><span class="line">//水平翻转</span><br><span class="line">$image-&gt;flip(Image::FLIP_Y);</span><br><span class="line">//图片旋转(顺时针旋转的度数)</span><br><span class="line">$image-&gt;rotate(30);</span><br><span class="line">//图片水印</span><br><span class="line">$image-&gt;water(ROOT_PATH.'图片名',Image::WATER_NORTHWEST,50)</span><br><span class="line">//文字水印(水印文字，字体文件路径，文字大小，文字颜色，文字写入位置，偏移量，文字倾斜角度)</span><br><span class="line">$image-&gt;text();</span><br></pre></td></tr></tbody></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/11/30/tp5基础/缩略图裁剪.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/11/30/tp5基础/图片水印.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ol start="3">
+<li>图片保存 <code>$image-&gt;save()</code><h3 id="tp5自带的方法"><a href="#tp5自带的方法" class="headerlink" title="tp5自带的方法"></a>tp5自带的方法</h3></li>
+</ol>
+<ul>
+<li>分页：paginate   需要在模板中使用：{$data-&gt;render()}</li>
+<li>tp5中url的写法</li>
+</ul>
+<ol>
+<li>href=”{:url(‘admin/index’)}?Id={$data[‘Id’]}” </li>
+<li>href=”{:url(‘index/download’,[‘Id’=&gt;$data[‘Id’]])}”</li>
+</ol>
+<ul>
+<li>validate验证<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/11/30/tp5基础/validate验证.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="附tp5完全开发手册：https-www-kancloud-cn-manual-thinkphp5-content"><a href="#附tp5完全开发手册：https-www-kancloud-cn-manual-thinkphp5-content" class="headerlink" title="附tp5完全开发手册：https://www.kancloud.cn/manual/thinkphp5/content"></a>附tp5完全开发手册：<a href="https://www.kancloud.cn/manual/thinkphp5/content" target="_blank" rel="noopener">https://www.kancloud.cn/manual/thinkphp5/content</a></h2></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-03T11:33:31.702Z" itemprop="dateUpdated">2021-08-03 19:33:31</time>
+</span>
+
+
+        
+        原文链接：<a href="/2018/11/30/tp5基础/" target="_blank" rel="external">http://lpower.com/2018/11/30/tp5基础/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='http://lpower.com'">
+            <img src="/img/avatar.jpg" alt="lpower">
+            <a>lpower</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tp5/">tp5</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2018/11/30/tp5基础/&title=《tp5基础》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2018/11/30/tp5基础/&title=《tp5基础》 — lpower&source=配置域名
+在c盘下Windows文件夹下的system32文件夹下drivers文件夹下的etc文件夹下的hosts文件添加一个配置" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2018/11/30/tp5基础/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《tp5基础》 — lpower&url=http://lpower.com/2018/11/30/tp5基础/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2018/11/30/tp5基础/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/01/03/实训笔记/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：实训笔记
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/11/25/PHPmvc笔记/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：PHPmvc笔记">下一篇：PHPmvc笔记</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2017
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="http://lpower.com">tomotoes.com</a>
+            <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br/>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license">This blog is licensed under a <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2018/11/30/tp5基础/&title=《tp5基础》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2018/11/30/tp5基础/&title=《tp5基础》 — lpower&source=配置域名
+在c盘下Windows文件夹下的system32文件夹下drivers文件夹下的etc文件夹下的hosts文件添加一个配置" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2018/11/30/tp5基础/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《tp5基础》 — lpower&url=http://lpower.com/2018/11/30/tp5基础/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2018/11/30/tp5基础/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAByklEQVR42u3aO5KDQAwFQN//0t4qp17wkzQMBE3kwsA0BCp95vWKj/fn+D6THEdPO/p3wYGLizvmJot9/z6/5uhV82cevhIuLu5GbrJMciYJWL1XxcXFfSY3zzfO76o+HxcX98ncfPlqQYWLi/tMbhKSeiXQeaJzYa2Gi4s74E6CzqrfF/Z3cXFxi9x38aguPwle/6yOi4u7hZsvk5RA+YvlDdnCvBcXF3cpd1KKJEVRUkqdZzK4uLj7udVmRxKS8jCXfxRcXNw93F5gmiQ91Y8SlT24uLgXcHujjvyapNCKPgcuLu6t3LUJzWTI+urFP1xc3KXcPBjlGy96W7KaQ1ZcXNxF3F5CUz2TEw+vx8XF3cJNipNVu6TysQouLu693B9z1zivqG6qqA5fcXFxd3KriGSZXsM0T49wcXGv5pZ3ahS3cyV3FcIlLi7uRu4k+ai2VArtUVxc3Fu51UZGdUtWnhgt7sTg4uK2uNWA0mt8TMqe8iAWFxd3ETcPOtXWyarrcXFx7+LOS5okOlav+dHfxcXFfQC3t32qOlz5cRcuLu6DufPzvUQKFxd3J7c6SqkOWpInLG6L4OLibm+YTlqlvbYsLi7uFu4fMpW0e7cFGtgAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2018/10/11");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "lpower");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 一个坏掉的番茄 %c  © Simon Ma  http://tomotoes.com \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>

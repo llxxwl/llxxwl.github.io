@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>wamp下基础sql语句 | lpower</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="sql语句">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="环境搭建实验环境：wamp-SQL控制台">
+<meta name="keywords" content="sql语句">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wamp下基础sql语句">
+<meta property="og:url" content="http://lpower.com/2018/11/22/wamp下基础sql语句/index.html">
+<meta property="og:site_name" content="lpower">
+<meta property="og:description" content="环境搭建实验环境：wamp-SQL控制台">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-08-03T11:33:31.638Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wamp下基础sql语句">
+<meta name="twitter:description" content="环境搭建实验环境：wamp-SQL控制台">
+    
+        <link rel="alternate" type="application/atom+xml" title="lpower" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">lpower</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about-me"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/llxxwl" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">wamp下基础sql语句</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#环境搭建"><span class="post-toc-number">1.</span> <span class="post-toc-text">环境搭建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实验环境：wamp-SQL控制台"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">实验环境：wamp-SQL控制台</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基础语句"><span class="post-toc-number">2.</span> <span class="post-toc-text">基础语句</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一些不常用的"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">一些不常用的</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-wamp下基础sql语句"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">wamp下基础sql语句</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2018-11-22 18:47:07" datetime="2018-11-22T10:47:07.000Z"  itemprop="datePublished">2018-11-22</time>
+
+            <br id="mybreak"/>
+            
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a></li></ul>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">2</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><h4 id="实验环境：wamp-SQL控制台"><a href="#实验环境：wamp-SQL控制台" class="headerlink" title="实验环境：wamp-SQL控制台"></a>实验环境：wamp-SQL控制台</h4><a id="more"></a>
+<ol>
+<li>设置MySQL的密码</li>
+<li>默认密码为空，直接回车登录</li>
+<li>use mysql;</li>
+<li><p>修改密码</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update user set authentication_string = PASSWORD('你自己的密码') where user='root';</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>使设定立即生效</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></tbody></table></figure>
+<ol start="6">
+<li>exit 退出；</li>
+</ol>
+<h3 id="基础语句"><a href="#基础语句" class="headerlink" title="基础语句"></a>基础语句</h3><ol>
+<li>登陆wamp；</li>
+<li>查看基本配置<ul>
+<li>查询服务器版本 select version（）</li>
+<li>查询用户权限  select user（） </li>
+<li>查询当前所在的库 select database（）</li>
+</ul>
+</li>
+<li>显示数据库列表  show databases</li>
+<li>建库  create database user</li>
+<li><p>建表  use user </p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table （id int username varchar(20)password varchar(20）</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>往表中加入记录</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into admin values(1,'admin','hhh')</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>显示表的字段信息  desc 表名</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; desc admin;</span><br><span class="line">+----------+-------------+------+-----+---------+-------+</span><br><span class="line">| Field    | Type        | Null | Key | Default | Extra |</span><br><span class="line">+----------+-------------+------+-----+---------+-------+</span><br><span class="line">| id       | int(11)     | YES  |     | NULL    |       |</span><br><span class="line">| username | varchar(20) | YES  |     | NULL    |       |</span><br><span class="line">| password | varchar(20) | YES  |     | NULL    |       |</span><br><span class="line">+----------+-------------+------+-----</span><br></pre></td></tr></tbody></table></figure>
+<ol start="8">
+<li>查询操作</li>
+</ol>
+<ul>
+<li>查询admin中所有数据   select * from 表名;</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from admin;</span><br><span class="line">+------+----------+----------+</span><br><span class="line">| id   | username | password |</span><br><span class="line">+------+----------+----------+</span><br><span class="line">|    1 | admin    | hhh      |</span><br><span class="line">|    1 | user     | dida     |</span><br><span class="line">|    1 | hack     | zzz      |</span><br><span class="line">|    2 | use      | ida      |</span><br><span class="line">|    3 | hak      | zz       |</span><br><span class="line">+------+----------+----------+</span><br></pre></td></tr></tbody></table></figure>
+<p>（因为手残所以多加了两个id=1的  以后忽略）</p>
+<ul>
+<li>查询admin中id=2的信息<br>select * from 表名 where id =2</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from admin where id =2;</span><br><span class="line">+------+----------+----------+</span><br><span class="line">| id   | username | password |</span><br><span class="line">+------+----------+----------+</span><br><span class="line">|    2 | use      | ida      |</span><br><span class="line">+------+----------+----------+</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>查询admin中id=2的用户名和密码<br>select username,password from admin where id =2;</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select username,password from admin where id =2;</span><br><span class="line">+----------+----------+</span><br><span class="line">| username | password |</span><br><span class="line">+----------+----------+</span><br><span class="line">| use      | ida      |</span><br><span class="line">+----------+----------+</span><br></pre></td></tr></tbody></table></figure>
+<ol start="9">
+<li>判断其他表是否存在</li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from admin where id=‘1’and exists(select * from task）</span><br></pre></td></tr></tbody></table></figure>
+<p>如果不存在 会出现Table ‘user.task’ doesn’t exist</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> mysql&gt; select * from admin where id='2'and exists(select * from task );</span><br><span class="line">ERROR 1146 (42S02): Table 'user.task' doesn't exist</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="一些不常用的"><a href="#一些不常用的" class="headerlink" title="一些不常用的"></a>一些不常用的</h4><ul>
+<li>@@version_compile_os显示服务器系统</li>
+<li>@@basedir   显示MySQL的安装路径</li>
+<li>@@datadir   显示MySQL数据库文件的路径</li>
+</ul>
+<ol>
+<li>order by n  查字段与排序<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from admin  order by 4;</span><br><span class="line">ERROR 1054 (42S22): Unknown column '4' in 'order clause'</span><br><span class="line">mysql&gt; select * from admin  order by 3;</span><br><span class="line">+------+----------+----------+</span><br><span class="line">| id   | username | password |</span><br><span class="line">+------+----------+----------+</span><br><span class="line">|    1 | user     | dida     |</span><br><span class="line">|    1 | admin    | hhh      |</span><br><span class="line">|    2 | use      | ida      |</span><br><span class="line">|    3 | hak      | zz       |</span><br><span class="line">|    1 | hack     | zzz      |</span><br><span class="line">+------+----------+--</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<p>联合查询：前后字段必须一致。</p>
+<ol start="2">
+<li>告诉服务器你的字符集</li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;set names gbk/utf-8</span><br></pre></td></tr></tbody></table></figure>
+<ol start="10">
+<li>快速清空表<br>truncate 表名</li>
+<li>distinct 在结果中去除重复行</li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select distinct name from aaa;</span><br></pre></td></tr></tbody></table></figure>
+<ol start="12">
+<li>order by 对结果排序</li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from hhh order by id;</span><br></pre></td></tr></tbody></table></figure>
+<ol start="13">
+<li>修改数据表记录</li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; update hhh set age='15' where id='3';</span><br></pre></td></tr></tbody></table></figure>
+<ol start="14">
+<li>concat联合多列</li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select id,concat(name,":",age) from hhh;</span><br></pre></td></tr></tbody></table></figure>
+<ol start="15">
+<li>修改字符编码</li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table users modify username char(20) character set gbk;</span><br></pre></td></tr></tbody></table></figure>
+<ol start="16">
+<li>建立索引</li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create unique index &lt;索引名&gt; on &lt;表名&gt; &lt;列名&gt;</span><br></pre></td></tr></tbody></table></figure>
+<!--more-->
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-03T11:33:31.638Z" itemprop="dateUpdated">2021-08-03 19:33:31</time>
+</span>
+
+
+        
+        原文链接：<a href="/2018/11/22/wamp下基础sql语句/" target="_blank" rel="external">http://lpower.com/2018/11/22/wamp下基础sql语句/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='http://lpower.com'">
+            <img src="/img/avatar.jpg" alt="lpower">
+            <a>lpower</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql语句/">sql语句</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2018/11/22/wamp下基础sql语句/&title=《wamp下基础sql语句》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2018/11/22/wamp下基础sql语句/&title=《wamp下基础sql语句》 — lpower&source=环境搭建实验环境：wamp-SQL控制台" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2018/11/22/wamp下基础sql语句/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《wamp下基础sql语句》 — lpower&url=http://lpower.com/2018/11/22/wamp下基础sql语句/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2018/11/22/wamp下基础sql语句/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/11/25/数据结构/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：数据结构基础
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/11/22/hexo博客上传图片/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：hexo博客上传图片">下一篇：hexo博客上传图片</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2017
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="http://lpower.com">tomotoes.com</a>
+            <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br/>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license">This blog is licensed under a <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2018/11/22/wamp下基础sql语句/&title=《wamp下基础sql语句》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2018/11/22/wamp下基础sql语句/&title=《wamp下基础sql语句》 — lpower&source=环境搭建实验环境：wamp-SQL控制台" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2018/11/22/wamp下基础sql语句/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《wamp下基础sql语句》 — lpower&url=http://lpower.com/2018/11/22/wamp下基础sql语句/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2018/11/22/wamp下基础sql语句/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMUlEQVR42u3aQW7DMAwF0dz/0inQbSFlPqkUMDVeBWlj62lBkxRfL3y9f6+/36yu1R1W99l/c+ySIUPGYxlkQfuFEszqbqu/xpslQ4aMCxj7ILt/MN+UdJvI2mTIkCGDpIaETUKzDBkyZHyDQSpKXh7LkCFDxp5BQmGaFPIt4CnjgVpchgwZD2SkBwP/+fmL5xsyZMh4CKPTGiMHBunB5Lt0yZAhYzaj35QPHoPbcJxazExlyJDxKEat0VYra0lBWyubZciQcQOj1tJKf1VLItFrQIYMGRcwOkeMnRB8LPWUIUPGaEZ/SOJUeE0D96uzOBkyZDyK0W/Wc95+kKIW3OP3hgwZMh7ISNM7PgZxaqiiNqAmQ4aMSYxOyOOheb8R8VDF6r0hQ4aMaxgkvKY8cmcelFHAlSFDxiBG2o7ft9Jq4ZsfA6CtlCFDxlBGmsb1g2lnOGMZcGXIkDGUwccjSAnKRzQ6GBkyZNzG4IEV3QgzOu+HJV6GDBmjGbXS9ECIxMslRbIMGTKmMvjBQNy9K6WV6SGoDBkybmOkAbTWjOObxVclQ4aM2QySGnbSOP749Mhh+f8yZMgYx3iHF0/saqle2tpbvjdkyJAxiFFL4PppH9mOtD0nQ4aM2QwSZGuNsD2eP0uGDBkyOiVrbSCsE9A/VOEyZMi4nsGDYzqcwdPEYLpNhgwZMkDLjMfDNCjLkCHjTkZaxH4DTJ4uQ4aMOxlnDwbS8weyfXwcRIYMGeMYP8U3HfPvolG1AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2018/10/11");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "lpower");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 一个坏掉的番茄 %c  © Simon Ma  http://tomotoes.com \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>

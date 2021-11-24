@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>七牛云批量压缩打包文件 | lpower</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="代码">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="记录总共有多少文件需要打包1234// 缓存作品数$redis = \Yii::$app-&amp;gt;redis;$redis-&amp;gt;set(&apos;count&apos; . $id, $count);$redis-&amp;gt;expire(&apos;count&apos; . $id, 86400);  视频文件从vod下载到七牛云 首先需要视频在vod的标识vid，根据vid来获取播放地址。获取播放地址的api在阿里云的文档里写">
+<meta name="keywords" content="代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="七牛云批量压缩打包文件">
+<meta property="og:url" content="http://lpower.com/2021/11/24/七牛云批量压缩打包文件/index.html">
+<meta property="og:site_name" content="lpower">
+<meta property="og:description" content="记录总共有多少文件需要打包1234// 缓存作品数$redis = \Yii::$app-&amp;gt;redis;$redis-&amp;gt;set(&apos;count&apos; . $id, $count);$redis-&amp;gt;expire(&apos;count&apos; . $id, 86400);  视频文件从vod下载到七牛云 首先需要视频在vod的标识vid，根据vid来获取播放地址。获取播放地址的api在阿里云的文档里写">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-11-24T07:10:53.560Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="七牛云批量压缩打包文件">
+<meta name="twitter:description" content="记录总共有多少文件需要打包1234// 缓存作品数$redis = \Yii::$app-&amp;gt;redis;$redis-&amp;gt;set(&apos;count&apos; . $id, $count);$redis-&amp;gt;expire(&apos;count&apos; . $id, 86400);  视频文件从vod下载到七牛云 首先需要视频在vod的标识vid，根据vid来获取播放地址。获取播放地址的api在阿里云的文档里写">
+    
+        <link rel="alternate" type="application/atom+xml" title="lpower" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">lpower</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about-me"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/llxxwl" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">七牛云批量压缩打包文件</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#记录总共有多少文件需要打包"><span class="post-toc-number">1.</span> <span class="post-toc-text">记录总共有多少文件需要打包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#视频文件从vod下载到七牛云"><span class="post-toc-number">2.</span> <span class="post-toc-text">视频文件从vod下载到七牛云</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#将所有下载好的文件打包，打包文档（大量文件压缩，mode-4）"><span class="post-toc-number">3.</span> <span class="post-toc-text">将所有下载好的文件打包，打包文档（大量文件压缩，mode=4）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#持久化"><span class="post-toc-number">4.</span> <span class="post-toc-text">持久化</span></a></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-七牛云批量压缩打包文件"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">七牛云批量压缩打包文件</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2021-11-24 15:06:58" datetime="2021-11-24T07:06:58.000Z"  itemprop="datePublished">2021-11-24</time>
+
+            <br id="mybreak"/>
+            
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/PHP/">PHP</a></li></ul>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">5</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><a name="Bp16D"></a></p>
+<h4 id="记录总共有多少文件需要打包"><a href="#记录总共有多少文件需要打包" class="headerlink" title="记录总共有多少文件需要打包"></a>记录总共有多少文件需要打包</h4><figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 缓存作品数</span></span><br><span class="line">$redis = \Yii::$app-&gt;redis;</span><br><span class="line">$redis-&gt;set(<span class="string">'count'</span> . $id, $count);</span><br><span class="line">$redis-&gt;expire(<span class="string">'count'</span> . $id, <span class="number">86400</span>);</span><br></pre></td></tr></tbody></table></figure>
+<p><a name="Rrk0G"></a></p>
+<h4 id="视频文件从vod下载到七牛云"><a href="#视频文件从vod下载到七牛云" class="headerlink" title="视频文件从vod下载到七牛云"></a>视频文件从vod下载到七牛云</h4><ol>
+<li>首先需要视频在vod的标识vid，根据vid来获取播放地址。获取播放地址的api在阿里云的文档里写的很清楚，详情见<a href="https://help.aliyun.com/document_detail/56124.htm?spm=a2c4g.11186623.0.0.59c55000NIGnPI#doc-api-vod-GetPlayInfo" target="_blank" rel="noopener">api文档</a>，sdk示例见<a href="https://help.aliyun.com/document_detail/61070.html" target="_blank" rel="noopener">sdk文档</a></li>
+<li><p>区分高清和标清</p>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据清晰度下载到七牛云</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>($info-&gt;PlayInfoList-&gt;PlayInfo)) {</span><br><span class="line">	$playInfo = $info-&gt;PlayInfoList-&gt;PlayInfo;</span><br><span class="line">	<span class="keyword">foreach</span> ($playInfo <span class="keyword">as</span> $item) {</span><br><span class="line">		<span class="keyword">if</span> (<span class="string">'FD'</span> == $item-&gt;Definition) {</span><br><span class="line">			<span class="keyword">echo</span> <span class="string">"标清"</span>;</span><br><span class="line">		}</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">'LD'</span> == $item-&gt;Definition) {</span><br><span class="line">			<span class="keyword">echo</span> <span class="string">"高清"</span>;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>记录下载失败数据</p>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$redis = \Yii::$app-&gt;redis;</span><br><span class="line"><span class="comment">// 需要打包文件数减1</span></span><br><span class="line">$redis-&gt;decr(<span class="string">'count'</span> . <span class="keyword">$this</span>-&gt;id);</span><br><span class="line"><span class="comment">// 记录失败的详细数据。 这里最好用数据的标识，以便之后的查询</span></span><br><span class="line">$redis-&gt;sadd(<span class="string">'failDownLoad'</span>, <span class="string">'标识'</span>);</span><br><span class="line"><span class="comment">// 设置过期时间</span></span><br><span class="line">$redis-&gt;expire(<span class="string">'failDownLoad'</span>, <span class="number">86400</span>);</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>视频文件（url）下载到七牛云，采用的是<a href="https://developer.qiniu.com/kodo/4097/asynch-fetch" target="_blank" rel="noopener">异步第三方文件抓取</a>方式</p>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">downloadSourceToQiniu</span><span class="params">($id, $creationId, $fileUrl, $bucket = <span class="string">''</span>, $moduleId = <span class="number">1</span>)</span> </span>{</span><br><span class="line">	<span class="comment">// 地址转换</span></span><br><span class="line">  $key = <span class="string">''</span>;</span><br><span class="line">	<span class="keyword">if</span> (strpos($fileUrl, <span class="string">'.com/'</span>)) {</span><br><span class="line">		<span class="keyword">list</span>($domain, $key) = explode(<span class="string">'.com/'</span>, $fileUrl);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">if</span> (strpos($fileUrl, <span class="string">'.cn/'</span>)) {</span><br><span class="line">		<span class="keyword">list</span>($domain, $key) = explode(<span class="string">'.cn/'</span>, $fileUrl);</span><br><span class="line">	}</span><br><span class="line">	$fileKey = $key;</span><br><span class="line">	<span class="comment">// 作品信息</span></span><br><span class="line">	$redis = \Yii::$app-&gt;redis;</span><br><span class="line">	$key = <span class="string">'download'</span> . $id;</span><br><span class="line">	<span class="keyword">if</span> (!<span class="keyword">empty</span>($creation)) {</span><br><span class="line">		$title = $creation[<span class="string">'title'</span>] ?? <span class="string">''</span>;</span><br><span class="line">		$name = !<span class="keyword">empty</span>($creation[<span class="string">'author_name'</span>]) ? $creation[<span class="string">'author_name'</span>] : (!<span class="keyword">empty</span>($creation[<span class="string">'user_name'</span>]) ? $creation[<span class="string">'user_name'</span>] : $creation[<span class="string">'user_nick'</span>]);</span><br><span class="line">		$redis-&gt;sadd($key, $fileKey . <span class="string">'*'</span> . $creation[<span class="string">'number'</span>] . <span class="string">'*'</span> . $title . <span class="string">'*'</span> . $name . <span class="string">'*'</span> . $moduleId);</span><br><span class="line">		$redis-&gt;expire($key, <span class="number">86400</span>);</span><br><span class="line">	}</span><br><span class="line">	$scheme = <span class="string">"http://"</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;config-&gt;useHTTPS === <span class="keyword">true</span>) {</span><br><span class="line">		$scheme = <span class="string">"https://"</span>;</span><br><span class="line">	}</span><br><span class="line">	$apiUrl = $scheme . <span class="keyword">$this</span>-&gt;apiHost. <span class="string">'/sisyphus/fetch'</span>;</span><br><span class="line">  <span class="comment">// 回调函数</span></span><br><span class="line">  $callbackurl = <span class="keyword">$this</span>-&gt;callback ?? <span class="string">''</span>;</span><br><span class="line">	<span class="comment">/*如果不指定储存，则用默认储存*/</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">empty</span>($bucket)) {</span><br><span class="line">		$bucket = <span class="keyword">$this</span>-&gt;bucket;</span><br><span class="line">	}</span><br><span class="line">	$count = $redis-&gt;get(<span class="string">'count'</span> . $id);</span><br><span class="line">  <span class="comment">// 这里所有的参数都可以在回调函数中拿到</span></span><br><span class="line">	$body = json_encode([<span class="string">'url'</span> =&gt; $fileUrl, <span class="string">'bucket'</span> =&gt; $bucket, <span class="string">'key'</span> =&gt; $fileKey, <span class="string">'callbackurl'</span> =&gt; $callbackurl, <span class="string">'callbackbody'</span> =&gt; <span class="string">'key=$(key)&amp;hash=$(etag)&amp;size=$(fsize)&amp;h=$(imageInfo.height)&amp;moduleId='</span>. $moduleId . <span class="string">'&amp;id='</span>.$id . <span class="string">'&amp;creationId='</span> . $creationId . <span class="string">'&amp;count='</span> . $count]);</span><br><span class="line">	$headers = <span class="keyword">$this</span>-&gt;auth-&gt;authorizationV2($apiUrl, <span class="string">'POST'</span>, $body, <span class="string">'application/json'</span>);</span><br><span class="line">	$headers[<span class="string">"Content-Type"</span>] = <span class="string">'application/json'</span>;</span><br><span class="line">	$headers[<span class="string">"Host"</span>] = <span class="keyword">$this</span>-&gt;apiHost;</span><br><span class="line">	$response = Client::post($apiUrl, $body, $headers);</span><br><span class="line">	<span class="keyword">if</span> (!$response-&gt;ok()) {</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">array</span>(<span class="keyword">null</span>, <span class="keyword">new</span> Error($apiUrl, $response));</span><br><span class="line">	}</span><br><span class="line">	$r = $response-&gt;json();</span><br><span class="line">	<span class="comment">// 新建一个hash表做计数用，用来判断下载到七牛云的资源是否已经全部完成</span></span><br><span class="line">	$redis-&gt;hmset($id, $fileKey . $creationId, $r[<span class="string">'id'</span>]);</span><br><span class="line">	$redis-&gt;expire($id, <span class="number">86400</span>);</span><br><span class="line">	<span class="keyword">return</span> $r;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<p>回调函数<br></p><figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionOssDownloadcallback</span><span class="params">()</span> </span>{</span><br><span class="line">	$qiniuInfo = \Yii::$app-&gt;params[<span class="string">'qiniu'</span>];</span><br><span class="line">	$post = \Yii::$app-&gt;request-&gt;post();</span><br><span class="line">	<span class="keyword">if</span> (!<span class="keyword">empty</span>($post[<span class="string">'key'</span>]) &amp;&amp; !<span class="keyword">empty</span>($post[<span class="string">'id'</span>])) {</span><br><span class="line">		$key = $post[<span class="string">'key'</span>];</span><br><span class="line">		$id = $post[<span class="string">'id'</span>];</span><br><span class="line">		$creationId = $post[<span class="string">'creationId'</span>];</span><br><span class="line">		$count = $post[<span class="string">'count'</span>];</span><br><span class="line">		$redis = \Yii::$app-&gt;redis;</span><br><span class="line">		$len = $redis-&gt;hlen($id);</span><br><span class="line">		<span class="comment">// 如果哈希表为空，代表文件全部下载完成，到压缩程序</span></span><br><span class="line">		<span class="keyword">if</span> ((int)$count == $len) {</span><br><span class="line">			$redis-&gt;del($id, <span class="string">'count'</span> . $id);</span><br><span class="line">			<span class="comment">// 数据表里改变下载状态为正在下载中</span></span><br><span class="line">			$qiniu = <span class="keyword">new</span> Qiniu($qiniuInfo);</span><br><span class="line">      <span class="comment">// 压缩打包回调函数</span></span><br><span class="line">			$callback = $qiniuInfo[<span class="string">'callbackUrl'</span>]. <span class="string">'v1/oss/fopdownload'</span>;</span><br><span class="line">      <span class="comment">// 压缩打包函数</span></span><br><span class="line">			$qiniu-&gt;fopDownload($id, $creationId, $callback);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> $qiniuInfo[<span class="string">'httpUrl'</span>];</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p><a name="YDF6S"></a></p>
+<h4 id="将所有下载好的文件打包，打包文档（大量文件压缩，mode-4）"><a href="#将所有下载好的文件打包，打包文档（大量文件压缩，mode-4）" class="headerlink" title="将所有下载好的文件打包，打包文档（大量文件压缩，mode=4）"></a>将所有下载好的文件打包，<a href="https://developer.qiniu.com/dora/1667/mkzip" target="_blank" rel="noopener">打包文档</a>（大量文件压缩，mode=4）</h4><ol>
+<li>拼接索引文件：用之前存在redis的数据查询索引文件所需要的信息，拼接成字符串</li>
+<li><p>以二进制流的形式上传到七牛云上，<a href="https://developer.qiniu.com/kodo/1241/php" target="_blank" rel="noopener">SDK文档</a></p>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">uploadIndexFile</span><span class="params">($index, $filename, $bucket)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="comment">// 上传索引文件到七牛云</span></span><br><span class="line">        $qiniuInfo = \Yii::$app-&gt;params[<span class="string">'qiniu'</span>];</span><br><span class="line">        $auth = <span class="keyword">new</span> Auth($qiniuInfo[<span class="string">'accessKey'</span>], $qiniuInfo[<span class="string">'secretKey'</span>]);</span><br><span class="line">  			<span class="comment">// 生成上传Token</span></span><br><span class="line">        $token = $auth-&gt;uploadToken($bucket, $filename);</span><br><span class="line">  			<span class="comment">// 构建UploadManager对象</span></span><br><span class="line">        $uploadMgr = <span class="keyword">new</span> UploadManager();</span><br><span class="line">        <span class="keyword">list</span>($ret, $err) = $uploadMgr-&gt;put($token, $filename, $index);</span><br><span class="line">        <span class="keyword">return</span> [<span class="string">'result'</span> =&gt; $ret, <span class="string">'err'</span> =&gt; $err];</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>压缩文件</p>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">fopDownload</span><span class="params">($id, $creationId, $notifyUrl = <span class="string">''</span>, $bucket = <span class="string">''</span>, $pipLine = <span class="string">''</span>, $force = false)</span> </span>{</span><br><span class="line">	<span class="comment">//        $fileInfo = $this-&gt;getFileWithoutExt($fileKey);</span></span><br><span class="line">	<span class="comment">/*如果不指定储存，则用默认储存*/</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">empty</span>($bucket)) {</span><br><span class="line">		$bucket = <span class="keyword">$this</span>-&gt;bucket;</span><br><span class="line">	}</span><br><span class="line">	$redis = \Yii::$app-&gt;redis;</span><br><span class="line">	<span class="comment">// 下载失败文件记录</span></span><br><span class="line">	$fails = $redis-&gt;smembers(<span class="string">'failDownLoad'</span> . $id);</span><br><span class="line">	<span class="keyword">if</span> (!<span class="keyword">empty</span>($fails)) {</span><br><span class="line">		$records = <span class="string">'未下载成功文件有：'</span>;</span><br><span class="line">		<span class="comment">// 这里拼接未下载成功提示</span></span><br><span class="line">    ...</span><br><span class="line">		$failName = <span class="string">"下载失败数据详情.txt"</span>;</span><br><span class="line">		$failFile = <span class="keyword">$this</span>-&gt;uploadIndexFile($records, $failName, $bucket);</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">// 构建索引文件</span></span><br><span class="line">	$members = $redis-&gt;smembers(<span class="string">'download'</span> . $id);</span><br><span class="line">	<span class="keyword">if</span> (!<span class="keyword">empty</span>($members)) {</span><br><span class="line">		<span class="comment">// 这里构建索引文件</span></span><br><span class="line">    ...</span><br><span class="line">      </span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">isset</span>($failFile[<span class="string">'result'</span>][<span class="string">'key'</span>])) {</span><br><span class="line">      <span class="comment">// 这里url要base64转码，详情见压缩文档</span></span><br><span class="line">			$index .= <span class="string">'url/'</span> . base64_urlSafeEncode(<span class="keyword">$this</span>-&gt;httpUrl . $failFile[<span class="string">'result'</span>][<span class="string">'key'</span>]);</span><br><span class="line">			<span class="comment">// 删除缓存</span></span><br><span class="line">			$redis-&gt;del(<span class="string">'failDownLoad'</span> . $id);</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (!<span class="keyword">empty</span>($actInfo)) {</span><br><span class="line">      <span class="comment">// 索引文件命名</span></span><br><span class="line">			$filename = $actInfo[<span class="string">'user_id'</span>] . <span class="string">'_'</span> . $actInfo[<span class="string">'act_id'</span>]  .<span class="string">'_'</span> . $actInfo[<span class="string">'id'</span>] . <span class="string">'.txt'</span>;</span><br><span class="line">			$file = <span class="keyword">$this</span>-&gt;uploadIndexFile($index, $filename, $bucket);</span><br><span class="line">			<span class="keyword">if</span> (!is_null($file[<span class="string">'result'</span>])) {</span><br><span class="line">				$fileKey = $file[<span class="string">'result'</span>][<span class="string">'key'</span>];</span><br><span class="line">				<span class="comment">/*如果不指定队列，则用默认队列*/</span></span><br><span class="line">				<span class="keyword">if</span> (<span class="keyword">empty</span>($pipLine)) {</span><br><span class="line">				    $pipLine = <span class="keyword">$this</span>-&gt;pipLine;</span><br><span class="line">				 }</span><br><span class="line">				<span class="comment">/*实例化*/</span></span><br><span class="line">				$pfop = <span class="keyword">new</span> PersistentFop(<span class="keyword">$this</span>-&gt;auth, <span class="keyword">$this</span>-&gt;config);</span><br><span class="line">				$fops = <span class="string">"mkzip/4/|saveas/"</span> . base64_urlSafeEncode($bucket . <span class="string">':'</span> . $id . <span class="string">'/'</span> . $actInfo[<span class="string">'title'</span>] . <span class="string">'-附件集合'</span> . <span class="string">'.zip'</span>);</span><br><span class="line">				<span class="keyword">list</span>($ret, $err) = $pfop-&gt;execute($bucket, $fileKey, $fops, $pipLine, $notifyUrl, $force);</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> [<span class="string">'err'</span> =&gt; $err, <span class="string">'result'</span> =&gt; $ret];</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>回调函数</p>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionFopdownload</span><span class="params">()</span> </span>{</span><br><span class="line">	$qiniuInfo = \Yii::$app-&gt;params[<span class="string">'qiniu'</span>];</span><br><span class="line">	$post = \Yii::$app-&gt;request-&gt;post();</span><br><span class="line">	<span class="keyword">if</span> (!<span class="keyword">empty</span>($post[<span class="string">'id'</span>])) {</span><br><span class="line">		$id = $post[<span class="string">'id'</span>];</span><br><span class="line">		$auth = <span class="keyword">new</span> Auth($qiniuInfo[<span class="string">'accessKey'</span>], $qiniuInfo[<span class="string">'secretKey'</span>]);</span><br><span class="line">		$config = <span class="keyword">new</span> Config();</span><br><span class="line">    <span class="comment">// 返回持久化id</span></span><br><span class="line">		$pfop = <span class="keyword">new</span> PersistentFop($auth, $config);</span><br><span class="line">		<span class="keyword">list</span>($ret, $err) = $pfop-&gt;status($id);</span><br><span class="line">		<span class="keyword">if</span> (!is_null($ret)) {</span><br><span class="line">			<span class="comment">// 更改数据表状态为下载完成</span></span><br><span class="line">      ...</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> $qiniuInfo[<span class="string">'httpUrl'</span>];</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<p><a name="UmV5G"></a></p>
+<h4 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h4><ol>
+<li>上面涉及到七牛云的过程几乎都会用到持久化数据处理。持久化用于满足数据处理时间较长、计算量较大的场景，并且可以随时获取处理进度信息。在资源处理时，自动触发</li>
+<li>文档地址：<a href="https://developer.qiniu.com/dora/1291/persistent-data-processing-pfop" target="_blank" rel="noopener">https://developer.qiniu.com/dora/1291/persistent-data-processing-pfop</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-11-24T07:10:53.560Z" itemprop="dateUpdated">2021-11-24 15:10:53</time>
+</span>
+
+
+        
+        原文链接：<a href="/2021/11/24/七牛云批量压缩打包文件/" target="_blank" rel="external">http://lpower.com/2021/11/24/七牛云批量压缩打包文件/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='http://lpower.com'">
+            <img src="/img/avatar.jpg" alt="lpower">
+            <a>lpower</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码/">代码</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2021/11/24/七牛云批量压缩打包文件/&title=《七牛云批量压缩打包文件》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2021/11/24/七牛云批量压缩打包文件/&title=《七牛云批量压缩打包文件》 — lpower&source=在职菜鸟" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2021/11/24/七牛云批量压缩打包文件/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《七牛云批量压缩打包文件》 — lpower&url=http://lpower.com/2021/11/24/七牛云批量压缩打包文件/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2021/11/24/七牛云批量压缩打包文件/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/08/03/supervisor/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：supervisor">下一篇：supervisor</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2017
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="http://lpower.com">tomotoes.com</a>
+            <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br/>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license">This blog is licensed under a <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2021/11/24/七牛云批量压缩打包文件/&title=《七牛云批量压缩打包文件》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2021/11/24/七牛云批量压缩打包文件/&title=《七牛云批量压缩打包文件》 — lpower&source=在职菜鸟" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2021/11/24/七牛云批量压缩打包文件/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《七牛云批量压缩打包文件》 — lpower&url=http://lpower.com/2021/11/24/七牛云批量压缩打包文件/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2021/11/24/七牛云批量压缩打包文件/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtElEQVR42u3a0W7jMAwEwP7/T7evBQo7u6SVywHjpyCxLY0CSATJr6/4+v5zXf36+5ur9yTf/33b1bMPXHh4eHjrqV9NNxnmfqL3U79fuPunLueGh4eHd4x3P9HNFO9HuR8r+fxiFDw8PLwP490/m2/3+dvw8PDw/kdeciTk4W8bRuPh4eF9Di9JRrTUPMhu0xxHci14eHh43VhRFelzPh+p7+Hh4eGtq+qbzT3Z9Ns0RD1bPDw8vAO8fMNtw+6nmrFm9+Dh4eGd480G3jRj5Rv6/dES/YqHh4d3gNdOMVmIpLjVFt5aXtHFgIeHhzfi5Vt5XuDfpx7yxq827MbDw8Pb8GZBbRtAP9ugUBxXeHh4eAd47bTe08WQHzl16xUeHh7eo7x9QasNf9sUxuxQwcPDw3sPr03IbhK1SQJ3Fifj4eHhneAlCYVNMmKW8miX+3Lp8fDw8A7wNsO3sP1RkSdw8fDw8M7x2s09b4raF8OSf+YFHg8PD+8YL28amKV9H8iU3N5fnHh4eHh4a94sYTr7dVb0yhfu8m14eHh4j/LaUn2+HN/xtTk2XswKDw8P7+28Tfg7a95qw/rVwYCHh4e34LW7aJuE3RwSqwXFw8PDO7ZX50Hz7M59d8OsHQEPDw/vNC9pC9gwktTGLDnyotqFh4eHd5jXFu9nDQezItnw4MHDw8M7zMtTBrN2q3xR8raqF9/g4eHhHePloWoeFreHR1v0io46PDw8vEd5+wJVmzVtD5XVsYGHh4d3gNdutflgeQieTzdvIKiReHh4eCVvk3po07V5G8FsQaPX4eHh4T3EOxEct4mMfXActQ7g4eHh/SNesmW3B0yyHG06GA8PD+8TeO2deapic13OEw8PD+8Yrw1887TCjN2OhYeHh/dO3uaxtvCfJyCOk/Dw8PAmc/sB9zpUuQa1vzAAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2018/10/11");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "lpower");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 一个坏掉的番茄 %c  © Simon Ma  http://tomotoes.com \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>

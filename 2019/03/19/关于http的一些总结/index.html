@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>关于http的一些总结 | lpower</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="HTTP">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="http在学习网络的过程中是必不可少的，所以在这里整理了一些关于HTTP的知识点">
+<meta name="keywords" content="HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于http的一些总结">
+<meta property="og:url" content="http://lpower.com/2019/03/19/关于http的一些总结/index.html">
+<meta property="og:site_name" content="lpower">
+<meta property="og:description" content="http在学习网络的过程中是必不可少的，所以在这里整理了一些关于HTTP的知识点">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://lpower.com/2019/03/19/关于http的一些总结/http/三次握手.png">
+<meta property="og:image" content="http://lpower.com/2019/03/19/关于http的一些总结/http/http报文.png">
+<meta property="og:updated_time" content="2021-08-03T11:33:31.666Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于http的一些总结">
+<meta name="twitter:description" content="http在学习网络的过程中是必不可少的，所以在这里整理了一些关于HTTP的知识点">
+<meta name="twitter:image" content="http://lpower.com/2019/03/19/关于http的一些总结/http/三次握手.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="lpower" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">lpower</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about-me"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/llxxwl" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">关于http的一些总结</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#http在学习网络的过程中是必不可少的，所以在这里整理了一些关于HTTP的知识点"><span class="post-toc-number">1.</span> <span class="post-toc-text">http在学习网络的过程中是必不可少的，所以在这里整理了一些关于HTTP的知识点</span></a></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-关于http的一些总结"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">关于http的一些总结</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2019-03-19 15:51:29" datetime="2019-03-19T07:51:29.000Z"  itemprop="datePublished">2019-03-19</time>
+
+            <br id="mybreak"/>
+            
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/协议/">协议</a></li></ul>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">3</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="http在学习网络的过程中是必不可少的，所以在这里整理了一些关于HTTP的知识点"><a href="#http在学习网络的过程中是必不可少的，所以在这里整理了一些关于HTTP的知识点" class="headerlink" title="http在学习网络的过程中是必不可少的，所以在这里整理了一些关于HTTP的知识点"></a>http在学习网络的过程中是必不可少的，所以在这里整理了一些关于HTTP的知识点</h2><a id="more"></a>
+<ol>
+<li>HTTP2与之前的版本的比较<ul>
+<li>所有数据均以二进制传输</li>
+<li>同一个连接里面发送多个请求不再需要按照顺序来</li>
+<li>增加了头信息压缩以及推送(并行推送css,html等)等提高效率的功能</li>
+</ul>
+</li>
+<li><p>HTTP三次握手</p>
+<p> <img src="http/三次握手.png" alt=""></p>
+<p> SYN:标志位<br> Seq 随机产生<br> 回应：ACK = Seq+1</p>
+<ul>
+<li>客户端发给服务器一个信号(SYN=1,Seq=0)。服务器端收到后，回应给客户端(SYN=1,ACK=1,Seq=0),当客户端收到服务器端的信号后，再回复给客户端，告知自己收到消息(ACK=1,Seq=0)。三次握手完毕后，确认可以安全传输。</li>
+<li>功能：防止服务端开启一些无用的连接，减少服务器一些不必要的开销。</li>
+</ul>
+</li>
+<li><p>URI URL URN</p>
+<ul>
+<li><p>URI Uniform Resource Identifier/统一资源标识符</p>
+<ul>
+<li><p>用来唯一标识互联网上的信息资源</p>
+</li>
+<li><p>包含URL和URN</p>
+</li>
+</ul>
+</li>
+<li>URL Uniform Resource Locator/统一资源定位器<ul>
+<li><a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a>  此类格式的都叫做URL，还有ftp协议等等。</li>
+</ul>
+</li>
+<li>URN 永久统一资源定位符<ul>
+<li>在资源移动之后还能被找到</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>http报文<br> <img src="http/http报文.png" alt=""></p>
+<ul>
+<li><p>请求部分：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">首行第一部分     method  请求方法  get,post等</span><br><span class="line">首行第二部分     url（请求的地址）</span><br><span class="line">首行第三部分     协议版本</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>响应报文：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">首行第一部分       协议版本</span><br><span class="line">首行第二部分        code 200表示正常</span><br><span class="line">首行第三部分        明文表示code的含义</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>http方法</p>
+<p>  用来定义对于资源的操作   GET post等</p>
+</li>
+<li>HTTP CODE ,可以判断结果.</li>
+<li>定义服务器对请求的处理结果，各个区间的CODE有各自的意义<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">100-199 代表请求已经被接受，需要继续处理  eg:100 Continue</span><br><span class="line">200-299 代表请求已成功被接收，理解并接受   eg:200 OK 202 accepted</span><br><span class="line">300-399 代表需要客户端采取进一步的操作才能完成请求，通常用来重定向 </span><br><span class="line">eg:307 Temporary Redirect</span><br><span class="line">在这种情况下，请求应该与另一个URI重复，但后续的请求应仍使用原始的URI。</span><br><span class="line">与302相反，当重新发出原始请求时，不允许更改请求方法。</span><br><span class="line">例如，应该使用另一个POST请求来重复POST请求。</span><br><span class="line">400-499  代表客户端看起来可能发生了错误   eg:403  forbidden 404 not found</span><br><span class="line">500-599  代表服务器错误  eg: 500   502 网关错误</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+</li>
+<li><p>CORS跨域请求的限制与解决</p>
+<ul>
+<li>CORS</li>
+</ul>
+<ol>
+<li><p>CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）。</p>
+</li>
+<li><p>它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。</p>
+</li>
+</ol>
+<ul>
+<li><p>限制</p>
+<ol>
+<li>浏览器同域请求，在浏览器这边发送的Ajax请求必须在同域里，如果跨域，需要服务器同意</li>
+<li>请求头限制</li>
+</ol>
+</li>
+<li><p>解决</p>
+<p>  可以通过放入<code>Access-Control-Allow-Origin: '*'</code>来实现跨域(‘*’ 代表任何服务都可以跨域   可以设置为一个特定的域名)</p>
+<p>  在script,link,image标签里写路径，加载一些东西的时候，浏览器是允许跨域的</p>
+</li>
+<li><p>CORS预请求</p>
+<p>  除GET,POST,HEAD三种方法 及三种Content-Type(text/plain,multipart/form-data,application/x-www-form-urlencoded)外，其他都需要预请求</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="6">
+<li><p>cookie和session</p>
+<ul>
+<li><p>cookie</p>
+<p>  在服务端返回数据时，通过Set-Cookie这个head设置在浏览器里面，保存在浏览器里面的一个内容。</p>
+<p>  下次请求会自动带上     </p>
+<p>  键值对，可以设置多个</p>
+<p>  有时效，如果没有设置时间，关闭浏览器后就会删除</p>
+<p>  属性：<br>  max-age和expires设置时间</p>
+<p>  Secure只在http的时候发送</p>
+<p>  HttpOnly无法通过documents.cookie访问(防止CSRF注入)</p>
+</li>
+<li><p>session</p>
+<p>  位于web服务器上，主要负责访问者与网站之间的交互</p>
+<p>  关闭网站时会话结束</p>
+<p>  无法永久保存数据</p>
+</li>
+<li><p>cookie与session的区别</p>
+<p>  session比cookie更安全</p>
+<p>  cookie在客户端，session在服务器上</p>
+<p>  cookie能够保存的数据较小</p>
+</li>
+</ul>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-03T11:33:31.666Z" itemprop="dateUpdated">2021-08-03 19:33:31</time>
+</span>
+
+
+        
+        原文链接：<a href="/2019/03/19/关于http的一些总结/" target="_blank" rel="external">http://lpower.com/2019/03/19/关于http的一些总结/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='http://lpower.com'">
+            <img src="/img/avatar.jpg" alt="lpower">
+            <a>lpower</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2019/03/19/关于http的一些总结/&title=《关于http的一些总结》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2019/03/19/关于http的一些总结/&title=《关于http的一些总结》 — lpower&source=http在学习网络的过程中是必不可少的，所以在这里整理了一些关于HTTP的知识点" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2019/03/19/关于http的一些总结/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《关于http的一些总结》 — lpower&url=http://lpower.com/2019/03/19/关于http的一些总结/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2019/03/19/关于http的一些总结/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/25/php验证码/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：php验证码
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/01/03/实训笔记/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：实训笔记">下一篇：实训笔记</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2017
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="http://lpower.com">tomotoes.com</a>
+            <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br/>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license">This blog is licensed under a <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2019/03/19/关于http的一些总结/&title=《关于http的一些总结》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2019/03/19/关于http的一些总结/&title=《关于http的一些总结》 — lpower&source=http在学习网络的过程中是必不可少的，所以在这里整理了一些关于HTTP的知识点" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2019/03/19/关于http的一些总结/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《关于http的一些总结》 — lpower&url=http://lpower.com/2019/03/19/关于http的一些总结/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2019/03/19/关于http的一些总结/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3aS27kMAwFwNz/0h4g28DOe5QzQEulVaM/NssLNiXy6yte1/d6/vTnurvC3evkXksLAwPjYxnX48qDuLv9Fayf38xjw8DAOIfxnGRvfzxK0wm4vgIGBgbGQlpcSdwYGBgY6wm3Db29CwYGBkYbSh7c8/Vbxst7cQwMjA9ktNvR//n6D/sbGBgYH8K4ytUm0DYFX6OFgYGxN6Mdd1gpGfP3hyUpBgbG1ozZbZK2wWxEbKl1ioGBsSljfagiT8orqfmXwhQDA+MYRp5YV1qY7TvRwRwGBsYBjDzVrifTvDGZ8zAwMHZl5AG1oc9GN4ZFJAYGxtaM/IBsVsC1Dc7k0dxeHwMDY1PG+rhDWwjONsPFzAgGBsamjDbZzY7bZi2BBIyBgXECoy3IhgNbcYu0bSpgYGDszai/WjY4Z8Xf8DFhYGBsymi3r0nqnDVE26Kw6G9gYGB8OCNfsyGMPNC2IYGBgXEaIz+yb2+fX7MdOLvdkWNgYGzHWCnLZuMR+RY3f0wYGBgnMPJmZFtEJsG1A2S3CRcDA2NTRrujXW9SztJxdNyGgYGxKWM2rpof0+db3CRN3+IxMDC2ZqwXfLO0+26DAQMD4wRGPqTVpstZoZnHcNsewMDA2JQxOzh7oVwbJeL6qWBgYBzDmCXHdvB0+AeAgYGBEYT1blFYF6AYGBgHMJIElyfBpJH5HG79sDAwMLZmvDVmkYQYHZyNUjAGBsamjH9PPLwqi7z/ygAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2018/10/11");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "lpower");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 一个坏掉的番茄 %c  © Simon Ma  http://tomotoes.com \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>

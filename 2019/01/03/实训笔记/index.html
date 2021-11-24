@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>实训笔记 | lpower</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="笔记">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）,使用的是思科的eve">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实训笔记">
+<meta property="og:url" content="http://lpower.com/2019/01/03/实训笔记/index.html">
+<meta property="og:site_name" content="lpower">
+<meta property="og:description" content="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）,使用的是思科的eve">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://lpower.com/2019/01/03/实训笔记/ACL示例.png">
+<meta property="og:image" content="http://lpower.com/2019/01/03/实训笔记/静态nat.png">
+<meta property="og:image" content="http://lpower.com/2019/01/03/实训笔记/ASA基础配置.png">
+<meta property="og:image" content="http://lpower.com/2019/01/03/实训笔记/ASA网络目标配置.png">
+<meta property="og:image" content="http://lpower.com/2019/01/03/实训笔记/综合实验.png">
+<meta property="og:updated_time" content="2021-08-03T11:33:31.684Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实训笔记">
+<meta name="twitter:description" content="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）,使用的是思科的eve">
+<meta name="twitter:image" content="http://lpower.com/2019/01/03/实训笔记/ACL示例.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="lpower" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">lpower</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about-me"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/llxxwl" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">实训笔记</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）-使用的是思科的eve"><span class="post-toc-number">1.</span> <span class="post-toc-text">2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）,使用的是思科的eve</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一、交换机和MAC地址"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">一、交换机和MAC地址</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#二、iOS软件操作"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">二、iOS软件操作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#三、传输层（tcp，udp，arp，路由表）"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">三、传输层（tcp，udp，arp，路由表）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#四、路由基础"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">四、路由基础</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#五、icmp（互联网控制协议）"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">五、icmp（互联网控制协议）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#六、vlan（虚拟局域网）"><span class="post-toc-number">2.</span> <span class="post-toc-text">六、vlan（虚拟局域网）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#七、DHCP（动态主机配置协议）"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">七、DHCP（动态主机配置协议）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安全方向"><span class="post-toc-number">3.</span> <span class="post-toc-text">安全方向</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#八、ACL-访问控制列表"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">八、ACL-访问控制列表</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#九、NAT（网络地址转换）"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">九、NAT（网络地址转换）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#十、简易密码学"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">十、简易密码学</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#十一、ASA防火墙基础"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">十一、ASA防火墙基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#实验需求：配置防火墙，实现内网主机可以访问公网的HTTP服务。公网客户端可以访问内网的DMZ服务器的HTTP和SSH服务。要求在防火墙上配置适当的自动NAT策略和严格ACL来完成这个需求。"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">实验需求：配置防火墙，实现内网主机可以访问公网的HTTP服务。公网客户端可以访问内网的DMZ服务器的HTTP和SSH服务。要求在防火墙上配置适当的自动NAT策略和严格ACL来完成这个需求。</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-实训笔记"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">实训笔记</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2019-01-03 10:26:13" datetime="2019-01-03T02:26:13.000Z"  itemprop="datePublished">2019-01-03</time>
+
+            <br id="mybreak"/>
+            
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CCNA/">CCNA</a></li></ul>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">25</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）-使用的是思科的eve"><a href="#2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）-使用的是思科的eve" class="headerlink" title="2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）,使用的是思科的eve"></a>2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）,使用的是思科的eve</h3><a id="more"></a>
+<h4 id="一、交换机和MAC地址"><a href="#一、交换机和MAC地址" class="headerlink" title="一、交换机和MAC地址"></a>一、交换机和MAC地址</h4><ol>
+<li>单工，半双工，全双工</li>
+</ol>
+<ul>
+<li>单工：数据只能沿一个方向发送，另一个方向是无法发送数据的。</li>
+<li>半双工：数据可以沿两个方向发送，但同一时间只可能有一台设备发送数据。</li>
+<li>全双工：数据可以沿两个方向同时发送。</li>
+<li>TYPE的取值：0800代表IP协议  0806代表arp协议<h4 id="二、iOS软件操作"><a href="#二、iOS软件操作" class="headerlink" title="二、iOS软件操作"></a>二、iOS软件操作</h4></li>
+</ul>
+<ol>
+<li>路由器：</li>
+</ol>
+<ul>
+<li>1）首先输入no     初始化配置对话</li>
+<li>2） en                 进入特权模式</li>
+<li>3）configuration terminal   进入全局配置模式</li>
+<li>4）hostname xxx   修改主机名</li>
+</ul>
+<ol start="2">
+<li>IP地址</li>
+</ol>
+<ul>
+<li><p>1）配置</p>
+  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">step1：进入要配置IP地址的接口。</span><br><span class="line">命令：全局配置模式下：interface +接口号</span><br><span class="line">step2：配置IP地址</span><br><span class="line">命令：接口子配置模式下：ip address IP地址 子网掩码</span><br><span class="line">示例：R1(config-if)#ip address 12.1.1.1 255.255.255.0</span><br><span class="line">step3：开启接口，因为接口模式情况下是关闭的，即使配置IP地址也无法正常工作，所以需要开启接口。</span><br><span class="line">命令：接口子配置模式下：no shutdown</span><br><span class="line">示例：R1(config-if)#no shutdown</span><br><span class="line">step4：exit退出接口子配置模式进入另一个接口。</span><br><span class="line">step5：检查IP地址配置</span><br></pre></td></tr></tbody></table></figure>
+<p>  命令：特权模式下：show ip interface brief显示接口的三层摘要信息。在除了执行模式外其它模式输入执行命令时，需要在命令前添加do 关键字。<br>  检查IP地址配置是否无误，使用ping命令，来检查一对直连接口的IP 。</p>
+</li>
+<li><p>2）分类</p>
+<ul>
+<li><p>IP地址根据其使用的方式分为ABCDE5类。分类的依据是一个IP地址当中前4bit的取值情况，按照如下规则进行分类。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A：0xxx      </span><br><span class="line">B：10xx</span><br><span class="line">C：110x</span><br><span class="line">D：1110    组播IP地址</span><br><span class="line">E：1111     保留科研用IP地址</span><br></pre></td></tr></tbody></table></figure>
+<p>A类地址的范围为1~126。0为保留地址。127为本地环回地址。<br>B类地址的范围为128~191。169.254为本地链路地址，DHCP获取地址失败时会使用该地址。<br>C类地址的范围为192~223。<br>本地广播地址：255.255.255.255（也就是32个1）</p>
+</li>
+<li>网络位：标识主机所属的网络</li>
+<li>主机位：标识网络中的一台主机</li>
+</ul>
+</li>
+<li>3）封装与解封<ul>
+<li>IP首部<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">版本（4bit）：描述IP协议版本。一般为4。</span><br><span class="line">IHL（4bit）：描述IP协议首部长度。</span><br><span class="line">ToS（8bit）：用于标记流量，用作QoS。</span><br><span class="line">总长度（16bit）：代表一个IP数据包的总长度。</span><br><span class="line">标识（16bit）：相同的标识代表分片数据包属于同一个源数据包。</span><br><span class="line">标志（3bit）：0（保留，恒为0）0（DF位，禁止分片位）0（MF更多分片位）</span><br><span class="line">片偏移（13bit）：当前分片的第一个bit与原始分片的第一个bit的相对位移。</span><br><span class="line">MTU：最大传输单元，默认情况下多为1500</span><br><span class="line">TTL（8bit）：当TTL为0时，该数据包将被丢弃。用于减缓产生路由环路后对网络的影响。</span><br><span class="line">协议（8bit）：用于指示IP报文的上层协议。（例：TCP 6，UDP 17，ICMP 1）</span><br><span class="line">首部校验和（16bit）：检查IP首部在传输过程当中的完整性。</span><br><span class="line">源IP地址（32bit）：源主机IP地址</span><br><span class="line">目的IP地址（32bit）：目的主机IP地址</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="三、传输层（tcp，udp，arp，路由表）"><a href="#三、传输层（tcp，udp，arp，路由表）" class="headerlink" title="三、传输层（tcp，udp，arp，路由表）"></a>三、传输层（tcp，udp，arp，路由表）</h4><ol>
+<li><p>telnet协议（远程管理协议）</p>
+<ul>
+<li>实验配置：<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">PC配置</span><br><span class="line">Router(config)#hostname PC            //将路由器的主机名设置为PC</span><br><span class="line">PC(config)#int e0/0               //进入设备的e0/0接口子配置模式</span><br><span class="line">PC(config-if)#ip address 12.1.1.1 255.255.255.0     //设置e0/0接口的IP地址为12.1.1.1/24</span><br><span class="line">PC(config-if)#no sh                        //开启e0/0接口</span><br><span class="line">PC(config)#no ip routing              //关闭路由器的路由功能</span><br><span class="line">PC(config)#ip default-gateway 12.1.1.2       //设置路由器的默认网关</span><br><span class="line">（备注：用路由器模拟PC的时候，必须关闭路由器的路由功能并为它设置默认网关。因为一台路由器收到一个目的地址未知的数据包，就会将它丢弃。而主机收到一个目的地址未知的数据包，会把它交给自己的网关）</span><br><span class="line">路由器的配置</span><br><span class="line">Router(config)#hostname ROUTER       //将路由器的主机名设定为ROUTER</span><br><span class="line">ROUTER(config)#int e0/0                 //进入e0/0接口的子配置模式</span><br><span class="line">ROUTER(config-if)#ip address 12.1.1.2 255.255.255.0 //设置e0/0接口的IP地址为12.1.1.2/24</span><br><span class="line">ROUTER(config-if)#no sh            //开启e0/0接口</span><br><span class="line">ROUTER(config)#line vty 0 4           //开启虚拟终端线路0到4共5条</span><br><span class="line">ROUTER(config-line)#transport input telnet      //限制入方向只能通过TELNET进行连接</span><br><span class="line">ROUTER(config-line)#password cisco123           //配置线路密码</span><br><span class="line">ROUTER(config-line)#login           //开启线路下密码认证功能</span><br><span class="line">验证实验效果</span><br><span class="line">PC&gt;telnet 12.1.1.2        //使用telnet协议连接12.1.1.2主机，默认端口号23。</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+</li>
+<li><p>路由表</p>
+<ul>
+<li><p>查看路由器的路由表：<code>show ip route</code></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C        10.1.10.0/24 is directly connected, Ethernet0/0</span><br><span class="line">L        10.1.10.254/32 is directly connected, Ethernet0/0</span><br><span class="line">C        10.1.20.0/24 is directly connected, Ethernet0/1</span><br><span class="line">L        10.1.20.254/32 is directly connected, Ethernet0/1</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>路由表中的每个路由条目，以一个网络地址作为主项。</p>
+</li>
+<li><p>最前面的代码，一般是一个大写字母，代表一个路由表项的来源，常见来源：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   C	直连路由</span><br><span class="line">L	本地路由</span><br><span class="line">D	EIGRP路由</span><br><span class="line">R	RIP路由</span><br><span class="line">S	静态路由</span><br><span class="line">O	OSPF路由</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>一条路由可能在最后带有一个出接口。代表去往该网络需要将数据从出接口转发出去。有些路由没有出接口。没有出接口的路由一定会带有下一跳路由器信息，根据该信息可以进行路由的递归查询。</p>
+</li>
+<li>一条路由可能在最后带有一个下一跳，代表去网该网络需要将数据发往哪个主机。</li>
+<li>一条路由（除了直连），一定会带有一个方括号，里面包含一对儿数字，其中前面的数字为AD（管理距离）后面的数字叫Metric(度量)。</li>
+<li>管理距离代表路由器对某种路由来源的信任程度。越小越好。常见管理距离，直连路由为0，静态路由默认为1，EIGRP为90，OSPF为110，RIP为120。管理距离越小，路由器越信任某种路由。</li>
+<li>度量代表路由协议通过何种方式计算到达目标网络的距离。也是越小越好。常见的度量标准有带宽（OSPF），跳数（RIP）和综合度量值（EIGRP）。目前的情况来看带宽是对数据传输能力影响最大的参数，所以推荐使用以带宽作为度量标准的路由协议（OSPF和ISIS和EIGRP）。</li>
+</ul>
+</li>
+<li>arp（地址解析协议）</li>
+</ol>
+<ul>
+<li>1）0x0806对应ARP协议</li>
+<li><p>2）ARP请求报文中的关键字段：</p>
+<ul>
+<li>源协议地址：发送主机的IP地址</li>
+<li>目的协议地址：目标主机的IP地址</li>
+<li>源硬件地址：发送主机的MAC地址</li>
+<li><p>目的硬件地址：00-00-00-00-00-00</p>
+<p>如果主机收到一个ARP请求，其中的目的协议地址是自己的IP地址，则他会向发来ARP请求的主机发送ARP回复。ARP回复是单播发送的</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="四、路由基础"><a href="#四、路由基础" class="headerlink" title="四、路由基础"></a>四、路由基础</h4><ol>
+<li>静态路由</li>
+</ol>
+<ul>
+<li><p>静态路由配置</p>
+<p>  <code>R1(config)#ip route 10.1.2.0 255.255.255.0 12.1.1.2</code></p>
+<p>  配置一条到达10.1.2.0/24的路由，下一跳路由器接口IP地址为12.1.1.2。</p>
+</li>
+<li><p>配置静态路由一定要注意，下一跳接口地址必须可达。否则该静态路由不会装载进路由表。</p>
+</li>
+<li>配置静态路由一定要注意单向路由问题。一个单向路由是没有意义的</li>
+</ul>
+<ol start="2">
+<li><p>默认路由</p>
+<p> <code>R1(config)#ip route 0.0.0.0 0.0.0.0 12.1.1.2</code><br> 配置一条指向12.1.1.2的静态默认路由。</p>
+<p> 默认路由是一种特殊的路由，它的前缀长度为0。所以默认路由可以被理解为描述一个最大的网络的路由，该网络可以包含任何一个IP网络。在末节路由器上常常配置默认路由来减少路由配置的复杂度。只要拥有任何一条明细路由，数据便不会匹配默认路由进行转发，这是由于路由表拥有最长子网掩码匹配的特性。任何明细路由子网掩码长度都会比默认路由的0更长一些，所以在有明细路由的情况下，数据不会匹配默认路由进行发送。</p>
+<h4 id="五、icmp（互联网控制协议）"><a href="#五、icmp（互联网控制协议）" class="headerlink" title="五、icmp（互联网控制协议）"></a>五、icmp（互联网控制协议）</h4></li>
+</ol>
+<ul>
+<li>IP协议号 1<ul>
+<li>校验和与IP和TCP/UDP校验和一样用于检查数据的完整性。</li>
+<li>类型用于表明该ICMP报文属于什么类型。</li>
+<li>代码用于表明该ICMP报文属于某种类型的子类型。</li>
+</ul>
+</li>
+<li>大部分ICMP类型的报文我们目前已经停止使用了。现在还在频繁使用的ICMP类型有：</li>
+</ul>
+<ol>
+<li>ICMP 类型8：回显请求。PING命令用于控制一台设备发送一个回显请求到某一个特定主机。收到回显请求的主机必须用回显应答进行响应。如果对端主机无法在规定时间内对回显请求进行响应，通常说明本主机与目标主机存在IP连通性故障。</li>
+<li>ICMP类型0：回显应答。在收到某主机发送过来的回显请求后，必须用回显应答对对端主机进行响应。这说明对端主机正在测试与本主机之间的IP连通性。</li>
+<li>ICMP类型3：差错报告报文。当一个主机由于某种原因丢弃了一个IP数据包后，会使用差错报告报文通知该数据包的源IP地址。根据不同的丢包原因，设定不同的CODE。常见丢包原因有：主机不可达，网络不可达，端口不可达等。<h3 id="六、vlan（虚拟局域网）"><a href="#六、vlan（虚拟局域网）" class="headerlink" title="六、vlan（虚拟局域网）"></a>六、vlan（虚拟局域网）</h3></li>
+<li><p>配置</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">VLAN配置命令</span><br><span class="line">Switch(config)#vlan 10</span><br><span class="line">创建一个VLAN号为10的VLAN</span><br><span class="line">Switch(config-vlan)#name HR</span><br><span class="line">将某个VLAN的名字改为HR</span><br><span class="line">Switch(config-if)#switchport mode access</span><br><span class="line">将该接口的模式配置为access</span><br><span class="line">Switch(config-if)#switchport access vlan 10</span><br><span class="line">将该接口分配到VLAN10中</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>trunk</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">配置命令：</span><br><span class="line">SW1(config-if)#switchport trunk encapsulation dot1q</span><br><span class="line">将接口的Trunk封装修改为802.1q</span><br><span class="line">SW1(config-if)#switchport mode trunk</span><br><span class="line">将接口的模式修改为Trunk</span><br><span class="line">SW1#show interfaces trunk</span><br><span class="line">查看一台交换机接口的trunk情况</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>vtp</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">VTP基本配置</span><br><span class="line">SW1(config)#vtp mode server</span><br><span class="line">将交换机配置为VTP服务器</span><br><span class="line">SW1(config)#vtp mode client</span><br><span class="line">将交换机配置为VTP客户端</span><br><span class="line">SW1(config)#vtp mode transparent</span><br><span class="line">将交换机配置为VTP透明模式</span><br><span class="line">SW1(config)#vtp domain CCNA</span><br><span class="line">配置VTP域名为CCNA</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<h4 id="七、DHCP（动态主机配置协议）"><a href="#七、DHCP（动态主机配置协议）" class="headerlink" title="七、DHCP（动态主机配置协议）"></a>七、DHCP（动态主机配置协议）</h4><ol>
+<li><p>DHCP分4次握手从服务器获取一个IP地址。</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1	客户端发送一个DISCOVER报文。（广播）</span><br><span class="line">2	服务器回应一个OFFER报文。（单播）</span><br><span class="line">3	客户端发送一个REQUEST报文。（广播）</span><br><span class="line">4	服务器回应一个ACK报文。（单播）</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>4次握手之后，IP地址被正常的分配给客户端使用。</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ip dhcp pool VLAN10</span><br><span class="line">network 10.1.10.0 255.255.255.0</span><br><span class="line">default-router 10.1.10.254 </span><br><span class="line">ip dhcp pool VLAN20</span><br><span class="line">network 10.1.20.0 255.255.255.0</span><br><span class="line">default-router 10.1.20.254 </span><br><span class="line">ip dhcp pool VLAN30</span><br><span class="line">network 10.1.30.0 255.255.255.0</span><br><span class="line">default-router 10.1.30.254</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<h3 id="安全方向"><a href="#安全方向" class="headerlink" title="安全方向"></a>安全方向</h3><h4 id="八、ACL-访问控制列表"><a href="#八、ACL-访问控制列表" class="headerlink" title="八、ACL-访问控制列表"></a>八、ACL-访问控制列表</h4><ol>
+<li><p>概念</p>
+<p> 访问控制列表是一种工具。顾名思义，它是一个列表。该列表有非常广泛的用途是各个厂商的安全设备或安全方案中的一个基本组件。该列表最初的作用在于控制访问，后来根据不同的应用场景，发展出不同的作用并衍生出各种其他的策略工具。</p>
+</li>
+<li><p>基本操作</p>
+<p> ACL是一系列包含了permit或deny操作以及对应的条件的有序语句。整个ACL的工作过程如下：自顶向下对每条ACL语句进行评估，一旦发现条件匹配的情况则应用相对应的操作并停止继续向下匹配后续语句。所谓的顶和下是通过ACL的序号来决定的。序号越小，越优先匹配，序号越大匹配的顺序越靠后。</p>
+<p> 所有ACL的末尾，都存在一个deny any的ACL语句。它的序号相当于无限大，也就是说任何用户定义的ACL都将优先于它进行匹配，也就是说如果一个数据没有被任何用户定义的ACL匹配，则它一定会被末尾的deny any语句匹配，并且流量会被拒绝。一方面默认的deny any操作体现了安全策略的基本原则，另一方面要注意，在编辑一个黑名单时，一定要在整个ACL的末尾，明确的permit any。否则，一个所有操作均为deny的ACL是没有实际意义的。<br> <img src="/2019/01/03/实训笔记/ACL示例.png" alt="ACL示例"></p>
+</li>
+<li>分类<ul>
+<li>标准ACL：只能以数据的源IP地址作为条件匹配流量。</li>
+<li>扩展ACL：可以以数据的源IP，目的IP以及其它一些三层和四层报文内容作为条件匹配流量。我们比较常用的是扩展ACL。</li>
+</ul>
+</li>
+<li><p>配置<br> ACL配置：</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">R3(config)#access-list 1 deny   10.1.3.0 0.0.0.255     </span><br><span class="line">//定义一个编号的标准ACL，拒绝10.1.3.0/24为源的数据</span><br><span class="line">R3(config)#access-list 1 permit any</span><br><span class="line">//定义一个编号的标准ACL，放行所有流量</span><br><span class="line">R3(config-if)#ip access-group 1 out </span><br><span class="line">//将编号ACL 1 调用在该接口的出方向上（注意配置模式）</span><br><span class="line">R3#show ip access-lists</span><br><span class="line">//检查配置的ACL以及命中情况。</span><br></pre></td></tr></tbody></table></figure>
+<p> 命名的扩展ACL配置：</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">R3(config)#ip access-list extended DENYHR2SRV</span><br><span class="line">//配置一个名为DENYHR2SRV的扩展ACL</span><br><span class="line">R3(config-ext-nacl)# deny ip 10.1.2.0 0.0.0.255 10.1.100.0 0.0.0.255</span><br><span class="line">//拒绝从10.1.2.0/24去往10.1.100.0/24的所有IP流量</span><br><span class="line">R3(config-ext-nacl)# permit ip any any</span><br><span class="line">//放行所有其它流量</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<h4 id="九、NAT（网络地址转换）"><a href="#九、NAT（网络地址转换）" class="headerlink" title="九、NAT（网络地址转换）"></a>九、NAT（网络地址转换）</h4><ol>
+<li><p>由来</p>
+<p> IPv4地址资源十分有限，总数只要43亿个左右，而且有大量地址是保留的无法直接分配给主机使用。随着互联网以及物联网的不断发展，接入到互联网中的设备数量越来越多。每一个需要在互联网上通信的设备都需要一个IP地址才能正常工作。私有IP地址的使用不受任何限制，也无需向IANA申请，但私有IP地址在Internet上是不被路由的，因为它破坏了IP地址唯一标识一台互联网主机的特点。在这种情况下，我们想要正常使用互联网资源，需要借助NAT技术。</p>
+</li>
+<li>静态nat配置</li>
+</ol>
+<ul>
+<li>问题:配置静态NAT。马同学家里有运营商分配的合法IP地址12.1.1.1和12.1.1.3。12.1.1.1被配置在TP-LINK路由器的公网接口e0/1上。现在要求配置静态NAT，在内网主机192.168.1.128访问公网时，将他的源IP地址转换为12.1.1.3。（注意配置默认路由）。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2019/01/03/实训笔记/静态nat.png" alt="nat" title="">
+                </div>
+                <div class="image-caption">nat</div>
+            </figure></li>
+<li>配置  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">TPLINK(config)#ip route 0.0.0.0 0.0.0.0 12.1.1.2</span><br><span class="line">//配置一条下一跳指向12.1.1.2的默认路由。注意，如果不添加此默认路由，则网关路由器没有到达目的主机的路由会丢弃数据包。但添加去往目的主机的明细路由并不可取，因为目的主机模拟互联网主机，实际上互联网主机的数量会非常庞大，不可能每一个网络的路由都配置在网关路由器上，所以必须使用默认路由。</span><br><span class="line">TPLINK(config)#ip nat inside source static 192.168.1.128 12.1.1.3</span><br><span class="line">//配置内部源转换静态NAT。将内部本地地址192.168.1.128转换为12.1.1.3。</span><br><span class="line">interface Ethernet0/0</span><br><span class="line">ip address 192.168.1.1 255.255.255.0</span><br><span class="line">ip nat inside</span><br><span class="line">interface Ethernet0/1</span><br><span class="line">ip address 12.1.1.1 255.255.255.0</span><br><span class="line">ip nat outside</span><br><span class="line">//配置接口的IP地址以及NAT方向。注意方向不要写反。且必须配置</span><br><span class="line">检查NAT的命令：</span><br><span class="line">TPLINK#show ip nat statistics</span><br><span class="line">//查看NAT的统计信息，包括配置的内部和外部NAT接口以及NAT的命中情况</span><br><span class="line">TPLINK#show ip nat translations</span><br><span class="line">//查看NAT转换表，查看已经配置的NAT的转换情况</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<ol start="3">
+<li>地址类型<ul>
+<li>所有Inside的地址，都是属于你内部设备的地址。</li>
+<li>所有Outside的地址，都是不属于你内部设备的地址。</li>
+<li>所有Local地址，一般是私有IP地址。</li>
+<li>所有Global地址，一般是公有IP地址。</li>
+<li>Inside Local Address:内部主机使用的私有IP地址。</li>
+<li>Inside Global Address:内部主机访问外部网络，将私有IP地址换成的共有IP地址。</li>
+<li>Outside Local Address:外部主机访问内部网络，为其分配的私有IP地址。</li>
+<li>Outside Global Address:外部主机的公有IP地址。</li>
+</ul>
+</li>
+<li>类型</li>
+</ol>
+<ul>
+<li>静态NAT：内部本地地址与内部全局地址的一一对应。每个内部本地地址访问外部网络的时候，需要一个单独的内部全局地址。</li>
+<li>动态NAT：内部本地地址数量多余可用的内部全局地址。所有内部全局地址被放入一个NAT地址池。在内部主机需要访问外部网络的时候，从地址池中获取一个内部全局地址并进行NAT，如果地址池空了，则内部主机无法进行NAT。</li>
+<li><p>PAT：端口地址转换，在转换三层地址的同时，对四层的端口号也进行转换，从而支持一个内部全局地址对应多个内部主机。</p>
+<p>  PAT基本配置</p>
+  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TPLINK(config)#access-list 1 permit 192.168.1.0 0.0.0.255</span><br><span class="line">//配置一个ACL，匹配NAT的感兴趣流量，本例中，感兴趣流量是源IP地址为192.168.1.0/24的流量。</span><br><span class="line">TPLINK(config)#ip nat inside source list 1 interface Ethernet0/1 overload</span><br><span class="line">//配置一个内部源转换，对ACL1匹配的感兴趣流进行地址转换，将源地址转换为接口E0/1的IP地址，进行超载转换允许多个内部主机同时通过一个内部全局地址访问公网。</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<h4 id="十、简易密码学"><a href="#十、简易密码学" class="headerlink" title="十、简易密码学"></a>十、简易密码学</h4><ol>
+<li>特点<ul>
+<li>机密性：信息不能被非授权的第三方所读取和理解。</li>
+<li>数据完整性：信息不能被有意或无意的篡改或破坏。</li>
+<li>抗抵赖：不能否认曾经发送过的某些信息或执行过的某些操作。</li>
+<li>源认证：对于数据真实的源进行的识别。</li>
+<li>反重放：防止重复接收看似合法的数据的副本。</li>
+</ul>
+</li>
+<li>散列算法<ul>
+<li>例如MD5加密，哈希算法（SHA）</li>
+</ul>
+</li>
+<li>HMAC算法<ul>
+<li>是基于HASH的消息认证代码，使用一个预共享密钥连同数据一起计算散列值。</li>
+</ul>
+</li>
+<li>加密技术<ul>
+<li>对称加密算法</li>
+<li>非对称加密算法<h4 id="十一、ASA防火墙基础"><a href="#十一、ASA防火墙基础" class="headerlink" title="十一、ASA防火墙基础"></a>十一、ASA防火墙基础</h4></li>
+</ul>
+</li>
+<li>防火墙<ol>
+<li>常见分区<ul>
+<li>公共区域：一般指Internet、公共网络、菲私有网络、不受信任、不受保护。</li>
+<li>DMZ区域：放置企业的公网服务器。</li>
+<li>内部区域：一般指企业内网。</li>
+</ul>
+</li>
+<li>防火墙在各个分区之间强制执行访问控制策略，如果一个区域被攻陷，防止攻击蔓延到另一个区域。</li>
+<li>功能<ul>
+<li>包过滤技术</li>
+<li>状态检测技术（节省资源、相对较安全）</li>
+<li>应用检测功能（AIC）</li>
+</ul>
+</li>
+<li>代理服务器：是客户端和服务器的一个中转站</li>
+<li>IPS与IDS：入侵防御系统和入侵检测系统，与防火墙类似。IPS可以采取阻断的动作，IDS可以向管理员发出警报。</li>
+</ol>
+</li>
+<li><p>ASA配置</p>
+<ol>
+<li>接口配置<ul>
+<li>接口IP地址：配置防火墙接口的IP地址</li>
+<li>接口的安全等级：防火墙接口必须有一个1-100的安全级别。通常接口连接到的区域受信任程度越高，该级别就越高</li>
+<li>接口的名字：防火墙接口必须有一个名字，在很多防火墙特性配置的时候，只能引用防火墙的接口名进行配置</li>
+<li>开启接口： no shutdown</li>
+</ul>
+</li>
+<li>默认访问控制策略：防火墙默认约需所有出站流量，拒绝所有入站流量。<ul>
+<li>出站流量：当流量从一个高安全级别接口始发，去往一个低安全级别接口时，被认为是出站流量</li>
+<li>入站流量：当流量从一个低安全级别接口始发，去往一个高安全级别接口时，被认为是入站流量</li>
+</ul>
+</li>
+<li><p>防火墙基本配置<br> <img src="/2019/01/03/实训笔记/ASA基础配置.png" alt="ASA基础配置"></p>
+<ul>
+<li><p>ASA配置</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">interface GigabitEthernet0/0</span><br><span class="line">    nameif DMZ</span><br><span class="line">    security-level 50</span><br><span class="line">    ip address 24.1.1.2 255.255.255.0 </span><br><span class="line">interface GigabitEthernet0/1</span><br><span class="line">    nameif INSIDE</span><br><span class="line">    security-level 100</span><br><span class="line">    ip address 23.1.1.2 255.255.255.0 </span><br><span class="line">interface GigabitEthernet0/2</span><br><span class="line">    nameif OUTSIDE</span><br><span class="line">    security-level 0</span><br><span class="line">    ip address 12.1.1.2 255.255.255.0</span><br><span class="line">//给每个接口配置了IP地址，接口名以及安全级别。</span><br><span class="line">policy-map global_policy</span><br><span class="line">    class inspection_default</span><br><span class="line">    inspect icmp</span><br><span class="line">//为默认全局策略的默认检测类开启ICMP检测。</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>路由器开启telnet服务</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">line vty 0 4</span><br><span class="line">    login local</span><br><span class="line">    transport input telnet</span><br><span class="line">    username name(主机名) password password(密码)</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>ASA网络目标配置</p>
+<ol>
+<li>网络目标是一种预定义的元素。分为三种类型，分别是主机(描述一台主机)，范围(描述从某IP地址到某IP地址的一组主机)，子网(描述一个子网的所有主机)。</li>
+<li><p>配置<br><img src="/2019/01/03/实训笔记/ASA网络目标配置.png" alt=""></p>
+<ol>
+<li><p>第一部分：按照图中所示配置所有设备的IP地址。正确配置模拟终端设备的路由器（关路由功能，设默认网关，配置IP地址并开启相应服务）。</p>
+<ul>
+<li>配置内网路由：在ASA和CORE之间配置动态路由协议</li>
+<li>配置公网路由：在CORE和ASA上配置指向电信的默认路由</li>
+<li>配置自动NAT:实现内网客户端访问公网服务器</li>
+<li><p>防火墙接口配置</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">interface GigabitEthernet0/0</span><br><span class="line">nameif INSIDE</span><br><span class="line">security-level 100</span><br><span class="line">ip address 10.1.23.2 255.255.255.0 </span><br><span class="line">interface GigabitEthernet0/1</span><br><span class="line">nameif OUTSIDE</span><br><span class="line">security-level 0</span><br><span class="line">ip address 12.1.1.2 255.255.255.0 </span><br><span class="line">interface GigabitEthernet0/2</span><br><span class="line">nameif DMZ</span><br><span class="line">security-level 50</span><br><span class="line">ip address 10.1.100.254 255.255.255.0</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>防火墙动态路由配置</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">router rigrp 1</span><br><span class="line">network 10.1.12.2 255.255.255.255</span><br><span class="line">network 10.1.100.254 255.255.255.255</span><br><span class="line">//开启了eigrp进程1，精确宣告了两个内网接口</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>发布防火墙静态路由配置</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">route OUTSIDE 0.0.0.0 0.0.0.0 12.1.1.1</span><br><span class="line">//配置了静态的默认路由指向TELECOM</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>防火墙自动NAT配置</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">object network ITSUBNET</span><br><span class="line">subnet 10.1.1.0 255.255.255.0</span><br><span class="line">nat(INSIIDE,OUTSIDE) dynamic interface</span><br><span class="line">//配置网络目标NAT（自动NAT），注意缩进。配置从10.1.1.0/24子网发起的流量，从INSIDE接口进入防火墙，从OUTSIDE接口离开防火墙。这些流量将源IP地址转化为接口OUTSIDE的IP地址。</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+</li>
+<li><p>第二部分：要求DMZServer开启HTTP服务，配置自动NAT和严格ACL允许公网主机访问DMZServerHTTP服务。</p>
+<ul>
+<li><p>配置自动NAT</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">object network DMZSERVER1</span><br><span class="line">host 10.1.100.1</span><br><span class="line">nat(DMZ,OUTSIDE) static 12.1.1.100</span><br><span class="line">//将主机10.1.100.1进行静态NAT转换，转换后的地址为12.1.1.100</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>配置ACL放行OUTSIDE到DMZ的合法流量</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">access-list FORDMZSRV extended permit tcp any host   10.1.100.1 eq www</span><br><span class="line">//配置一个叫做FORDMZSRV的ACL，允许任何主机法网10.1.100.1的http流量。注意在这个位置写的IP地址和端口号是服务器的真实IP地址和端口号。</span><br><span class="line">access-group FORDMZSRV in interface OUTSIDE</span><br><span class="line">//将FORDMZSRV 调用在OUTSIDE接口的入方向上，放行公网主机访问内网服务器的首包。</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>SSH(安全外壳协议):SSH和TELNET一样都可用于远程访问目标主机的CLI，SSH较安全。SSH使用TCP端口22作为目的</p>
+</li>
+<li><p>综合实验<br><img src="/2019/01/03/实训笔记/综合实验.png" alt=""></p>
+<h5 id="实验需求：配置防火墙，实现内网主机可以访问公网的HTTP服务。公网客户端可以访问内网的DMZ服务器的HTTP和SSH服务。要求在防火墙上配置适当的自动NAT策略和严格ACL来完成这个需求。"><a href="#实验需求：配置防火墙，实现内网主机可以访问公网的HTTP服务。公网客户端可以访问内网的DMZ服务器的HTTP和SSH服务。要求在防火墙上配置适当的自动NAT策略和严格ACL来完成这个需求。" class="headerlink" title="实验需求：配置防火墙，实现内网主机可以访问公网的HTTP服务。公网客户端可以访问内网的DMZ服务器的HTTP和SSH服务。要求在防火墙上配置适当的自动NAT策略和严格ACL来完成这个需求。"></a>实验需求：配置防火墙，实现内网主机可以访问公网的HTTP服务。公网客户端可以访问内网的DMZ服务器的HTTP和SSH服务。要求在防火墙上配置适当的自动NAT策略和严格ACL来完成这个需求。</h5><ol>
+<li>交换机配置各个VLAN以及各VLAN的SVI接口。交换机连接防火墙的接口使用RSI。</li>
+<li>配置IP地址。（主机ping直连检查IP连通性）</li>
+<li>配置内网路由（用EIGRP来实现。注意在ASA上连接ISP的接口不要运行EIGRP）</li>
+<li>配置默认路由。（三层交换机和防火墙都需要默认路由来确保公网连通性）</li>
+<li>配置ACL放行合法流量。（应用在出接口的入方向，ACL必须精确）。</li>
+<li>配置自动NAT。（为HR和IT配置动态PAT，让他们能够访问公网，为DMZ服务器配置静态端口映射，让公网能够访问他们）。</li>
+</ol>
+<ul>
+<li>实验解答</li>
+</ul>
+<ol>
+<li><p>核心配置</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">object network SRV1</span><br><span class="line">&nbsp;host 10.1.100.1</span><br><span class="line">object network SRV2</span><br><span class="line">&nbsp;host 10.1.100.2</span><br><span class="line">object network SRV3</span><br><span class="line">&nbsp;host 10.1.100.3</span><br><span class="line">object network IT</span><br><span class="line">&nbsp;subnet 10.1.10.0 255.255.255.0</span><br><span class="line">object network HR</span><br><span class="line">&nbsp;subnet 10.1.20.0 255.255.255.0</span><br><span class="line">object service HTTP</span><br><span class="line">&nbsp;service tcp destination eq www </span><br><span class="line">object service TELNET</span><br><span class="line">&nbsp;service tcp destination eq telnet</span><br><span class="line">object-group network SRVCluster</span><br><span class="line">&nbsp;network-object object SRV1</span><br><span class="line">&nbsp;network-object object SRV2</span><br><span class="line">&nbsp;network-object object SRV3</span><br><span class="line">object-group network SRVUser</span><br><span class="line">&nbsp;network-object object IT</span><br><span class="line">&nbsp;network-object object HR</span><br><span class="line">object-group service SRVService</span><br><span class="line">&nbsp;service-object object HTTP </span><br><span class="line">&nbsp;service-object object TELNET</span><br><span class="line">配置并调用ACL：</span><br><span class="line">access-list ININSIDE extended permit object-group SRVService object-group SRVUser object-group SRVCluster</span><br><span class="line">access-group ININSIDE in interface INSIDE</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>ssh配置</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">SRV1(config)#hostname SRV1</span><br><span class="line">SRV1(config)#ip domain-name zbh.com</span><br><span class="line">//配置主机名和域名。主机名和域名对RSA密钥并无影响但RSA生成密钥需要这两个参数作为密钥标签。所以在生成RSA密钥对之前必须先配置主机名和域名。</span><br><span class="line">SRV1(config)#crypto key generate rsa modulus 1024</span><br><span class="line">//生成一个以1024为素模的RSA密钥对，模数越大，RSA密钥长度越长，强度越高</span><br><span class="line">SRV1(config)#ip ssh version 2</span><br><span class="line">//开启SSH版本2，SSH版本1的连接会被拒绝。推荐使用SSHv2</span><br><span class="line">SRV1(config)#line vty 0 4</span><br><span class="line">login local</span><br><span class="line">&nbsp;transport input ssh</span><br><span class="line">//开启vty线路，并允许在入向传输时使用SSH协议，注意这里没有包括telnet关键字，所以设备当前无法通过telnet进行远程管理。</span><br><span class="line">SRV1(config)#username zbh password cisco123</span><br><span class="line">//配置本地用户账户数据库用于对SSH远程连接进行身份认证</span><br><span class="line">HR#ssh -l zbh 10.1.100.1</span><br><span class="line">//以用户名zbh对10.1.100.1发起一个SSH远程访问。注意-l参数后面需要空格再填写用户名。</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-03T11:33:31.684Z" itemprop="dateUpdated">2021-08-03 19:33:31</time>
+</span>
+
+
+        
+        原文链接：<a href="/2019/01/03/实训笔记/" target="_blank" rel="external">http://lpower.com/2019/01/03/实训笔记/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='http://lpower.com'">
+            <img src="/img/avatar.jpg" alt="lpower">
+            <a>lpower</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2019/01/03/实训笔记/&title=《实训笔记》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2019/01/03/实训笔记/&title=《实训笔记》 — lpower&source=2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）,使用的是思科的eve" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2019/01/03/实训笔记/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《实训笔记》 — lpower&url=http://lpower.com/2019/01/03/实训笔记/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2019/01/03/实训笔记/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/19/关于http的一些总结/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：关于http的一些总结
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/11/30/tp5基础/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：tp5基础">下一篇：tp5基础</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2017
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="http://lpower.com">tomotoes.com</a>
+            <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br/>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license">This blog is licensed under a <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2019/01/03/实训笔记/&title=《实训笔记》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2019/01/03/实训笔记/&title=《实训笔记》 — lpower&source=2019年第一篇博客，我大学生涯的第一次实训，在大连诺达，学了一些思科模拟器的使用和一点网络安全基础（防火墙）,使用的是思科的eve" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2019/01/03/实训笔记/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《实训笔记》 — lpower&url=http://lpower.com/2019/01/03/实训笔记/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2019/01/03/实训笔记/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABy0lEQVR42u3aQW7DIBAF0Nz/0q7UVRcN/R8MsarHykoIfmQxmhl4veJxfY/xtz/ntM83D1xc3GXuNRxj0Lv5ybaT1X5ZExcX9yA3Xzr5ZBza8qCGi4v7fO67V+ahEBcX939z8w20BRIuLu5zuG0YGrdF8g1srNVwcXEXuG3DdMfzxv4uLi5uyb2mRtIcyYNU8V5cXNwj3CTVWDkISbbUtllxcXHPcJMsom2h5nOSbeDi4p7kttcm8nKlLWyihikuLu4RbtsMnUtK2hSqKH5wcXE3cJN0ZO5AtL3Ulfw1uLi4Z7h5uMkXyg9RkmZrcbaDi4t7EzdJblaOTNorXH/8ChcX90PcHNEGwSRgFcUPLi7uQW6Cztsfc/Gnjru4uLgbuPlVquRXSc3SHr7i4uKe5LalzlzS025gsmGKi4t7E3fuyHNlTh6j3hY/uLi4m7lJujOXsrRpUH2si4uLu417lWM9DC2lSri4uEe4+cgboAkxv5yBi4v7KW4SvPI57VWtumTCxcU9yM0vVaxf6loKnbi4uI/n3pXcFMUPLi7uw7hJUGubLHVNhouLe5A7dxlrvFr710RvxMXFPcKdK0Xy5kgbwrb0d3FxcdP5X2/ktHvb9PXmAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2018/10/11");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "lpower");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 一个坏掉的番茄 %c  © Simon Ma  http://tomotoes.com \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>

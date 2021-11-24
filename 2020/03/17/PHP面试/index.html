@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>PHP面试 | lpower</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content>
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="自我介绍  自我介绍是一个很重要的环节，一个好的自我介绍，会让面试官眼前一亮，有继续了解你的欲望">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP面试">
+<meta property="og:url" content="http://lpower.com/2020/03/17/PHP面试/index.html">
+<meta property="og:site_name" content="lpower">
+<meta property="og:description" content="自我介绍  自我介绍是一个很重要的环节，一个好的自我介绍，会让面试官眼前一亮，有继续了解你的欲望">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-08-03T11:36:05.823Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP面试">
+<meta name="twitter:description" content="自我介绍  自我介绍是一个很重要的环节，一个好的自我介绍，会让面试官眼前一亮，有继续了解你的欲望">
+    
+        <link rel="alternate" type="application/atom+xml" title="lpower" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">lpower</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about-me"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/llxxwl" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">PHP面试</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#自我介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">自我介绍</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#PHP基础"><span class="post-toc-number">2.</span> <span class="post-toc-text">PHP基础</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#网络基础"><span class="post-toc-number">3.</span> <span class="post-toc-text">网络基础</span></a></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-PHP面试"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">PHP面试</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2020-03-17 09:04:34" datetime="2020-03-17T01:04:34.000Z"  itemprop="datePublished">2020-03-17</time>
+
+            <br id="mybreak"/>
+            
+<script>
+	mybreak.style="display:none";
+</script>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">6</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h4 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h4><p>  自我介绍是一个很重要的环节，一个好的自我介绍，会让面试官眼前一亮，有继续了解你的欲望<br>  <a id="more"></a></p>
+<h4 id="PHP基础"><a href="#PHP基础" class="headerlink" title="PHP基础"></a>PHP基础</h4><pre><code>1. 什么是面向对象：面向对象编程是软件开发方法，可以提高软件的重用性、灵活性和扩展性。包括类（定义了一件事物的抽象特点）与对象（类的实例），优势在于类的复用
+2. 面向对象的三大特性
+    2.1 封装：只有特定类的对象可以访问这一特定类的成员，信息隐藏，将类的使用和实现分开，避免耦合
+    2.2 继承：一个类会有子类，子类会继承父类的属性和行为，增加了代码的可重用性
+    2.3 多态：一个类实例的相同方法在不同情形有不同的表现形式，增强了软件的灵活性，确切的含义是：同一类的对象收到相同消息时，会得到不同的结果。而这个消息是不可预测的
+3. PHP基础函数
+    3.1 操作数组的函数
+        array_pop 删除数组中最后一个函数
+        array_merge  合并数组
+        array_push   向数组中添加元素
+        sort      数组排序
+        count     数组计数
+        array_search    查找数组中元素
+        array_unique    去重
+        array_shift     删除数组中首个元素
+        array_unshift   插入首个元素
+    3.2 操作字符串的函数
+    <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">trim  去除特殊字符</span><br><span class="line">explode    分割字符串</span><br><span class="line">implode    合成字符串</span><br><span class="line">strrev     字符串反转</span><br><span class="line">strpos     字符串检索</span><br><span class="line">strcmp     字符串比较</span><br><span class="line">strlen     字符串长度</span><br></pre></td></tr></tbody></table></figure>
+
+[完整的字符串和数组函数](http://note.youdao.com/noteshare?id=84d22d5db2c27508804867c9228f1259)
+4. 面向对象设计五大原则
+    4.1 开放封闭原则(osp)一个模块在扩展性方面是开放的，在更改性方面是封闭的。核心思想就是对抽象编程。能够提高系统的可扩展性和可维护性
+    4.2 单一职责原则(srp)可以减少类之间的耦合，提高代码复用性。适配工厂模式、命令模式
+    4.3 里氏替换原则(lsp)子类型必须能够替换掉他们的父类型、并出现在父类能够出现的任何地方
+    4.4 依赖倒置原则(dip)上层模块不应该依赖于下层模块，他们共同依赖于一个抽象；抽象不能依赖于具体，具体应该依赖于抽象
+    4.5 接口隔离原则(isp)
+5. 魔术方法(以两个下划线__开头，具有特殊作用的方法)
+    5.1 __construct  构造函数，实例化对象时被调用
+    5.2 __set和__get函数：是两个比较重要的魔术方法，这两个方法被归类到重载，动态的创建类属性和方法。作用是当给对象属性赋值或者取值时，即使这个属性不存在，也不会报错，一定程度上增强了程序的健壮性
+    5.3 __call和__callStatic方法：和上面的两个魔术方法一样，也是PHP的重载。当调用一个不可访问的方法(如未定义或不可见)时，__call方法会被调用。作用是防止调用不存在的方法而出错。
+    5.4 toString和debugInfo方法：格式化输出这个对象所包含的数据。tostring=》print_r   debuginfo=》var_dump 
+6. 命名空间：命名空间是一种封装事务的方法。在PHP中，命名空间用来解决在创建可重用的代码时碰到的两类问题：
+    1) 用户编写的代码与PHP内部的类/函数/常量或第三方类之间的名字冲突
+    2) 为很长的标识符名称创建一个别名，提高代码的可读性
+7. 自动加载：PHP5.1.2之后，提供了自动加载类的方法----spl_autoload_register。有了这个方法，我们就不用每个文件都去加载了
+8. 接口：接口常用来作为类与类之间的一个“协议”，接口是抽象类的变体，接口中所有方法都是抽象的，接口为抽象而生。在程序里，接口的所有方法都必须被全部实现，否则会报fetal错误
+9. PHP中的错误级别：
+    deprecated是最低级别的错误，表示不推荐，不建议
+    notice一般是语法存在不当的地方，如未定义的变量等，不影响PHP正常流程
+    warning是级别比较高的错误，一般在语法中有很不恰当的地方才会触发，比如函数参数不匹配，这类错误会得不到预期结果
+    fetal error是致命错误，会导致PHP流程终结
+    最高级别的错误是语法解析错误prase error，语法错误，导致PHP无法通过语法检查
+10. echo，print，print_r的区别
+    print和echo是语言结构，echo可以输出多个值，无返回值；print只能输出一个值，有返回值，都能输出整形和字符串，没法打印bool型。print_r除了输出整形和字符串，还可以输出数组和对象
+11. 按值传递和按引用传递的区别
+    按值传递：在函数内部的修改在函数外部都会被忽略
+    按引用传递：在函数内部的修改在函数外部也会反映
+12. PHP的垃圾回收机制
+    PHP的变量存储在变量容器zval中，zval中除了存储变量类型和值外，还有is_ref和refcount字段。Refcount表示指向变量的元素个数，is_ref表示变量是否有别名。如果refcount为0时，就回收该变量容器。如果一个zval的refcount-1之后大于0，他就会进入垃圾缓冲区。当缓冲区达到最大值后，回收算法会循环遍历zval，判断其是否为垃圾，并进行释放处理
+</code></pre><h4 id="网络基础"><a href="#网络基础" class="headerlink" title="网络基础"></a>网络基础</h4><pre><code>1. osi七层模型
+    应用层：FTP、DNS、HTTP、SMTP
+    表示层
+    会话层
+    传输层：TCP、UDP
+    网络层：IP、ARP
+    数据链路层
+    物理层
+2. HTTP协议：HTTP协议是一个应用层协议，由请求和响应构成，是一个标准的客户端和服务器模型。默认的HTTP端口是80，https的端口是443
+3. 常见状态码
+    200 OK：客户端请求成功
+    301 Moved Permanently：表客户请求的文档被移动到其他地方，新的url在location头中给出
+    400 客户端请求有语法错误
+    401 请求未经授权
+    403 服务器收到请求，但拒绝提供服务
+    404 请求资源不存在，例如输入了错误的URL
+    451 由于当前地区法律原因而不可用
+    500 服务器发生不可预期的错误
+    503 服务器当前不能处理客户端的请求，一段时间后恢复正常
+4. Cookie
+    Cookie在远程浏览器端存储数据并以此跟踪和识别用户的机制。从实现上说，Cookie是存储在客户端的一小段数据，浏览器通过HTTP协议和服务器端进行cookie交互。cookie通常用于存储一些不是很敏感的信息，或者是进行登陆控制，也可用来记住用户名、记住免密码登录，防止刷票等
+5. Session
+    Session即会话，指一种持续性的、双向的连接。针对Web网站来说，session指用户在浏览某个网站时，从进入网站到浏览器关闭这段时间内的会话。PHP的Session默认通过文件的方式实现
+</code></pre>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-03T11:36:05.823Z" itemprop="dateUpdated">2021-08-03 19:36:05</time>
+</span>
+
+
+        
+        原文链接：<a href="/2020/03/17/PHP面试/" target="_blank" rel="external">http://lpower.com/2020/03/17/PHP面试/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='http://lpower.com'">
+            <img src="/img/avatar.jpg" alt="lpower">
+            <a>lpower</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2020/03/17/PHP面试/&title=《PHP面试》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2020/03/17/PHP面试/&title=《PHP面试》 — lpower&source=自我介绍  自我介绍是一个很重要的环节，一个好的自我介绍，会让面试官眼前一亮，有继续了解你的欲望" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2020/03/17/PHP面试/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PHP面试》 — lpower&url=http://lpower.com/2020/03/17/PHP面试/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2020/03/17/PHP面试/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/08/03/supervisor/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：supervisor
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/11/17/设计模式/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：设计模式">下一篇：设计模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2017
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="http://lpower.com">tomotoes.com</a>
+            <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br/>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license">This blog is licensed under a <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://lpower.com/2020/03/17/PHP面试/&title=《PHP面试》 — lpower&pic=http://lpower.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lpower.com/2020/03/17/PHP面试/&title=《PHP面试》 — lpower&source=自我介绍  自我介绍是一个很重要的环节，一个好的自我介绍，会让面试官眼前一亮，有继续了解你的欲望" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lpower.com/2020/03/17/PHP面试/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PHP面试》 — lpower&url=http://lpower.com/2020/03/17/PHP面试/&via=http://lpower.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://lpower.com/2020/03/17/PHP面试/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABxUlEQVR42u3aQQ6DMAxEUe5/6VTqtkqYGSeGSj+rqiB4bKzE4+uS1/gu5er4WbP7188sLbhw4Za5Y7nWIJ0+u6ob4MKF2891y5NLWRcyxQAXLtx3cvXyNytD+ifBhQv3X7g62j1QwYUL951cZfuyLkxKH0P5Z9tZDS5cuAVupejs+n2wvwsXLlyTO8y1LmF6oyR8O1y4cFu46we54Wj2eW4LFS5cuKe5WSmpH2PCz4YLF24LVx+lckuS8vxwOwUXLtx2brZZybY7bomECxduDzcbj9BLkl4ElQ+DCxduJ7dy7HFTD6UtEqbBcOHC3cp1x7D0NqtSzoyoFS5cuC1cNzipBCRZEZy2ReDChXuYWwlT6y1R/R+4cOH2cN2C4g5guQ2Um60VXLhwW7hZ2FkvW1lACxcu3B6u2/7QY9EsULl5I1y4cBu5WbszG61w26Nw4cJ9iutGre7r9S3R5T4ILly4B7iVZFMvc1nUujmIhQsXrsndNZLlRqpuuAIXLtx+rlJo6kcdfUt009+FCxfua7j6sUe/Xx/ygAsX7r9w3XZJFszAhQv3KW59ZCobwzrYFoELF25jw1TZ3GTRiNuIgQsX7gHuB2JGbMOMI05NAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2018/10/11");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "lpower");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 一个坏掉的番茄 %c  © Simon Ma  http://tomotoes.com \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>
