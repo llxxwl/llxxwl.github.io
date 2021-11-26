@@ -235,7 +235,7 @@
 <p> 在浏览器输入127.0.0.1，出现如下界面，说明已经安装成功</p><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/2019/06/12/ubuntu16-04-下搭建lnmp/nginx.png" alt title>
+                    <img src="/2019/06/12/ubuntu16-04-下搭建lnmp/nginx.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure><p></p>
@@ -257,10 +257,10 @@
 <p>  配置完成后，保存退出。运行<code>nginx -t</code>命令检测配置文件是否有错误。我在检测的时候遇到了一个错误</p><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/2019/06/12/ubuntu16-04-下搭建lnmp/error.png" alt title>
+                    <img src="/2019/06/12/ubuntu16-04-下搭建lnmp/error.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
-            </figure>这种情况是80端口被占用，此时我们可以输入<code>lsof -i :80</code>命令来查看80端口的pid，然后<code>kill pid号</code>将进程关闭，再运行<code>nginx -t</code>，如果出现<br>  <img src="/2019/06/12/ubuntu16-04-下搭建lnmp/ok.png" alt><p></p>
+            </figure>这种情况是80端口被占用，此时我们可以输入<code>lsof -i :80</code>命令来查看80端口的pid，然后<code>kill pid号</code>将进程关闭，再运行<code>nginx -t</code>，如果出现<br>  <img src="/2019/06/12/ubuntu16-04-下搭建lnmp/ok.png" alt=""><p></p>
 <p>  证明配置完成，再重新载入nginx配置（<code>nginx -s reload</code>）</p>
 </li>
 </ul>
@@ -269,7 +269,7 @@
 <li>改完配置文件后，重新启动nginx服务<code>systemctl start nginx</code>,此时可能会报错，查看nginx状态<code>systemctl status nginx</code>，会发现出现下列情况<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/2019/06/12/ubuntu16-04-下搭建lnmp/502.png" alt title>
+                    <img src="/2019/06/12/ubuntu16-04-下搭建lnmp/502.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>  这个错误还是端口80被占用，用上述方法再修复一次即可。</li>
@@ -277,7 +277,7 @@
 <li><code>sudo echo '&lt;?php echo phpinfo();'  &gt; /var/www/html/test.php</code>运行此命令，将test.php存放到网站根目录下，访问<code>127.0.0.1/test.php</code>，如果成功，会出现  <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/2019/06/12/ubuntu16-04-下搭建lnmp/success.png" alt title>
+                    <img src="/2019/06/12/ubuntu16-04-下搭建lnmp/success.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>.但是注意，这里还会有一个坑，访问这个页面之后可能会出现502的情况，如果出现502，应该就是nginx配置文件出错<pre><code>location ~ \.php$ {
